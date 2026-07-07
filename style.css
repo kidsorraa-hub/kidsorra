@@ -518,3 +518,57 @@ background:#DDF7E3;
 background:#FFE1EC;
 
 }
+/* Sparkle Animation */
+
+
+.sparkle{
+
+position:absolute;
+
+font-size:40px;
+
+animation:sparkleMove 3s infinite;
+
+}
+
+
+.sparkle-one{
+
+top:120px;
+
+right:20%;
+
+}
+
+
+.sparkle-two{
+
+bottom:120px;
+
+right:35%;
+
+}
+
+
+
+@keyframes sparkleMove{
+
+
+0%,100%{
+
+opacity:.5;
+
+transform:scale(1);
+
+}
+
+
+50%{
+
+opacity:1;
+
+transform:scale(1.3);
+
+}
+
+}
