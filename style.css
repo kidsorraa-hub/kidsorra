@@ -2305,5 +2305,89 @@ max-width:100%;
 height:auto;
 
 }
+/* PROGRAMS SECTION */
 
+.programs{
+    padding:120px 8%;
+    background:#ffffff;
+}
+
+
+.section-title{
+    text-align:center;
+    max-width:650px;
+    margin:auto;
+}
+
+
+.section-title span{
+    background:#fff2a8;
+    padding:12px 25px;
+    border-radius:40px;
+    font-weight:700;
+}
+
+
+.section-title h2{
+    font-size:48px;
+    color:#4b35e8;
+    margin:25px 0;
+}
+
+
+.section-title p{
+    color:#666;
+    font-size:18px;
+}
+
+
+.program-grid{
+    margin-top:60px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+
+.program-card{
+    background:white;
+    padding:35px;
+    border-radius:30px;
+    box-shadow:0 20px 50px rgba(0,0,0,.08);
+    text-align:center;
+    transition:.4s;
+}
+
+
+.program-card:hover{
+    transform:translateY(-15px);
+}
+
+
+.program-card .icon{
+    font-size:55px;
+}
+
+
+.program-card h3{
+    color:#4b35e8;
+    font-size:28px;
+}
+
+
+.program-card p{
+    color:#666;
+    line-height:1.8;
+}
+
+
+.program-card button{
+    margin-top:20px;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    background:#5138f5;
+    color:white;
+    font-weight:bold;
+}
 
