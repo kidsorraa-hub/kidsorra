@@ -376,6 +376,36 @@ KIDSORRA BRAND COLORS
 
 :root{
 
+   *{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+
+overflow-x:hidden;
+
+background:
+linear-gradient(
+135deg,
+#F8FBFF,
+#FFFDF8
+);
+
+color:#252525;
+
+}
+
+   
 --kids-blue:#4F46E5;
 
 --kids-yellow:#FFD93D;
