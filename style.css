@@ -121,55 +121,21 @@ transform:translateY(-3px);
 
 /* Hero */
 
-.hero{
+..hero{
 
 display:flex;
 
-align-items:center;
-
 justify-content:space-between;
 
+align-items:center;
 
-   
-padding:90px 8%;
+padding:120px 8%;
 
-}
+min-height:100vh;
 
+position:relative;
 
-.hero-text{
-
-width:50%;
-
-}
-
-
-.hero-text h1{
-
-font-size:65px;
-
-font-weight:800;
-
-line-height:1.1;
-
-}
-
-
-.hero-text span{
-
-color:#4F46E5;
-
-}
-
-
-.hero-text p{
-
-margin-top:30px;
-
-font-size:20px;
-
-line-height:1.8;
-
-color:#666;
+overflow:hidden;
 
 }
 
