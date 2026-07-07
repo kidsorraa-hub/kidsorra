@@ -1006,3 +1006,43 @@ line-height:1.7;
 color:#666;
 
 }
+
+
+.hero-text{
+
+width:48%;
+
+z-index:5;
+
+}
+
+.hero-text h1{
+
+font-size:78px;
+
+font-weight:800;
+
+line-height:1.05;
+
+margin-bottom:25px;
+
+}
+
+.hero-text span{
+
+color:#4F46E5;
+
+}
+
+.hero-text p{
+
+font-size:22px;
+
+line-height:1.8;
+
+color:#666;
+
+margin-bottom:40px;
+
+}
+
