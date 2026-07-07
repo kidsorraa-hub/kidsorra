@@ -814,3 +814,38 @@ line-height:1.7;
 color:#666;
 
 }
+/* ============================
+Mobile
+============================ */
+
+@media(max-width:900px){
+
+.cards{
+
+grid-template-columns:1fr;
+
+}
+
+.hero{
+
+flex-direction:column;
+
+text-align:center;
+
+}
+
+.hero-text{
+
+width:100%;
+
+}
+
+.hero-art{
+
+width:100%;
+
+margin-top:60px;
+
+}
+
+}
