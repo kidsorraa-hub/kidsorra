@@ -282,3 +282,88 @@ font-size:20px;
 color:#666;
 
 }
+
+/* ==========================
+Kidsorra Hero Design
+========================== */
+
+
+.character{
+
+font-size:180px;
+
+animation:float 3s infinite ease-in-out;
+
+}
+
+
+.skill-card{
+
+position:absolute;
+
+background:white;
+
+padding:15px 25px;
+
+border-radius:30px;
+
+font-weight:700;
+
+box-shadow:0 15px 40px rgba(0,0,0,.12);
+
+animation:float 4s infinite ease-in-out;
+
+}
+
+
+.hero-art{
+
+position:relative;
+
+}
+
+
+.one{
+
+top:50px;
+
+left:-20px;
+
+}
+
+
+.two{
+
+right:-20px;
+
+top:150px;
+
+}
+
+
+.three{
+
+bottom:50px;
+
+left:20px;
+
+}
+
+
+
+@keyframes float{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+
+50%{
+
+transform:translateY(-20px);
+
+}
+
+}
