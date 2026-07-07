@@ -2195,3 +2195,49 @@ background:linear-gradient(180deg,#6C63FF,#4F46E5);
 box-shadow:0 15px 30px rgba(0,0,0,.12);
 
 }
+/* HERO FINAL MOBILE FIX */
+
+@media(max-width:900px){
+
+.hero{
+
+padding-top:140px;
+
+}
+
+
+.hero-content h1{
+
+font-size:52px;
+
+line-height:1.1;
+
+}
+
+
+.hero-container{
+
+gap:30px;
+
+}
+
+
+.hero-visual{
+
+margin-top:40px;
+
+}
+
+
+.character-card{
+
+transform:scale(.85);
+
+}
+
+}
+.hero-content h1 span{
+
+white-space:nowrap;
+
+}
