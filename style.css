@@ -854,6 +854,50 @@ margin-top:60px;
 
 }
 
+.experience{
+
+padding:80px 25px;
+
+}
+
+.experience h2{
+
+font-size:38px;
+
+}
+
+.experience>p{
+
+font-size:18px;
+
+}
+
+.experience-grid{
+
+grid-template-columns:1fr;
+
+gap:25px;
+
+}
+
+.experience-card{
+
+padding:35px 25px;
+
+}
+
+.experience-icon{
+
+font-size:55px;
+
+}
+
+.experience-card h3{
+
+font-size:24px;
+
+}
+   
 }
 
 
