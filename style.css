@@ -687,7 +687,50 @@ Mobile
 
 @media(max-width:900px){
 
+.character-card{
 
+width:240px;
+
+height:240px;
+
+}
+
+
+
+.character-face{
+
+width:130px;
+
+height:130px;
+
+font-size:60px;
+
+}
+
+
+
+.floating-tag{
+
+font-size:12px;
+
+padding:10px 14px;
+
+}
+
+
+.tag-one{
+
+left:-35px;
+
+}
+
+
+.tag-two{
+
+right:-35px;
+
+}
+   
 .hero{
 
 padding:100px 25px 50px;
