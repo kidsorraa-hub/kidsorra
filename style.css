@@ -1117,3 +1117,51 @@ color:white;
 
 }
 
+.hero::before{
+
+content:"";
+
+position:absolute;
+
+width:700px;
+
+height:700px;
+
+background:
+
+radial-gradient(
+
+circle,
+
+rgba(79,70,229,.15),
+
+transparent 70%
+
+);
+
+right:-250px;
+
+top:-150px;
+
+border-radius:50%;
+
+animation:blob 10s infinite alternate;
+
+}
+
+
+@keyframes blob{
+
+0%{
+
+transform:scale(1);
+
+}
+
+100%{
+
+transform:scale(1.2);
+
+}
+
+}
