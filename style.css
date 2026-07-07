@@ -685,7 +685,28 @@ color:#666;
 Mobile
 ============================ */
 
-@media(max-width:900px){
+@media(max-width:900px) 
+.star{
+
+font-size:25px;
+
+}
+
+
+.star-2{
+
+right:5%;
+
+}
+
+
+.star-4{
+
+right:10%;
+
+}
+{
+   
 
 .character-card{
 
@@ -2104,3 +2125,12 @@ opacity:.5;
 }
 }
 
+.magic-circle{
+
+filter:
+
+drop-shadow(
+0 0 60px rgba(124,58,237,.25)
+);
+
+}
