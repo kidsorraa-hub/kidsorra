@@ -1978,6 +1978,129 @@ transform:translateY(0);
 
 }
 
+/* =====================================
+PART 9-D MAGIC BACKGROUND
+===================================== */
 
+
+.hero{
+
+position:relative;
+
+}
+
+
+
+.magic-background{
+
+position:absolute;
+
+inset:0;
+
+overflow:hidden;
+
+pointer-events:none;
+
+}
+
+
+
+.star{
+
+position:absolute;
+
+color:#FFD83D;
+
+font-size:35px;
+
+opacity:.8;
+
+animation:starFloat 5s infinite ease-in-out;
+
+}
+
+
+
+.star-1{
+
+top:15%;
+
+left:12%;
+
+}
+
+
+
+.star-2{
+
+top:35%;
+
+right:15%;
+
+animation-delay:1s;
+
+}
+
+
+
+.star-3{
+
+bottom:20%;
+
+left:25%;
+
+font-size:45px;
+
+animation-delay:2s;
+
+}
+
+
+
+.star-4{
+
+bottom:30%;
+
+right:30%;
+
+animation-delay:3s;
+
+}
+
+
+
+@keyframes starFloat{
+
+
+0%{
+
+transform:translateY(0) rotate(0deg);
+
+opacity:.5;
+
+}
+
+
+
+50%{
+
+transform:translateY(-25px) rotate(20deg);
+
+opacity:1;
+
+}
+
+
+
+100%{
+
+transform:translateY(0) rotate(0deg);
+
+opacity:.5;
+
+}
+
+
+}
 }
 
