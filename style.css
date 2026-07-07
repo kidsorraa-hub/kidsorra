@@ -694,7 +694,13 @@ Mobile
 .cards{
 
 grid-template-columns:1fr;
+.experience-grid{
 
+grid-template-columns:1fr;
+
+}
+
+   
 }
 
 .hero{
