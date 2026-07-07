@@ -1368,5 +1368,49 @@ cursor:pointer;
 }
 
 
+/* =================================
+PREMIUM HERO
+================================= */
 
+
+.hero-text h1{
+
+font-size:72px;
+
+line-height:1.1;
+
+letter-spacing:-2px;
+
+max-width:650px;
+
+}
+
+
+.hero-text h1 span{
+
+color:#4F46E5;
+
+display:block;
+
+}
+
+
+.hero-text p{
+
+max-width:520px;
+
+}
+
+
+.hero-art{
+
+position:relative;
+
+width:45%;
+
+display:flex;
+
+justify-content:center;
+
+}
 
