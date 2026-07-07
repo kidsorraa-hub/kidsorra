@@ -720,3 +720,97 @@ margin-top:60px;
 }
 
 }
+
+/* =====================================
+Experience Section
+===================================== */
+
+.experience{
+
+padding:120px 8%;
+
+background:#F8FBFF;
+
+text-align:center;
+
+}
+
+.experience h2{
+
+font-size:52px;
+
+color:#4F46E5;
+
+font-weight:800;
+
+margin-bottom:20px;
+
+}
+
+.experience p{
+
+font-size:20px;
+
+color:#666;
+
+margin-bottom:60px;
+
+}
+
+.experience-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:30px;
+
+}
+
+.experience-card{
+
+background:white;
+
+padding:40px;
+
+border-radius:30px;
+
+box-shadow:0 20px 40px rgba(0,0,0,.08);
+
+transition:.4s;
+
+}
+
+.experience-card:hover{
+
+transform:translateY(-10px) scale(1.03);
+
+}
+
+.experience-icon{
+
+font-size:60px;
+
+margin-bottom:20px;
+
+}
+
+.experience-card h3{
+
+font-size:28px;
+
+color:#4F46E5;
+
+margin-bottom:15px;
+
+}
+
+.experience-card p{
+
+font-size:17px;
+
+line-height:1.7;
+
+color:#666;
+
+}
