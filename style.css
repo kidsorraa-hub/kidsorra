@@ -1046,3 +1046,74 @@ margin-bottom:40px;
 
 }
 
+
+.buttons{
+
+display:flex;
+
+gap:20px;
+
+flex-wrap:wrap;
+
+}
+
+.primary{
+
+background:#4F46E5;
+
+color:white;
+
+padding:18px 40px;
+
+border:none;
+
+border-radius:50px;
+
+font-size:18px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.35s;
+
+}
+
+.primary:hover{
+
+transform:translateY(-5px);
+
+box-shadow:0 15px 30px rgba(79,70,229,.35);
+
+}
+
+.secondary{
+
+background:white;
+
+border:3px solid #4F46E5;
+
+color:#4F46E5;
+
+padding:18px 40px;
+
+border-radius:50px;
+
+font-size:18px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.35s;
+
+}
+
+.secondary:hover{
+
+background:#4F46E5;
+
+color:white;
+
+}
+
