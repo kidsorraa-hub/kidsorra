@@ -367,3 +367,154 @@ transform:translateY(-20px);
 }
 
 }
+/* ==================================
+KIDSORRA BRAND COLORS
+================================== */
+
+
+:root{
+
+--kids-blue:#4F46E5;
+
+--kids-yellow:#FFD93D;
+
+--kids-orange:#FF9F45;
+
+--kids-pink:#FF7EB3;
+
+--kids-green:#6BCB77;
+
+--kids-purple:#A855F7;
+
+--soft-bg:#F8FBFF;
+
+--dark:#252525;
+
+}
+
+
+
+/* Body Upgrade */
+
+
+body{
+
+background:
+
+linear-gradient(
+
+135deg,
+
+#F8FBFF 0%,
+
+#FFFFFF 50%,
+
+#FFF8E7 100%
+
+);
+
+}
+
+
+
+/* Header Upgrade */
+
+
+header{
+
+backdrop-filter:blur(12px);
+
+background:rgba(255,255,255,.85);
+
+}
+
+
+
+/* Logo Upgrade */
+
+
+.logo{
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#4F46E5,
+
+#A855F7
+
+);
+
+-webkit-background-clip:text;
+
+color:transparent;
+
+}
+
+
+
+/* Hero Upgrade */
+
+
+.hero{
+
+min-height:90vh;
+
+overflow:hidden;
+
+}
+
+
+
+/* Character Upgrade */
+
+
+.character{
+
+filter:
+
+drop-shadow(0 20px 30px rgba(0,0,0,.15));
+
+}
+
+
+
+/* Floating Cards */
+
+
+.skill-card{
+
+border:
+
+3px solid rgba(79,70,229,.08);
+
+color:#333;
+
+}
+
+
+
+/* Different Colors */
+
+
+.one{
+
+background:#FFF4B8;
+
+}
+
+
+.two{
+
+background:#DDF7E3;
+
+}
+
+
+.three{
+
+background:#FFE1EC;
+
+}
