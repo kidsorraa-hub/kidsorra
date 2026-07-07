@@ -855,3 +855,114 @@ margin-top:60px;
 }
 
 }
+
+
+/* =====================================
+   THE KIDSORRA EXPERIENCE
+===================================== */
+
+.experience{
+
+padding:120px 8%;
+
+background:#ffffff;
+
+text-align:center;
+
+}
+
+.experience h2{
+
+font-size:52px;
+
+font-weight:800;
+
+color:#4F46E5;
+
+margin-bottom:20px;
+
+}
+
+.experience>p{
+
+font-size:20px;
+
+color:#666;
+
+margin-bottom:60px;
+
+max-width:700px;
+
+margin-left:auto;
+
+margin-right:auto;
+
+line-height:1.8;
+
+}
+
+.experience-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:30px;
+
+}
+
+.experience-card{
+
+background:white;
+
+padding:45px 30px;
+
+border-radius:30px;
+
+box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+transition:all .35s ease;
+
+border:2px solid transparent;
+
+}
+
+.experience-card:hover{
+
+transform:translateY(-12px);
+
+border-color:#4F46E5;
+
+box-shadow:0 25px 60px rgba(79,70,229,.18);
+
+}
+
+.experience-icon{
+
+font-size:60px;
+
+margin-bottom:25px;
+
+}
+
+.experience-card h3{
+
+font-size:28px;
+
+font-weight:700;
+
+color:#4F46E5;
+
+margin-bottom:15px;
+
+}
+
+.experience-card p{
+
+font-size:17px;
+
+line-height:1.7;
+
+color:#666;
+
+}
