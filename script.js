@@ -958,3 +958,83 @@ document.querySelectorAll(".nav-links li").forEach(item=>{
     });
 
 });
+/* ==================================
+   SMOOTH SCROLL
+================================== */
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+
+anchor.addEventListener("click",function(e){
+
+e.preventDefault();
+
+const target=document.querySelector(this.getAttribute("href"));
+
+if(target){
+
+target.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+}
+
+});
+
+});
+
+
+/* ==================================
+   ACTIVE NAVBAR
+================================== */
+
+window.addEventListener("scroll",()=>{
+
+const header=document.querySelector("header");
+
+if(window.scrollY>50){
+
+header.classList.add("sticky");
+
+}else{
+
+header.classList.remove("sticky");
+
+}
+
+});
+
+
+/* ==================================
+   SCROLL REVEAL
+================================== */
+
+const reveals=document.querySelectorAll(
+
+"section,.program-card,.why-card,.experience-card,.contact-card,.faq-item"
+
+);
+
+function reveal(){
+
+reveals.forEach(item=>{
+
+const top=item.getBoundingClientRect().top;
+
+const visible=window.innerHeight-100;
+
+if(top<visible){
+
+item.classList.add("show");
+
+}
+
+});
+
+}
+
+window.addEventListener("scroll",reveal);
+
+reveal();
+
