@@ -2871,3 +2871,135 @@ display:none;
 }
 
 }
+
+
+/* =====================================
+   PART 20 — STEP 5
+   PREMIUM PRELOADER
+===================================== */
+
+#preloader{
+
+    position:fixed;
+    inset:0;
+
+    background:linear-gradient(
+        135deg,
+        #F8FBFF,
+        #FFFFFF,
+        #F5F3FF
+    );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:99999;
+
+    transition:opacity .8s ease,
+               visibility .8s ease;
+
+}
+
+#preloader.hide{
+
+    opacity:0;
+    visibility:hidden;
+
+}
+
+.loader-content{
+
+    text-align:center;
+
+}
+
+.loader-logo{
+
+    font-size:90px;
+
+    animation:
+    loaderFloat 2s ease-in-out infinite;
+
+}
+
+.loader-content h2{
+
+    margin-top:15px;
+
+    font-size:38px;
+
+    font-weight:800;
+
+    color:#4F46E5;
+
+    letter-spacing:1px;
+
+}
+
+.loader-bar{
+
+    width:220px;
+    height:8px;
+
+    background:#E9E9F8;
+
+    border-radius:30px;
+
+    margin:30px auto 0;
+
+    overflow:hidden;
+
+}
+
+.loader-bar span{
+
+    display:block;
+
+    width:40%;
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        #4F46E5,
+        #A855F7
+    );
+
+    border-radius:30px;
+
+    animation:loadingBar 1.5s infinite;
+
+}
+
+@keyframes loadingBar{
+
+    0%{
+
+        transform:translateX(-100%);
+
+    }
+
+    100%{
+
+        transform:translateX(550%);
+
+    }
+
+}
+
+@keyframes loaderFloat{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
+
+}
+
