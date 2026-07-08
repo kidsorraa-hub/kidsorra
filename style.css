@@ -1205,6 +1205,46 @@ width:260px;
 height:340px;
 
 }
+.schools-container{
+
+grid-template-columns:1fr;
+
+text-align:center;
+
+}
+
+.schools-left h2{
+
+font-size:42px;
+
+}
+
+.schools-left p{
+
+font-size:18px;
+
+}
+
+.school-buttons{
+
+justify-content:center;
+
+}
+
+.school-card{
+
+width:260px;
+
+height:320px;
+
+}
+
+.school-box{
+
+font-size:90px;
+
+}
+
 
 /* =====================================
    THE KIDSORRA EXPERIENCE
@@ -2790,3 +2830,152 @@ border-radius:50px;
 background:#5B4DFF;
 
 }
+
+/* ===========================
+FOR SCHOOLS
+=========================== */
+
+.schools-section{
+
+padding:140px 8%;
+
+background:#F7F8FF;
+
+}
+
+.schools-container{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:80px;
+
+align-items:center;
+
+}
+
+.school-badge{
+
+display:inline-block;
+
+padding:12px 24px;
+
+border-radius:40px;
+
+background:#FFF4B8;
+
+font-weight:700;
+
+margin-bottom:20px;
+
+}
+
+.schools-left h2{
+
+font-size:58px;
+
+line-height:1.15;
+
+margin-bottom:25px;
+
+color:#2A2A2A;
+
+}
+
+.schools-left p{
+
+font-size:20px;
+
+line-height:1.9;
+
+color:#666;
+
+margin-bottom:35px;
+
+}
+
+.school-list{
+
+list-style:none;
+
+padding:0;
+
+margin:0 0 40px;
+
+}
+
+.school-list li{
+
+font-size:19px;
+
+margin-bottom:18px;
+
+color:#444;
+
+}
+
+.school-buttons{
+
+display:flex;
+
+gap:18px;
+
+flex-wrap:wrap;
+
+}
+
+.schools-right{
+
+display:flex;
+
+justify-content:center;
+
+}
+
+.school-card{
+
+width:360px;
+
+height:420px;
+
+border-radius:45px;
+
+background:white;
+
+box-shadow:0 35px 80px rgba(0,0,0,.10);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.school-circle{
+
+position:absolute;
+
+width:420px;
+
+height:420px;
+
+border-radius:50%;
+
+background:radial-gradient(circle,#DDD6FE,#FFFFFF);
+
+}
+
+.school-box{
+
+position:relative;
+
+font-size:120px;
+
+}
+
