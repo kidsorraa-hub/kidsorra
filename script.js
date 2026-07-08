@@ -1,320 +1,158 @@
-/* ===================================================
+
+/* =========================================
    KIDSORRA WEBSITE
-   PREMIUM SCRIPT 3.0 FIXED
+   CLEAN SCRIPT VERSION 2.0
 
-   PART 1 / 5
-   Core + Language Engine
-=================================================== */
-
-"use strict";
+   Part 19 Step 3
+   Part 20 Step 1-2-3
+========================================= */
 
 
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
+document.addEventListener("DOMContentLoaded",()=>{
 
 
-console.log(
-"🚀 Kidsorra Premium Loaded"
-);
+console.log("🌈 Welcome to Kidsorra!");
+
+/* =====================================
+PART 20 STEP 8
+PRELOADER EXIT
+===================================== */
+
+const preloader = document.getElementById("preloader");
+
+if(preloader){
+
+    window.addEventListener("load",()=>{
+
+        preloader.style.opacity="0";
+
+        preloader.style.visibility="hidden";
+
+        preloader.style.transition="all .8s ease";
+
+        setTimeout(()=>{
+
+            preloader.remove();
+
+        },800);
+
+    });
+
+}
+   
+
+/* =====================================
+   HERO FADE
+===================================== */
 
 
-
-/* ======================================
-   GLOBAL CONFIG
-====================================== */
+const hero=document.querySelector(".hero");
 
 
-const CONFIG = {
+if(hero){
 
-languages:[
-"en",
-"fa",
-"ar",
-"th",
-"zh"
-],
+    hero.style.opacity="0";
 
-defaultLanguage:"en"
-
-};
+    hero.style.transform="translateY(20px)";
 
 
+    setTimeout(()=>{
+
+        hero.style.transition="1s ease";
+
+        hero.style.opacity="1";
+
+        hero.style.transform="translateY(0)";
 
 
-
-let currentLanguage =
-localStorage.getItem(
-"kidsorra-language"
-)
-||
-CONFIG.defaultLanguage;
-
-
-
-
-
-
-
-/* ======================================
-   TRANSLATION DATABASE
-====================================== */
-
-
-const LANG = {
-
-
-en:{
-
-dir:"ltr",
-
-texts:{
-
-logo:"Kidsorra",
-
-home:"Home",
-
-about:"About",
-
-programs:"Programs",
-
-schools:"Schools",
-
-parents:"Parents",
-
-contact:"Contact",
-
-demo:"Book Demo",
-
-heroTitle:
-"Smart Learning For Every Child",
-
-heroText:
-"Kidsorra creates joyful learning experiences with technology, creativity and care.",
-
-start:
-"Start Learning",
-
-explore:
-"Explore Programs",
-
-method:
-"Our Learning Method",
-
-faq:
-"Frequently Asked Questions",
-
-contactTitle:
-"Contact Us"
+    },250);
 
 }
 
-},
 
 
+/* =====================================
+   BUTTON CLICK EFFECT
+===================================== */
 
 
+document.querySelectorAll("button").forEach(button=>{
 
-fa:{
 
-dir:"rtl",
+    button.addEventListener("click",()=>{
 
-texts:{
 
-logo:"کیدسورا",
+        button.style.transform="scale(.96)";
 
-home:"خانه",
 
-about:"درباره ما",
+        setTimeout(()=>{
 
-programs:"برنامه‌ها",
 
-schools:"مدارس",
+            button.style.transform="";
 
-parents:"والدین",
 
-contact:"تماس",
+        },120);
 
-demo:"رزرو دمو",
 
-heroTitle:
-"یادگیری هوشمند برای هر کودک",
 
-heroText:
-"کیدسورا تجربه‌ای شاد و خلاقانه برای رشد کودکان ایجاد می‌کند.",
+    });
 
-start:
-"شروع یادگیری",
 
-explore:
-"مشاهده برنامه‌ها",
+});
 
-method:
-"روش آموزشی ما",
 
-faq:
-"سوالات متداول",
 
-contactTitle:
-"تماس با ما"
 
-}
 
-},
+/* =====================================
+   COUNTER FUNCTION
+===================================== */
 
 
+const startCounter=(counter)=>{
 
 
+    const target=Number(counter.dataset.target);
 
-ar:{
 
-dir:"rtl",
+    let current=0;
 
-texts:{
 
-logo:"كيدسورا",
+    const speed=target/120;
 
-home:"الرئيسية",
 
-about:"من نحن",
 
-programs:"البرامج",
+    function update(){
 
-schools:"المدارس",
 
-parents:"الآباء",
+        current+=speed;
 
-contact:"اتصل بنا",
 
-demo:"احجز تجربة",
 
-heroTitle:
-"تعلم ذكي لكل طفل",
+        if(current<target){
 
-heroText:
-"كيدسورا تقدم تجربة تعليمية ممتعة ومبتكرة للأطفال.",
 
-start:
-"ابدأ التعلم",
+            counter.innerText=Math.ceil(current);
 
-explore:
-"استكشف البرامج",
 
-method:
-"طريقة التعلم",
+            requestAnimationFrame(update);
 
-faq:
-"الأسئلة الشائعة",
 
-contactTitle:
-"تواصل معنا"
 
-}
+        }else{
 
-},
 
+            counter.innerText=target;
 
 
+        }
 
 
-th:{
+    }
 
-dir:"ltr",
 
-texts:{
 
-logo:"Kidsorra",
-
-home:"หน้าแรก",
-
-about:"เกี่ยวกับเรา",
-
-programs:"โปรแกรม",
-
-schools:"โรงเรียน",
-
-parents:"ผู้ปกครอง",
-
-contact:"ติดต่อ",
-
-demo:"จองทดลอง",
-
-heroTitle:
-"การเรียนรู้ที่ชาญฉลาดสำหรับเด็กทุกคน",
-
-heroText:
-"Kidsorra สร้างประสบการณ์การเรียนรู้ที่สนุกและสร้างสรรค์",
-
-start:
-"เริ่มเรียนรู้",
-
-explore:
-"ดูโปรแกรม",
-
-method:
-"วิธีการเรียนรู้",
-
-faq:
-"คำถามที่พบบ่อย",
-
-contactTitle:
-"ติดต่อเรา"
-
-}
-
-},
-
-
-
-
-
-zh:{
-
-dir:"ltr",
-
-texts:{
-
-logo:"Kidsorra",
-
-home:"首页",
-
-about:"关于我们",
-
-programs:"课程",
-
-schools:"学校",
-
-parents:"家长",
-
-contact:"联系我们",
-
-demo:"预约体验",
-
-heroTitle:
-"为每个孩子提供智能学习",
-
-heroText:
-"Kidsorra 为孩子创造快乐、有创造力的学习体验。",
-
-start:
-"开始学习",
-
-explore:
-"查看课程",
-
-method:
-"学习方法",
-
-faq:
-"常见问题",
-
-contactTitle:
-"联系我们"
-
-}
-
-}
-
+    update();
 
 
 };
@@ -323,469 +161,371 @@ contactTitle:
 
 
 
+/* =====================================
+   PREMIUM SCROLL ANIMATION
+===================================== */
 
 
+const fadeElements=document.querySelectorAll(
 
+".section-title, .program-card, .why-card, .experience-card, .journey-step, .schools-container, .meet-container, .testimonial, .stat"
 
-/* ======================================
-   LANGUAGE APPLY SYSTEM
-====================================== */
-
-
-function applyLanguage(lang){
-
-
-if(!CONFIG.languages.includes(lang))
-return;
-
-
-
-currentLanguage = lang;
-
-
-localStorage.setItem(
-"kidsorra-language",
-lang
 );
 
 
 
-const data =
-LANG[lang];
+const observer=new IntersectionObserver((entries)=>{
+
+
+entries.forEach(entry=>{
+
+
+    if(entry.isIntersecting){
 
 
 
-document.documentElement.lang =
-lang;
+        entry.target.classList.add("fade-up");
 
 
 
-document.documentElement.dir =
-data.dir;
+        requestAnimationFrame(()=>{
+
+
+            entry.target.classList.add("show");
+
+
+        });
 
 
 
 
 
-document
-.querySelectorAll(
-"[data-lang]"
-)
-.forEach(element=>{
+        if(entry.target.classList.contains("stat")){
 
 
-const key =
-element.dataset.lang;
+            const counter=entry.target.querySelector(".counter");
 
 
 
-if(
-data.texts[key]
-){
+            if(counter && !counter.classList.contains("started")){
 
 
-/*
- Secure text update
- prevents XSS
-*/
+                counter.classList.add("started");
 
 
-element.textContent =
-data.texts[key];
+                startCounter(counter);
 
+
+
+            }
+
+
+        }
+
+
+
+
+        observer.unobserve(entry.target);
+
+
+
+    }
+
+
+});
+
+
+},{
+
+threshold:.18
+
+});
+
+
+
+
+fadeElements.forEach(item=>{
+
+
+    observer.observe(item);
+
+
+});
+
+
+
+
+
+
+/* =====================================
+   PREMIUM MOBILE MENU
+===================================== */
+
+
+const menuButton=document.querySelector(".menu-toggle");
+
+const nav=document.querySelector(".nav-links");
+
+const overlay=document.querySelector(".mobile-menu-overlay");
+
+
+
+
+if(menuButton && nav && overlay){
+
+
+
+    menuButton.addEventListener("click",()=>{
+
+
+        nav.classList.toggle("active");
+
+
+        overlay.classList.toggle("active");
+
+
+
+    });
+
+
+
+
+
+    overlay.addEventListener("click",()=>{
+
+
+        nav.classList.remove("active");
+
+
+        overlay.classList.remove("active");
+
+
+
+    });
+
+
+
+
+
+    nav.querySelectorAll("li").forEach(link=>{
+
+
+        link.addEventListener("click",()=>{
+
+
+            nav.classList.remove("active");
+
+
+            overlay.classList.remove("active");
+
+
+
+        });
+
+
+
+    });
+
+
+
+}
+   /* =====================================
+   BACK TO TOP BUTTON
+===================================== */
+
+const backTop = document.querySelector(".back-to-top");
+
+if(backTop){
+
+    window.addEventListener("scroll",()=>{
+
+        if(window.scrollY > 500){
+
+            backTop.classList.add("show");
+
+        }else{
+
+            backTop.classList.remove("show");
+
+        }
+
+    });
+
+
+    backTop.addEventListener("click",()=>{
+
+        window.scrollTo({
+
+            top:0,
+            behavior:"smooth"
+
+        });
+
+    });
 
 }
 
 
 
-});
-
-
-
-
-updateSEO(lang);
-
-
-updateDirection(lang);
-
-
-}
-
-
-
-
-
-/* ======================================
-   LANGUAGE BUTTONS
-====================================== */
-
-
-document
-.querySelectorAll(
-".language-btn"
-)
-.forEach(button=>{
-
-
-button.addEventListener(
-"click",
-()=>{
-
-
-applyLanguage(
-button.dataset.language
-);
-
-
-});
-
-
-});
-
-
-
-
-
-
-/* ======================================
-   INITIAL LANGUAGE LOAD
-====================================== */
-
-
-applyLanguage(
-currentLanguage
-);
-
-
-
-
-
-
-console.log(
-"🌍 Language Engine Ready"
-);
-
-   /* ===================================================
-   KIDSORRA WEBSITE
-   PREMIUM SCRIPT 3.0 FIXED
-
-   PART 2 / 5
-   UI Navigation Systems
-=================================================== */
-
-
-
-/* ======================================
-   PRELOADER SYSTEM
-====================================== */
-
-
-function initPreloader(){
-
-
-const loader =
-document.querySelector(
-"#preloader"
-);
-
-
-
-if(!loader)
-return;
-
-
-
-
-window.addEventListener(
-"load",
-()=>{
-
-
-setTimeout(
-()=>{
-
-
-loader.classList.add(
-"hide"
-);
-
-
-
-setTimeout(
-()=>{
-
-
-loader.remove();
-
-
-
-},
-700
-);
-
-
-
-},
-800
-);
-
-
-
-});
-
-
-
-}
-
-
-
-initPreloader();
-
-
-
-
-
-
-
-
-/* ======================================
-   NAVBAR SCROLL EFFECT
-====================================== */
-
-
-function initNavbar(){
-
-
-const header =
-document.querySelector(
-"header"
-);
-
-
-const navbar =
-document.querySelector(
-".navbar"
-);
-
-
-
-if(!header)
-return;
-
-
-
-
-function updateNavbar(){
-
-
-if(
-window.scrollY > 60
-){
-
-
-header.classList.add(
-"sticky"
-);
-
-
+/* =====================================
+   NAVBAR SHADOW ON SCROLL
+===================================== */
+
+const navbar = document.querySelector(".navbar");
 
 if(navbar){
 
-navbar.classList.add(
-"scrolled"
-);
+    window.addEventListener("scroll",()=>{
+
+        if(window.scrollY > 40){
+
+            navbar.classList.add("scrolled");
+
+        }else{
+
+            navbar.classList.remove("scrolled");
+
+        }
+
+    });
 
 }
 
 
 
-}else{
+/* =====================================
+   HERO PARALLAX
+===================================== */
 
+const heroVisual = document.querySelector(".hero-visual");
 
-header.classList.remove(
-"sticky"
-);
+if(heroVisual){
 
+    window.addEventListener("scroll",()=>{
 
+        const y = window.scrollY * 0.15;
 
-if(navbar){
+        heroVisual.style.transform = `translateY(${y}px)`;
 
-navbar.classList.remove(
-"scrolled"
-);
-
-}
-
-
+    });
 
 }
 
 
 
-}
+/* =====================================
+   FLOATING TAG PARALLAX
+===================================== */
 
+const tags = document.querySelectorAll(".floating-tag");
 
+if(tags.length){
 
+    window.addEventListener("mousemove",(e)=>{
 
+        const x = (e.clientX / window.innerWidth - 0.5) * 10;
+        const y = (e.clientY / window.innerHeight - 0.5) * 10;
 
-window.addEventListener(
-"scroll",
-updateNavbar,
-{
-passive:true
-}
-);
+        tags.forEach((tag,index)=>{
 
+            const speed = (index + 1) * 2;
 
+            tag.style.transform =
+            `translate(${x*speed}px, ${y*speed}px)`;
 
-updateNavbar();
+        });
 
-
-}
-
-
-
-initNavbar();
-
-
-
-
-
-
-
-
-/* ======================================
-   MOBILE MENU SYSTEM
-====================================== */
-
-
-function initMobileMenu(){
-
-
-const toggle =
-document.querySelector(
-".menu-toggle"
-);
-
-
-
-const menu =
-document.querySelector(
-".nav-links"
-);
-
-
-
-const overlay =
-document.querySelector(
-".mobile-menu-overlay"
-);
-
-
-
-
-if(
-!toggle ||
-!menu
-)
-return;
-
-
-
-
-
-function openMenu(){
-
-
-menu.classList.add(
-"active"
-);
-
-
-
-if(overlay){
-
-overlay.classList.add(
-"active"
-);
+    });
 
 }
 
 
 
-document.body.classList.add(
-"menu-open"
-);
+/* =====================================
+   BUTTON HOVER SOUND PLACEHOLDER
+===================================== */
+
+document.querySelectorAll("button").forEach(btn=>{
+
+    btn.addEventListener("mouseenter",()=>{
+
+        btn.style.transition=".25s";
+
+    });
+
+});
 
 
 
-toggle.innerHTML =
-"✖";
+/* =====================================
+   PAGE LOADED
+===================================== */
+
+console.log("✅ Kidsorra Script Loaded Successfully");
+
+});
+
+
+/* =====================================
+   PART 20 — STEP 4
+   SCRIPT INTERACTION UPGRADE
+===================================== */
+
+
+/* ===============================
+   BUTTON RIPPLE EFFECT
+=============================== */
+
+
+document.querySelectorAll(
+"button, .btn-primary, .btn-secondary, .primary, .secondary, .demo-btn"
+).forEach(button=>{
+
+
+    button.addEventListener("click",function(e){
+
+
+        const ripple=document.createElement("span");
+
+
+        const rect=this.getBoundingClientRect();
+
+
+        const size=Math.max(
+            rect.width,
+            rect.height
+        );
+
+
+        ripple.style.width=size+"px";
+
+        ripple.style.height=size+"px";
+
+
+        ripple.style.left=
+        e.clientX-rect.left-size/2+"px";
+
+
+        ripple.style.top=
+        e.clientY-rect.top-size/2+"px";
+
+
+        ripple.className="ripple";
+
+
+        this.appendChild(ripple);
 
 
 
-}
+        setTimeout(()=>{
+
+            ripple.remove();
+
+        },600);
 
 
 
-function closeMenu(){
-
-
-menu.classList.remove(
-"active"
-);
-
-
-
-if(overlay){
-
-overlay.classList.remove(
-"active"
-);
-
-}
-
-
-
-document.body.classList.remove(
-"menu-open"
-);
-
-
-
-toggle.innerHTML =
-"☰";
-
-
-
-}
-
-
-
-
-
-
-toggle.addEventListener(
-"click",
-()=>{
-
-
-if(
-menu.classList.contains(
-"active"
-)
-){
-
-closeMenu();
-
-
-}else{
-
-
-openMenu();
-
-
-}
+    });
 
 
 });
@@ -794,34 +534,33 @@ openMenu();
 
 
 
+/* ===============================
+   HERO MOUSE PARALLAX
+=============================== */
 
 
-if(overlay){
+const heroCard=document.querySelector(".character-card");
 
 
-overlay.addEventListener(
-"click",
-closeMenu
-);
+if(heroCard){
 
 
-}
+document.addEventListener("mousemove",(e)=>{
+
+
+    const x=
+    (window.innerWidth/2-e.clientX)/40;
+
+
+    const y=
+    (window.innerHeight/2-e.clientY)/40;
 
 
 
-
-
-menu
-.querySelectorAll(
-"a"
-)
-.forEach(link=>{
-
-
-link.addEventListener(
-"click",
-closeMenu
-);
+    heroCard.style.transform=
+    `
+    translate(${x}px,${y}px)
+    `;
 
 
 
@@ -834,909 +573,461 @@ closeMenu
 
 
 
-initMobileMenu();
+
+
+/* ===============================
+   CARD TILT EFFECT
+=============================== */
+
+
+const cards=document.querySelectorAll(
+".program-card, .why-card, .experience-card"
+);
+
+
+
+cards.forEach(card=>{
+
+
+card.addEventListener("mousemove",(e)=>{
+
+
+    const rect=
+    card.getBoundingClientRect();
+
+
+
+    const x=
+    e.clientX-rect.left;
+
+
+    const y=
+    e.clientY-rect.top;
+
+
+
+    const rotateX=
+    ((y-rect.height/2)/20)*-1;
+
+
+    const rotateY=
+    ((x-rect.width/2)/20);
+
+
+
+    card.style.transform=
+    `
+    perspective(800px)
+    rotateX(${rotateX}deg)
+    rotateY(${rotateY}deg)
+    translateY(-8px)
+    `;
+
+
+
+});
+
+
+
+card.addEventListener("mouseleave",()=>{
+
+
+    card.style.transform="";
+
+
+});
+
+
+
+});
 
 
 
 
 
 
+/* ===============================
+   CURSOR GLOW
+=============================== */
+
+
+const cursorGlow=document.createElement("div");
+
+
+cursorGlow.className="cursor-glow";
+
+
+document.body.appendChild(cursorGlow);
 
 
 
-/* ======================================
+document.addEventListener("mousemove",(e)=>{
+
+
+cursorGlow.style.left=
+e.clientX+"px";
+
+
+cursorGlow.style.top=
+e.clientY+"px";
+
+
+});
+
+
+
+
+
+
+console.log("✨ Part 20 Step 4 Interaction Loaded");
+
+/* =====================================
+   PART 20 — STEP 5
+   PREMIUM PRELOADER
+===================================== */
+
+window.addEventListener("load", () => {
+
+    const preloader = document.getElementById("preloader");
+
+    if (preloader) {
+
+        setTimeout(() => {
+
+            preloader.classList.add("hide");
+
+            setTimeout(() => {
+
+                preloader.remove();
+
+            }, 800);
+
+        }, 1200);
+
+    }
+
+
+
+   /* =====================================
+PRELOADER
+===================================== */
+
+window.addEventListener("load", () => {
+
+    const preloader = document.getElementById("preloader");
+
+    if(preloader){
+
+        setTimeout(() => {
+
+            preloader.classList.add("hide");
+
+        },800);
+
+    }
+
+});
+
+ /* =====================================
+PREMIUM CURSOR
+===================================== */
+
+
+const cursorDot =
+document.querySelector(".cursor-dot");
+
+
+const cursorRing =
+document.querySelector(".cursor-ring");
+
+
+if(cursorDot && cursorRing && window.innerWidth > 900){
+
+
+document.addEventListener("mousemove",(e)=>{
+
+
+cursorDot.style.left=e.clientX+"px";
+
+cursorDot.style.top=e.clientY+"px";
+
+
+cursorRing.style.left=e.clientX+"px";
+
+cursorRing.style.top=e.clientY+"px";
+
+
+});
+
+
+
+document.querySelectorAll(
+"button, a, .program-card, .why-card"
+).forEach(item=>{
+
+
+item.addEventListener("mouseenter",()=>{
+
+cursorRing.classList.add("active");
+
+});
+
+
+item.addEventListener("mouseleave",()=>{
+
+cursorRing.classList.remove("active");
+
+});
+
+
+});
+
+
+}  
+/* =====================================
+PART 20 STEP 6
+SCROLL REVEAL
+===================================== */
+
+
+const revealElements = document.querySelectorAll(
+    ".program-card, .why-card, .experience-card, .testimonial, .stat, .journey-step"
+);
+
+
+const revealObserver = new IntersectionObserver((entries)=>{
+
+
+    entries.forEach(entry=>{
+
+
+        if(entry.isIntersecting){
+
+
+            entry.target.classList.add("active");
+
+
+        }
+
+
+    });
+
+
+},{
+    threshold:.15
+});
+
+
+
+revealElements.forEach(el=>{
+
+
+    el.classList.add("reveal");
+
+
+    revealObserver.observe(el);
+
+
+});   
+
+ /* =====================================
+PART 20 STEP 9
+MOUSE PARALLAX EFFECT
+===================================== */
+
+
+const heroVisual = document.querySelector(".hero-visual");
+
+const stars = document.querySelectorAll(".star");
+
+
+if(heroVisual){
+
+
+document.addEventListener("mousemove",(e)=>{
+
+
+    const x =
+    (window.innerWidth / 2 - e.clientX) / 40;
+
+
+    const y =
+    (window.innerHeight / 2 - e.clientY) / 40;
+
+
+
+    heroVisual.style.transform =
+    `translate(${x}px, ${y}px)`;
+
+
+
+    stars.forEach((star,index)=>{
+
+
+        const speed = (index + 1) * 3;
+
+
+        star.style.transform =
+        `translate(${x * speed}px, ${y * speed}px)`;
+
+
+
+    });
+
+
+
+});
+
+
+}  
+});
+/* ===============================
+   FAQ ACCORDION
+================================ */
+
+const faqItems = document.querySelectorAll(".faq-item");
+
+faqItems.forEach(item => {
+
+    const question = item.querySelector(".faq-question");
+
+    question.addEventListener("click", () => {
+
+        faqItems.forEach(other => {
+            if (other !== item) {
+                other.classList.remove("active");
+            }
+        });
+
+        item.classList.toggle("active");
+
+    });
+
+});
+
+/* ==================================
+   MOBILE MENU
+================================== */
+
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
+const overlay = document.querySelector(".mobile-menu-overlay");
+
+menuToggle.addEventListener("click", () => {
+
+    navLinks.classList.toggle("active");
+    overlay.classList.toggle("active");
+
+    document.body.classList.toggle("menu-open");
+
+    if(navLinks.classList.contains("active")){
+
+        menuToggle.innerHTML = "✖";
+
+    }else{
+
+        menuToggle.innerHTML = "☰";
+
+    }
+
+});
+
+
+overlay.addEventListener("click", () => {
+
+    navLinks.classList.remove("active");
+    overlay.classList.remove("active");
+
+    document.body.classList.remove("menu-open");
+
+    menuToggle.innerHTML = "☰";
+
+});
+
+
+document.querySelectorAll(".nav-links li").forEach(item=>{
+
+    item.addEventListener("click",()=>{
+
+        navLinks.classList.remove("active");
+        overlay.classList.remove("active");
+
+        document.body.classList.remove("menu-open");
+
+        menuToggle.innerHTML="☰";
+
+    });
+
+});
+/* ==================================
    SMOOTH SCROLL
-====================================== */
+================================== */
 
+document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
 
-function initSmoothScroll(){
-
-
-
-document
-.querySelectorAll(
-'a[href^="#"]'
-)
-.forEach(link=>{
-
-
-link.addEventListener(
-"click",
-function(e){
-
-
-
-const target =
-document.querySelector(
-this.getAttribute(
-"href"
-)
-);
-
-
-
-if(target){
-
+anchor.addEventListener("click",function(e){
 
 e.preventDefault();
 
+const target=document.querySelector(this.getAttribute("href"));
 
+if(target){
 
 target.scrollIntoView({
-
-behavior:
-"smooth",
-
-block:
-"start"
-
-});
-
-
-}
-
-
-
-});
-
-
-
-});
-
-
-
-}
-
-
-
-initSmoothScroll();
-
-
-
-
-
-
-
-
-
-/* ======================================
-   BACK TO TOP BUTTON
-====================================== */
-
-
-function initBackToTop(){
-
-
-const button =
-document.querySelector(
-".back-to-top"
-);
-
-
-
-if(!button)
-return;
-
-
-
-
-
-window.addEventListener(
-"scroll",
-()=>{
-
-
-if(
-window.scrollY > 500
-){
-
-
-button.classList.add(
-"show"
-);
-
-
-}else{
-
-
-button.classList.remove(
-"show"
-);
-
-
-}
-
-
-
-},
-{
-passive:true
-}
-);
-
-
-
-
-
-
-button.addEventListener(
-"click",
-()=>{
-
-
-window.scrollTo({
-
-top:0,
 
 behavior:"smooth"
 
 });
 
+}
+
+});
 
 });
 
 
+/* ==================================
+   ACTIVE NAVBAR
+================================== */
 
-}
+window.addEventListener("scroll",()=>{
 
+const header=document.querySelector("header");
 
+if(window.scrollY>50){
 
-initBackToTop();
-
-
-
-
-
-
-
-console.log(
-"✅ Part 2 Navigation Loaded"
-);
-
-  /* ===================================================
-   KIDSORRA WEBSITE
-   PREMIUM SCRIPT 3.0 FIXED
-
-   PART 3 / 5
-   Animation Systems
-=================================================== */
-
-
-
-/* ======================================
-   SCROLL REVEAL SYSTEM
-====================================== */
-
-
-function initScrollReveal(){
-
-
-const elements =
-document.querySelectorAll(`
-
-section,
-.program-card,
-.why-card,
-.why-box,
-.experience-card,
-.testimonial,
-.stat,
-.journey-step,
-.contact-card,
-.faq-item,
-.method-card,
-.parent-card,
-.booking-card
-
-`);
-
-
-
-
-if(!elements.length)
-return;
-
-
-
-
-
-elements.forEach(
-(element)=>{
-
-
-element.classList.add(
-"reveal"
-);
-
-
-});
-
-
-
-
-
-
-
-const observer =
-new IntersectionObserver(
-(entries)=>{
-
-
-entries.forEach(
-(entry)=>{
-
-
-if(
-entry.isIntersecting
-){
-
-
-entry.target.classList.add(
-"active"
-);
-
-
-
-observer.unobserve(
-entry.target
-);
-
-
-
-}
-
-
-
-});
-
-
-},
-{
-
-threshold:
-0.15
-
-}
-
-);
-
-
-
-
-
-
-elements.forEach(
-(element)=>{
-
-
-observer.observe(
-element
-);
-
-
-
-});
-
-
-
-}
-
-
-
-
-initScrollReveal();
-
-
-
-
-
-
-
-
-
-/* ======================================
-   NUMBER COUNTER SYSTEM
-====================================== */
-
-
-function animateCounter(
-counter
-){
-
-
-const target =
-Number(
-counter.dataset.target
-);
-
-
-
-if(
-!target
-)
-return;
-
-
-
-let current = 0;
-
-
-const speed =
-target / 120;
-
-
-
-
-
-
-function update(){
-
-
-current += speed;
-
-
-
-
-if(
-current < target
-){
-
-
-counter.textContent =
-Math.floor(
-current
-);
-
-
-
-requestAnimationFrame(
-update
-);
-
-
+header.classList.add("sticky");
 
 }else{
 
-
-counter.textContent =
-target;
-
-
+header.classList.remove("sticky");
 
 }
-
-
-
-}
-
-
-
-update();
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-function initCounters(){
-
-
-const counters =
-document.querySelectorAll(
-".counter"
-);
-
-
-
-
-if(
-!counters.length
-)
-return;
-
-
-
-
-
-
-const observer =
-new IntersectionObserver(
-(entries)=>{
-
-
-entries.forEach(
-(entry)=>{
-
-
-if(
-entry.isIntersecting &&
-!entry.target.dataset.done
-){
-
-
-entry.target.dataset.done =
-"true";
-
-
-
-animateCounter(
-entry.target
-);
-
-
-
-}
-
-
 
 });
 
 
-},
-{
+/* ==================================
+   SCROLL REVEAL
+================================== */
 
-threshold:
-0.7
+const reveals=document.querySelectorAll(
 
-}
+"section,.program-card,.why-card,.experience-card,.contact-card,.faq-item"
 
 );
 
+function reveal(){
 
+reveals.forEach(item=>{
 
+const top=item.getBoundingClientRect().top;
 
+const visible=window.innerHeight-100;
 
+if(top<visible){
 
-counters.forEach(
-(counter)=>{
-
-
-observer.observe(
-counter
-);
-
-
-
-});
-
-
-
-}
-
-
-
-
-initCounters();
-
-
-
-
-
-
-
-
-
-/* ======================================
-   CARD HOVER EFFECT
-====================================== */
-
-
-function initCardAnimation(){
-
-
-const cards =
-document.querySelectorAll(`
-
-.program-card,
-.why-card,
-.experience-card,
-.testimonial,
-.stat,
-.method-card
-
-`);
-
-
-
-
-
-cards.forEach(
-(card)=>{
-
-
-card.addEventListener(
-"mouseenter",
-()=>{
-
-
-card.classList.add(
-"hovered"
-);
-
-
-
-});
-
-
-
-
-
-card.addEventListener(
-"mouseleave",
-()=>{
-
-
-card.classList.remove(
-"hovered"
-);
-
-
-
-});
-
-
-
-});
-
-
-
-}
-
-
-
-
-initCardAnimation();
-
-
-
-
-
-
-
-
-
-/* ======================================
-   FAQ ACCORDION SYSTEM
-====================================== */
-
-
-function initFAQ(){
-
-
-const items =
-document.querySelectorAll(
-".faq-item"
-);
-
-
-
-
-
-if(
-!items.length
-)
-return;
-
-
-
-
-
-
-items.forEach(
-(item)=>{
-
-
-const question =
-item.querySelector(
-".faq-question"
-);
-
-
-
-
-if(!question)
-return;
-
-
-
-
-
-
-question.addEventListener(
-"click",
-()=>{
-
-
-
-items.forEach(
-(other)=>{
-
-
-if(
-other !== item
-){
-
-
-other.classList.remove(
-"active"
-);
-
-
-
-}
-
-
-
-});
-
-
-
-
-item.classList.toggle(
-"active"
-);
-
-
-
-});
-
-
-
-});
-
-
-
-}
-
-
-
-
-initFAQ();
-
-
-
-
-
-
-
-
-
-/* ======================================
-   ACTIVE SECTION OBSERVER
-====================================== */
-
-
-function initActiveSections(){
-
-
-const sections =
-document.querySelectorAll(
-"section[id]"
-);
-
-
-
-const links =
-document.querySelectorAll(
-".nav-links a"
-);
-
-
-
-
-
-if(
-!sections.length ||
-!links.length
-)
-return;
-
-
-
-
-
-
-
-const observer =
-new IntersectionObserver(
-(entries)=>{
-
-
-entries.forEach(
-(entry)=>{
-
-
-if(
-entry.isIntersecting
-){
-
-
-links.forEach(
-(link)=>{
-
-
-link.classList.remove(
-"active"
-);
-
-
-
-if(
-link.getAttribute("href")
-===
-"#"+entry.target.id
-){
-
-
-link.classList.add(
-"active"
-);
-
-
-
-}
-
-
-
-});
-
-
-
-}
-
-
-
-});
-
-
-},
-{
-
-threshold:
-0.5
-
-}
-
-);
-
-
-
-
-
-sections.forEach(
-(section)=>{
-
-
-observer.observe(
-section
-);
-
-
-
-});
-
-
-
-}
-
-
-
-
-initActiveSections();
-
-
-
-
-
-
-
-
-
-console.log(
-"✨ Part 3 Animation Loaded"
-);
-
-   /* ===================================================
-   KIDSORRA WEBSITE
-   PREMIUM SCRIPT 3.0 FIXED
-
-   PART 4 / 5
-   Multi Language + Forms
-=================================================== */
-
-
-
-/* ======================================
-   LANGUAGE SELECTOR
-====================================== */
-
-function initLanguageSelector(){
-
-const selector =
-document.querySelector(
-".language-selector"
-);
-
-const menu =
-document.querySelector(
-".language-menu"
-);
-
-if(!selector || !menu) return;
-
-selector.addEventListener(
-"click",
-(e)=>{
-
-e.stopPropagation();
-
-menu.classList.toggle(
-"active"
-);
-
-});
-
-document.addEventListener(
-"click",
-()=>{
-
-menu.classList.remove(
-"active"
-);
-
-});
-
-}
-
-initLanguageSelector();
-
-
-
-
-
-/* ======================================
-   ACTIVE LANGUAGE BUTTON
-====================================== */
-
-function updateLanguageButtons(lang){
-
-document
-.querySelectorAll(".language-btn")
-.forEach(btn=>{
-
-btn.classList.remove("active");
-
-if(btn.dataset.language===lang){
-
-btn.classList.add("active");
+item.classList.add("show");
 
 }
 
@@ -1744,633 +1035,7 @@ btn.classList.add("active");
 
 }
 
+window.addEventListener("scroll",reveal);
 
+reveal();
 
-
-
-/* ======================================
-   CHANGE LANGUAGE
-====================================== */
-
-const originalChangeLanguage =
-changeLanguage;
-
-changeLanguage=function(lang){
-
-originalChangeLanguage(lang);
-
-updateLanguageButtons(lang);
-
-translateForm(lang);
-
-};
-
-
-
-
-
-
-/* ======================================
-   FORM TRANSLATIONS
-====================================== */
-
-function translateForm(lang){
-
-const placeholders={
-
-en:{
-child:"Child Name",
-parent:"Parent Name",
-email:"Email Address",
-phone:"Phone Number",
-message:"Tell us about your child..."
-},
-
-fa:{
-child:"نام کودک",
-parent:"نام والد",
-email:"ایمیل",
-phone:"شماره تماس",
-message:"درباره کودک خود بنویسید..."
-},
-
-ar:{
-child:"اسم الطفل",
-parent:"اسم ولي الأمر",
-email:"البريد الإلكتروني",
-phone:"رقم الهاتف",
-message:"أخبرنا عن طفلك..."
-},
-
-th:{
-child:"ชื่อเด็ก",
-parent:"ชื่อผู้ปกครอง",
-email:"อีเมล",
-phone:"เบอร์โทร",
-message:"บอกเราเกี่ยวกับเด็ก..."
-},
-
-zh:{
-child:"孩子姓名",
-parent:"家长姓名",
-email:"电子邮箱",
-phone:"电话号码",
-message:"请介绍一下您的孩子..."
-}
-
-};
-
-
-
-const data =
-placeholders[lang];
-
-if(!data) return;
-
-
-
-const map={
-
-childName:data.child,
-parentName:data.parent,
-email:data.email,
-phone:data.phone,
-message:data.message
-
-};
-
-
-
-Object.keys(map).forEach(id=>{
-
-const el =
-document.getElementById(id);
-
-if(el){
-
-el.placeholder=
-map[id];
-
-}
-
-});
-
-}
-
-
-
-
-
-
-/* ======================================
-   LANGUAGE CHANGE ANIMATION
-====================================== */
-
-function animateLanguageChange(){
-
-document.body.classList.add(
-"language-changing"
-);
-
-setTimeout(()=>{
-
-document.body.classList.remove(
-"language-changing"
-);
-
-},350);
-
-}
-
-
-
-document
-.querySelectorAll(".language-btn")
-.forEach(btn=>{
-
-btn.addEventListener(
-"click",
-()=>{
-
-animateLanguageChange();
-
-});
-
-});
-
-
-
-
-
-
-/* ======================================
-   BOOKING FORM
-====================================== */
-
-function initBookingForm(){
-
-const form =
-document.querySelector(
-"#bookingForm"
-);
-
-if(!form) return;
-
-form.addEventListener(
-"submit",
-(e)=>{
-
-e.preventDefault();
-
-const required =
-form.querySelectorAll(
-"[required]"
-);
-
-let valid=true;
-
-required.forEach(input=>{
-
-if(
-input.value.trim()===""
-){
-
-valid=false;
-
-input.classList.add(
-"error"
-);
-
-}else{
-
-input.classList.remove(
-"error"
-);
-
-}
-
-});
-
-if(!valid){
-
-alert(
-"Please fill all required fields."
-);
-
-return;
-
-}
-
-alert(
-"Booking Submitted Successfully!"
-);
-
-form.reset();
-
-});
-
-}
-
-initBookingForm();
-
-
-
-
-
-
-/* ======================================
-   INITIALIZE
-====================================== */
-
-const savedLanguage =
-localStorage.getItem(
-"kidsorra-language"
-)||"en";
-
-updateLanguageButtons(
-savedLanguage
-);
-
-translateForm(
-savedLanguage
-);
-
-console.log(
-"🌍 Part 4 Loaded Successfully"
-);
-   /* ===================================================
-   KIDSORRA WEBSITE
-   PREMIUM SCRIPT 3.0 FIXED
-
-   PART 5 / 5
-   Final System
-=================================================== */
-
-
-
-/* ======================================
-   RTL / LTR MODE
-====================================== */
-
-function updateDirectionStyle(){
-
-const lang =
-localStorage.getItem(
-"kidsorra-language"
-) || "en";
-
-const rtlLanguages = [
-"fa",
-"ar"
-];
-
-if(rtlLanguages.includes(lang)){
-
-document.body.classList.add(
-"rtl-mode"
-);
-
-document.body.classList.remove(
-"ltr-mode"
-);
-
-}else{
-
-document.body.classList.add(
-"ltr-mode"
-);
-
-document.body.classList.remove(
-"rtl-mode"
-);
-
-}
-
-}
-
-updateDirectionStyle();
-
-
-
-
-
-document
-.querySelectorAll(".language-btn")
-.forEach(btn=>{
-
-btn.addEventListener(
-"click",
-()=>{
-
-setTimeout(
-updateDirectionStyle,
-100
-);
-
-});
-
-});
-
-
-
-
-
-/* ======================================
-   ACCESSIBILITY
-====================================== */
-
-function accessibilitySetup(){
-
-document
-.querySelectorAll(
-"a,button,input,textarea,select"
-)
-.forEach(el=>{
-
-el.addEventListener(
-"focus",
-()=>{
-
-el.classList.add(
-"keyboard-focus"
-);
-
-});
-
-el.addEventListener(
-"blur",
-()=>{
-
-el.classList.remove(
-"keyboard-focus"
-);
-
-});
-
-});
-
-}
-
-accessibilitySetup();
-
-
-
-
-
-/* ======================================
-   LAZY IMAGES
-====================================== */
-
-function lazyImages(){
-
-document
-.querySelectorAll("img")
-.forEach(img=>{
-
-if(
-!img.hasAttribute("loading")
-){
-
-img.loading="lazy";
-
-}
-
-});
-
-}
-
-lazyImages();
-
-
-
-
-
-/* ======================================
-   SEO TITLE
-====================================== */
-
-function updateSEO(){
-
-const lang =
-localStorage.getItem(
-"kidsorra-language"
-)||"en";
-
-const titles={
-
-en:"Kidsorra | Smart Learning",
-
-fa:"کیدسورا | آموزش هوشمند",
-
-ar:"كيدسورا | التعليم الذكي",
-
-th:"Kidsorra | Smart Kids",
-
-zh:"Kidsorra | 儿童学习"
-
-};
-
-document.title =
-titles[lang];
-
-}
-
-updateSEO();
-
-
-
-
-
-document
-.querySelectorAll(".language-btn")
-.forEach(btn=>{
-
-btn.addEventListener(
-"click",
-()=>{
-
-setTimeout(
-updateSEO,
-100
-);
-
-});
-
-});
-
-
-
-
-
-/* ======================================
-   FORM VALIDATION
-====================================== */
-
-function validateForms(){
-
-document
-.querySelectorAll("form")
-.forEach(form=>{
-
-form.addEventListener(
-"submit",
-e=>{
-
-const required =
-form.querySelectorAll(
-"[required]"
-);
-
-let valid=true;
-
-required.forEach(input=>{
-
-if(
-input.value.trim()===""
-){
-
-valid=false;
-
-input.classList.add(
-"error"
-);
-
-}else{
-
-input.classList.remove(
-"error"
-);
-
-}
-
-});
-
-if(!valid){
-
-e.preventDefault();
-
-alert(
-"Please complete all required fields."
-);
-
-}
-
-});
-
-});
-
-}
-
-validateForms();
-
-
-
-
-
-/* ======================================
-   SCROLL PROGRESS BAR
-====================================== */
-
-function createScrollBar(){
-
-const bar =
-document.createElement("div");
-
-bar.className =
-"scroll-progress";
-
-document.body.appendChild(
-bar
-);
-
-window.addEventListener(
-"scroll",
-()=>{
-
-const total =
-document.documentElement.scrollHeight -
-window.innerHeight;
-
-const progress =
-(window.scrollY/total)*100;
-
-bar.style.width =
-progress+"%";
-
-});
-
-}
-
-createScrollBar();
-
-
-
-
-
-/* ======================================
-   DISABLE IMAGE DRAG
-====================================== */
-
-document
-.querySelectorAll("img")
-.forEach(img=>{
-
-img.addEventListener(
-"dragstart",
-e=>e.preventDefault()
-);
-
-});
-
-
-
-
-
-/* ======================================
-   SITE READY
-====================================== */
-
-window.addEventListener(
-"load",
-()=>{
-
-document.body.classList.add(
-"site-loaded"
-);
-
-console.log(
-"🚀 Kidsorra Premium Website Ready"
-);
-
-});
-
-
-
-
-
-/* ======================================
-   SAFE ERROR HANDLER
-====================================== */
-
-window.addEventListener(
-"error",
-e=>{
-
-console.warn(
-"Kidsorra Error:",
-e.message
-);
-
-});
-
-
-
-
-
-console.log(
-"✅ Part 5 Loaded Successfully"
-);
-
-/* ===================================================
-   END OF SCRIPT
-=================================================== */
