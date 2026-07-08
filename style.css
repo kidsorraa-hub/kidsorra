@@ -3359,6 +3359,168 @@ SCROLL REVEAL
 
 }
 
+/* =================================
+PART 20 STEP 7
+FLOATING MAGIC EFFECTS
+================================= */
 
+
+.star{
+
+    animation:
+    magicFloat 5s ease-in-out infinite;
+
+}
+
+
+
+.star-1{
+
+    animation-delay:0s;
+
+}
+
+
+.star-2{
+
+    animation-delay:1s;
+
+}
+
+
+.star-3{
+
+    animation-delay:2s;
+
+}
+
+
+.star-4{
+
+    animation-delay:3s;
+
+}
+
+
+
+.character-card{
+
+    animation:
+    characterFloat 5s ease-in-out infinite;
+
+}
+
+
+
+.floating-tag{
+
+    animation:
+    tagFloat 4s ease-in-out infinite;
+
+}
+
+
+
+.tag-two{
+
+    animation-delay:1s;
+
+}
+
+
+.tag-three{
+
+    animation-delay:2s;
+
+}
+
+
+
+
+
+@keyframes magicFloat{
+
+
+0%{
+
+    transform:translateY(0) rotate(0deg);
+
+}
+
+
+50%{
+
+    transform:translateY(-25px) rotate(10deg);
+
+}
+
+
+100%{
+
+    transform:translateY(0) rotate(0deg);
+
+}
+
+
+}
+
+
+
+
+
+@keyframes characterFloat{
+
+
+0%{
+
+    transform:translateY(0);
+
+}
+
+
+50%{
+
+    transform:translateY(-18px);
+
+}
+
+
+100%{
+
+    transform:translateY(0);
+
+}
+
+
+}
+
+
+
+
+@keyframes tagFloat{
+
+
+0%{
+
+    transform:translateY(0);
+
+}
+
+
+50%{
+
+    transform:translateY(-10px);
+
+}
+
+
+100%{
+
+    transform:translateY(0);
+
+}
+
+
+}
 
 
