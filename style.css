@@ -3331,6 +3331,34 @@ filter:brightness(1.05);
 }
 
 
+/* =================================
+PART 20 STEP 6
+SCROLL REVEAL
+================================= */
+
+
+.reveal{
+
+    opacity:0;
+
+    transform:translateY(50px);
+
+    transition:
+    opacity .8s ease,
+    transform .8s ease;
+
+}
+
+
+
+.reveal.active{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
 
 
 
