@@ -2201,3 +2201,110 @@ overflow:hidden;
 }
 
 }
+/* =========================================
+   PART 20 STEP 1
+   MOBILE NAVIGATION UPGRADE
+========================================= */
+
+
+.mobile-menu-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,.35);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.35s ease;
+
+    z-index:900;
+
+}
+
+
+
+.nav-links{
+
+    transition:.4s ease;
+
+}
+
+
+
+/* MOBILE MENU OPEN */
+
+@media(max-width:900px){
+
+
+.nav-links{
+
+    position:fixed;
+
+    top:90px;
+
+    left:20px;
+
+    right:20px;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:30px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+    box-shadow:
+
+    0 25px 70px rgba(0,0,0,.15);
+
+
+    transform:translateY(-30px);
+
+    opacity:0;
+
+    pointer-events:none;
+
+}
+
+
+.nav-links.active{
+
+    transform:translateY(0);
+
+    opacity:1;
+
+    pointer-events:auto;
+
+}
+
+
+
+.mobile-menu-overlay.active{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+
+
+.nav-links li{
+
+    text-align:center;
+
+    font-size:20px;
+
+}
+
+
+}
