@@ -2154,3 +2154,50 @@ footer p{
 
 }
 
+/* =========================
+   MOBILE MENU
+========================= */
+
+@media(max-width:900px){
+
+.nav-links{
+
+display:none;
+
+position:absolute;
+
+top:85px;
+
+left:20px;
+
+right:20px;
+
+background:white;
+
+border-radius:25px;
+
+padding:25px;
+
+box-shadow:0 20px 50px rgba(0,0,0,.12);
+
+flex-direction:column;
+
+gap:20px;
+
+z-index:999;
+
+}
+
+.nav-links.active{
+
+display:flex;
+
+}
+
+body.menu-open{
+
+overflow:hidden;
+
+}
+
+}
