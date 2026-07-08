@@ -1,67 +1,71 @@
-// =====================================
-// KIDSORRA WEBSITE
-// Main JavaScript
-// Version 2.0
-// =====================================
+/* =========================================
+   KIDSORRA WEBSITE
+   Script Upgrade
+   Part 19 — Step 3
+========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    console.log("⭐ Welcome to Kidsorra World!");
+    console.log("🌈 Welcome to Kidsorra!");
 
-    // =====================================
-    // HERO FADE IN
-    // =====================================
+    /* =====================================
+       HERO FADE
+    ===================================== */
 
     const hero = document.querySelector(".hero");
 
     if (hero) {
         hero.style.opacity = "0";
+        hero.style.transform = "translateY(20px)";
 
         setTimeout(() => {
-            hero.style.transition = "opacity 1s ease";
+            hero.style.transition = "1s ease";
             hero.style.opacity = "1";
-        }, 300);
+            hero.style.transform = "translateY(0)";
+        }, 250);
     }
 
-    // =====================================
-    // BUTTON CLICK EFFECT
-    // =====================================
+    /* =====================================
+       BUTTON EFFECT
+    ===================================== */
 
-    const buttons = document.querySelectorAll("button");
-
-    buttons.forEach(button => {
+    document.querySelectorAll("button").forEach(button => {
 
         button.addEventListener("click", () => {
 
-            console.log("Kidsorra Button Clicked ⭐");
+            button.style.transform = "scale(.96)";
+
+            setTimeout(() => {
+                button.style.transform = "";
+            }, 120);
 
         });
 
     });
 
-    // =====================================
-    // COUNTER ANIMATION
-    // =====================================
+    /* =====================================
+       COUNTER
+    ===================================== */
 
     const counters = document.querySelectorAll(".counter");
 
-    counters.forEach(counter => {
-
-        counter.innerText = "0";
+    const startCounter = counter => {
 
         const target = Number(counter.dataset.target);
 
-        const updateCounter = () => {
+        let current = 0;
 
-            const current = Number(counter.innerText);
+        const speed = target / 120;
 
-            const increment = target / 120;
+        function update() {
+
+            current += speed;
 
             if (current < target) {
 
-                counter.innerText = Math.ceil(current + increment);
+                counter.innerText = Math.ceil(current);
 
-                requestAnimationFrame(updateCounter);
+                requestAnimationFrame(update);
 
             } else {
 
@@ -69,25 +73,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
 
-        };
+        }
 
-        updateCounter();
+        update();
 
-    });
+    };
 
-    // =====================================
-    // SCROLL ANIMATION
-    // =====================================
+    /* =====================================
+       SCROLL ANIMATION
+    ===================================== */
 
     const fadeElements = document.querySelectorAll(
         ".section-title, .program-card, .why-card, .experience-card, .journey-step, .schools-container, .meet-container, .testimonial, .stat"
     );
-
-    fadeElements.forEach(element => {
-
-        element.classList.add("fade-up");
-
-    });
 
     const observer = new IntersectionObserver((entries) => {
 
@@ -95,24 +93,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (entry.isIntersecting) {
 
-                entry.target.classList.add("show");
+                entry.target.classList.add("fade-up");
 
-                observer.unobserve(entry.target);
+                setTimeout(() => {
+
+                    entry.target.classList.add("show");
+
+                }, 80);
+
+                if (entry.target.classList.contains("stat")) {
+
+                    const counter = entry.target.querySelector(".counter");
+
+                    if (counter && !counter.classList.contains("started")) {
+
+                        counter.classList.add("started");
+
+                        startCounter(counter);
+
+                    }
+
+                }
 
             }
 
         });
 
     }, {
-
-        threshold: 0.15
-
+        threshold: 0.18
     });
 
-    fadeElements.forEach(element => {
+    fadeElements.forEach(item => observer.observe(item));
 
-        observer.observe(element);
+    /* =====================================
+       MOBILE MENU
+    ===================================== */
 
-    });
+    const menuButton = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".nav-links");
+
+    if (menuButton && nav) {
+
+        menuButton.addEventListener("click", () => {
+
+            nav.classList.toggle("active");
+
+            document.body.classList.toggle("menu-open");
+
+        });
+
+    }
 
 });
