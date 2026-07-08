@@ -1580,162 +1580,100 @@ Send Message
 BOOKING FORM
 ========================= -->
 
-
 <section class="booking-section">
 
+    <div class="section-title">
 
-<div class="section-title">
+        <span>🌈 Free Demo Booking</span>
 
+        <h2>Reserve Your Kidsorra Session</h2>
 
-<span>
-🌈 Free Demo Booking
-</span>
+        <p>
+            Fill the form and our team will contact you soon.
+        </p>
 
+    </div>
 
-<h2>
-Reserve Your Kidsorra Session
-</h2>
+    <div class="booking-card">
 
+        <form
+            class="booking-form"
+            action="https://formspree.io/f/YOUR_FORM_ID"
+            method="POST">
 
-<p>
-Fill the form and our team will contact you soon.
-</p>
+            <div class="form-row">
 
+                <input
+                    type="text"
+                    name="first_name"
+                    placeholder="First Name"
+                    required>
 
-</div>
+                <input
+                    type="text"
+                    name="last_name"
+                    placeholder="Last Name"
+                    required>
 
+            </div>
 
+            <div class="form-row">
 
+                <input
+                    type="number"
+                    name="child_age"
+                    placeholder="Child Age"
+                    min="2"
+                    max="18"
+                    required>
 
+                <select
+                    name="relationship"
+                    required>
 
-<div class="booking-card">
+                    <option value="">Relationship</option>
 
+                    <option>Mother</option>
 
+                    <option>Father</option>
 
-<form class="booking-form">
+                    <option>Parent</option>
 
+                    <option>School</option>
 
+                    <option>Other</option>
 
-<div class="form-row">
+                </select>
 
+            </div>
 
-<input 
-type="text"
-placeholder="First Name"
-required>
+            <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                required>
 
+            <textarea
+                name="message"
+                placeholder="Tell us about your child (Optional)">
+            </textarea>
 
+            <input
+                type="hidden"
+                name="_subject"
+                value="New Kidsorra Demo Booking">
 
-<input
-type="text"
-placeholder="Last Name"
-required>
+            <button
+                type="submit"
+                class="btn-primary">
 
+                Book Free Demo
 
-</div>
+            </button>
 
+        </form>
 
-
-
-
-<div class="form-row">
-
-
-<input
-type="number"
-placeholder="Child Age"
-min="2"
-max="18"
-required>
-
-
-
-
-<select required>
-
-
-<option value="">
-Relationship
-</option>
-
-
-<option>
-Mother
-</option>
-
-
-<option>
-Father
-</option>
-
-
-<option>
-Parent
-</option>
-
-
-<option>
-School
-</option>
-
-
-<option>
-Other
-</option>
-
-
-</select>
-
-
-
-</div>
-
-
-
-
-
-<input
-type="email"
-placeholder="Email Address"
-required>
-
-
-
-
-
-<input
-type="tel"
-placeholder="WhatsApp Number"
-required>
-
-
-
-
-
-<textarea
-placeholder="Tell us about your child (optional)">
-</textarea>
-
-
-
-
-
-<button class="btn-primary">
-
-Book Free Demo
-
-</button>
-
-
-
-
-</form>
-
-
-
-</div>
-
-
+    </div>
 
 </section>
 <!-- =========================
