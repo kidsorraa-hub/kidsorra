@@ -3288,3 +3288,49 @@ padding:60px 25px 25px;
 
 
 }
+
+/* =================================
+PART 20 STEP 5
+Hover Glow
+================================= */
+
+.program-card,
+.why-card,
+.experience-card,
+.testimonial,
+.stat{
+
+transition:.35s ease;
+
+}
+
+.program-card:hover,
+.why-card:hover,
+.experience-card:hover,
+.testimonial:hover,
+.stat:hover{
+
+transform:translateY(-12px);
+
+box-shadow:
+0 25px 60px rgba(79,70,229,.18);
+
+}
+
+
+button{
+
+transition:.3s ease;
+
+}
+
+button:hover{
+
+filter:brightness(1.05);
+
+}
+
+
+
+
+
