@@ -3535,3 +3535,24 @@ opacity .8s ease,
 visibility .8s ease;
 
 }
+/* =================================
+PART 20 STEP 9
+PARALLAX SMOOTH
+================================= */
+
+
+.hero-visual{
+
+transition:
+transform .25s ease-out;
+
+}
+
+
+
+.star{
+
+transition:
+transform .25s ease-out;
+
+}
