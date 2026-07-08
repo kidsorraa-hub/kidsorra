@@ -653,3 +653,30 @@ e.clientY+"px";
 
 
 console.log("✨ Part 20 Step 4 Interaction Loaded");
+
+/* =====================================
+   PART 20 — STEP 5
+   PREMIUM PRELOADER
+===================================== */
+
+window.addEventListener("load", () => {
+
+    const preloader = document.getElementById("preloader");
+
+    if (preloader) {
+
+        setTimeout(() => {
+
+            preloader.classList.add("hide");
+
+            setTimeout(() => {
+
+                preloader.remove();
+
+            }, 800);
+
+        }, 1200);
+
+    }
+
+});
