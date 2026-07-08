@@ -2498,3 +2498,280 @@ box-shadow:
 0 30px 70px rgba(0,0,0,.12);
 
 }
+
+
+
+/* =====================================
+   PART 20 — STEP 4
+   PREMIUM MICRO INTERACTIONS
+===================================== */
+
+
+/* ===============================
+   BUTTON RIPPLE READY
+=============================== */
+
+button,
+.btn-primary,
+.btn-secondary,
+.primary,
+.secondary,
+.demo-btn{
+
+    position:relative;
+    overflow:hidden;
+    transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+
+}
+
+
+button:hover,
+.btn-primary:hover,
+.btn-secondary:hover,
+.primary:hover,
+.secondary:hover,
+.demo-btn:hover{
+
+    transform:translateY(-5px);
+
+}
+
+
+
+/* ===============================
+   CARD PREMIUM MOTION
+=============================== */
+
+
+.program-card,
+.why-card,
+.experience-card,
+.testimonial,
+.stat{
+
+    position:relative;
+    overflow:hidden;
+
+}
+
+
+
+.program-card::before,
+.why-card::before,
+.experience-card::before,
+.testimonial::before,
+.stat::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:0;
+
+    height:0;
+
+    top:50%;
+
+    left:50%;
+
+    background:
+    radial-gradient(
+        circle,
+        rgba(79,70,229,.15),
+        transparent 70%
+    );
+
+    transform:translate(-50%,-50%);
+
+    transition:.5s;
+
+}
+
+
+
+.program-card:hover::before,
+.why-card:hover::before,
+.experience-card:hover::before,
+.testimonial:hover::before,
+.stat:hover::before{
+
+    width:400px;
+
+    height:400px;
+
+}
+
+
+
+/* ===============================
+   HERO CHARACTER PREMIUM FLOAT
+=============================== */
+
+
+.character-card{
+
+    animation:
+    floatCharacter 5s ease-in-out infinite,
+    glowCharacter 4s infinite alternate;
+
+}
+
+
+
+@keyframes glowCharacter{
+
+
+from{
+
+    box-shadow:
+    0 35px 80px rgba(79,70,229,.15);
+
+}
+
+
+to{
+
+    box-shadow:
+    0 35px 100px rgba(168,85,247,.35);
+
+}
+
+}
+
+
+
+/* ===============================
+   MAGIC CIRCLE UPGRADE
+=============================== */
+
+
+.magic-circle{
+
+    animation:
+
+    pulseMagic 6s infinite alternate,
+    rotateMagic 20s linear infinite;
+
+}
+
+
+
+@keyframes rotateMagic{
+
+from{
+
+    transform:rotate(0deg);
+
+}
+
+to{
+
+    transform:rotate(360deg);
+
+}
+
+}
+
+
+
+/* ===============================
+   SECTION TITLE ANIMATION
+=============================== */
+
+
+.section-title span{
+
+    transition:.4s;
+
+}
+
+
+.section-title span:hover{
+
+    transform:scale(1.08);
+
+}
+
+
+
+/* ===============================
+   NAVBAR PREMIUM
+=============================== */
+
+
+.navbar{
+
+    transition:.4s;
+
+}
+
+
+
+.navbar.scrolled{
+
+    padding-top:15px;
+
+    padding-bottom:15px;
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.12);
+
+}
+
+
+
+/* ===============================
+   SMOOTH IMAGE / AVATAR
+=============================== */
+
+
+.kidsorra-avatar,
+.school-card{
+
+    transition:.5s ease;
+
+}
+
+
+
+.kidsorra-avatar:hover,
+.school-card:hover{
+
+    transform:
+
+    translateY(-10px)
+
+    scale(1.03);
+
+}
+
+
+
+/* ===============================
+   MOBILE TOUCH FEEL
+=============================== */
+
+
+@media(max-width:900px){
+
+
+button:active{
+
+    transform:scale(.96);
+
+}
+
+
+.program-card:active,
+.why-card:active,
+.experience-card:active{
+
+    transform:scale(.98);
+
+}
+
+
+}
