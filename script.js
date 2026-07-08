@@ -700,4 +700,61 @@ window.addEventListener("load", () => {
     }
 
 });
+
+ /* =====================================
+PREMIUM CURSOR
+===================================== */
+
+
+const cursorDot =
+document.querySelector(".cursor-dot");
+
+
+const cursorRing =
+document.querySelector(".cursor-ring");
+
+
+if(cursorDot && cursorRing && window.innerWidth > 900){
+
+
+document.addEventListener("mousemove",(e)=>{
+
+
+cursorDot.style.left=e.clientX+"px";
+
+cursorDot.style.top=e.clientY+"px";
+
+
+cursorRing.style.left=e.clientX+"px";
+
+cursorRing.style.top=e.clientY+"px";
+
+
+});
+
+
+
+document.querySelectorAll(
+"button, a, .program-card, .why-card"
+).forEach(item=>{
+
+
+item.addEventListener("mouseenter",()=>{
+
+cursorRing.classList.add("active");
+
+});
+
+
+item.addEventListener("mouseleave",()=>{
+
+cursorRing.classList.remove("active");
+
+});
+
+
+});
+
+
+}ب  
 });
