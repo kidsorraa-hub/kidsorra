@@ -3753,4 +3753,157 @@ border-radius:20px;
 background:#F2F4FF;
 
 }
+/* =================================
+PART 21 STEP 3
+BOOKING FORM
+================================= */
 
+
+.booking-section{
+
+padding:120px 8%;
+
+background:#F8F9FF;
+
+}
+
+
+
+.booking-card{
+
+max-width:900px;
+
+margin:auto;
+
+background:white;
+
+padding:50px;
+
+border-radius:35px;
+
+box-shadow:
+0 25px 70px rgba(0,0,0,.08);
+
+}
+
+
+
+.booking-form{
+
+display:flex;
+
+flex-direction:column;
+
+gap:25px;
+
+}
+
+
+
+.form-row{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:20px;
+
+}
+
+
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea{
+
+width:100%;
+
+padding:18px 20px;
+
+border:2px solid #E7E7F3;
+
+border-radius:18px;
+
+font-size:17px;
+
+font-family:inherit;
+
+transition:.3s;
+
+background:#fff;
+
+}
+
+
+
+.booking-form textarea{
+
+min-height:160px;
+
+resize:vertical;
+
+}
+
+
+
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus{
+
+outline:none;
+
+border-color:var(--kids-blue);
+
+box-shadow:
+0 0 0 4px rgba(79,70,229,.12);
+
+}
+
+
+
+.booking-form button{
+
+align-self:center;
+
+width:280px;
+
+margin-top:10px;
+
+}
+
+
+
+.booking-form input::placeholder,
+.booking-form textarea::placeholder{
+
+color:#888;
+
+}
+
+
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+.booking-card{
+
+padding:30px 20px;
+
+}
+
+
+.form-row{
+
+grid-template-columns:1fr;
+
+}
+
+
+.booking-form button{
+
+width:100%;
+
+}
+
+}
