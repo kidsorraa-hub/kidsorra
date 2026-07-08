@@ -358,7 +358,7 @@ body{
 
 font-family:'Poppins',sans-serif;
 
-overflow-x:hidden;
+overflow: visible;
 
 background:
 linear-gradient(
@@ -2335,7 +2335,10 @@ PART 9-E AVATAR
 ===================================== */
 
 .character-avatar{
+animation: float 4s ease-in-out infinite;
 
+
+   
 display:flex;
 
 flex-direction:column;
@@ -3091,5 +3094,20 @@ background:#DDD6FE;
 margin-top:35px;
 
 border-radius:10px;
+
+}
+@keyframes float {
+
+  0%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-12px);
+  }
+
+  100%{
+    transform:translateY(0);
+  }
 
 }
