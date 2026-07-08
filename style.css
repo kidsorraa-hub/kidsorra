@@ -1776,3 +1776,138 @@ header{
 
 
 }
+
+
+/* =================================
+PART 19 STEP 2 MOBILE FIX
+================================= */
+
+@media (max-width:900px){
+
+.navbar{
+    padding:20px;
+}
+
+.nav-links{
+    display:none;
+}
+
+.menu-toggle{
+    display:block;
+}
+
+
+.hero{
+    min-height:auto;
+    padding:130px 20px 60px;
+}
+
+
+.hero-container{
+
+    display:flex;
+    flex-direction:column;
+    gap:40px;
+    text-align:center;
+
+}
+
+
+.hero-content{
+
+    width:100%;
+}
+
+
+.hero-content h1{
+
+    font-size:48px;
+    line-height:1.05;
+    letter-spacing:-1px;
+
+}
+
+
+.hero-content h1 span{
+
+    display:block;
+
+}
+
+
+.hero-content p{
+
+    font-size:17px;
+    max-width:330px;
+    margin:auto;
+}
+
+
+.hero-buttons{
+
+    justify-content:center;
+    flex-direction:column;
+    align-items:center;
+
+}
+
+
+.btn-primary,
+.btn-secondary{
+
+    width:260px;
+
+}
+
+
+.hero-visual{
+
+    width:100%;
+    height:330px;
+
+}
+
+
+.magic-circle{
+
+    width:260px;
+    height:260px;
+
+}
+
+
+.character-card{
+
+    width:210px;
+    height:210px;
+
+}
+
+
+.floating-tag{
+
+    font-size:12px;
+    padding:8px 14px;
+
+}
+
+
+.stats{
+
+    flex-direction:column;
+    gap:25px;
+    padding:60px 20px;
+
+}
+
+
+.stat{
+
+    width:100%;
+    max-width:260px;
+
+    margin:auto;
+
+}
+
+}   
