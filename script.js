@@ -12,7 +12,33 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 console.log("🌈 Welcome to Kidsorra!");
 
+/* =====================================
+PART 20 STEP 8
+PRELOADER EXIT
+===================================== */
 
+const preloader = document.getElementById("preloader");
+
+if(preloader){
+
+    window.addEventListener("load",()=>{
+
+        preloader.style.opacity="0";
+
+        preloader.style.visibility="hidden";
+
+        preloader.style.transition="all .8s ease";
+
+        setTimeout(()=>{
+
+            preloader.remove();
+
+        },800);
+
+    });
+
+}
+   
 
 /* =====================================
    HERO FADE
