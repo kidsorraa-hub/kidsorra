@@ -2391,3 +2391,60 @@ height:auto;
     font-weight:bold;
 }
 
+.stats{
+
+display:flex;
+justify-content:center;
+gap:50px;
+
+padding:90px 8%;
+
+flex-wrap:wrap;
+
+background:white;
+
+}
+
+.stat{
+
+text-align:center;
+
+padding:30px;
+
+border-radius:25px;
+
+background:white;
+
+box-shadow:0 20px 60px rgba(0,0,0,.08);
+
+transition:.4s;
+
+min-width:180px;
+
+}
+
+.stat:hover{
+
+transform:translateY(-12px);
+
+}
+
+.stat h2{
+
+font-size:55px;
+
+color:#5B4DFF;
+
+margin-bottom:10px;
+
+}
+
+.stat p{
+
+font-size:18px;
+
+font-weight:600;
+
+color:#666;
+
+}
