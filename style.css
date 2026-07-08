@@ -2218,7 +2218,10 @@ font-size:52px;
 line-height:1.1;
 
 }
-
+.testimonials-grid{
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
 
 .hero-container{
 
