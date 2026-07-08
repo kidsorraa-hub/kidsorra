@@ -89,3 +89,37 @@ counter.innerText=target;
 updateCounter();
 
 });
+const fadeElements = document.querySelectorAll(
+    ".section-title, .program-card, .why-card, .experience-card, .journey-step, .schools-container, .meet-container"
+);
+
+
+const observer = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("fade-up");
+
+            setTimeout(()=>{
+
+                entry.target.classList.add("show");
+
+            },100);
+
+        }
+
+    });
+
+},
+{
+    threshold:0.15
+});
+
+
+fadeElements.forEach(element=>{
+
+    observer.observe(element);
+
+});
