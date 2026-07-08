@@ -437,3 +437,219 @@ document.querySelectorAll("button").forEach(btn=>{
 console.log("✅ Kidsorra Script Loaded Successfully");
 
 });
+
+
+/* =====================================
+   PART 20 — STEP 4
+   SCRIPT INTERACTION UPGRADE
+===================================== */
+
+
+/* ===============================
+   BUTTON RIPPLE EFFECT
+=============================== */
+
+
+document.querySelectorAll(
+"button, .btn-primary, .btn-secondary, .primary, .secondary, .demo-btn"
+).forEach(button=>{
+
+
+    button.addEventListener("click",function(e){
+
+
+        const ripple=document.createElement("span");
+
+
+        const rect=this.getBoundingClientRect();
+
+
+        const size=Math.max(
+            rect.width,
+            rect.height
+        );
+
+
+        ripple.style.width=size+"px";
+
+        ripple.style.height=size+"px";
+
+
+        ripple.style.left=
+        e.clientX-rect.left-size/2+"px";
+
+
+        ripple.style.top=
+        e.clientY-rect.top-size/2+"px";
+
+
+        ripple.className="ripple";
+
+
+        this.appendChild(ripple);
+
+
+
+        setTimeout(()=>{
+
+            ripple.remove();
+
+        },600);
+
+
+
+    });
+
+
+});
+
+
+
+
+
+/* ===============================
+   HERO MOUSE PARALLAX
+=============================== */
+
+
+const heroCard=document.querySelector(".character-card");
+
+
+if(heroCard){
+
+
+document.addEventListener("mousemove",(e)=>{
+
+
+    const x=
+    (window.innerWidth/2-e.clientX)/40;
+
+
+    const y=
+    (window.innerHeight/2-e.clientY)/40;
+
+
+
+    heroCard.style.transform=
+    `
+    translate(${x}px,${y}px)
+    `;
+
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+/* ===============================
+   CARD TILT EFFECT
+=============================== */
+
+
+const cards=document.querySelectorAll(
+".program-card, .why-card, .experience-card"
+);
+
+
+
+cards.forEach(card=>{
+
+
+card.addEventListener("mousemove",(e)=>{
+
+
+    const rect=
+    card.getBoundingClientRect();
+
+
+
+    const x=
+    e.clientX-rect.left;
+
+
+    const y=
+    e.clientY-rect.top;
+
+
+
+    const rotateX=
+    ((y-rect.height/2)/20)*-1;
+
+
+    const rotateY=
+    ((x-rect.width/2)/20);
+
+
+
+    card.style.transform=
+    `
+    perspective(800px)
+    rotateX(${rotateX}deg)
+    rotateY(${rotateY}deg)
+    translateY(-8px)
+    `;
+
+
+
+});
+
+
+
+card.addEventListener("mouseleave",()=>{
+
+
+    card.style.transform="";
+
+
+});
+
+
+
+});
+
+
+
+
+
+
+/* ===============================
+   CURSOR GLOW
+=============================== */
+
+
+const cursorGlow=document.createElement("div");
+
+
+cursorGlow.className="cursor-glow";
+
+
+document.body.appendChild(cursorGlow);
+
+
+
+document.addEventListener("mousemove",(e)=>{
+
+
+cursorGlow.style.left=
+e.clientX+"px";
+
+
+cursorGlow.style.top=
+e.clientY+"px";
+
+
+});
+
+
+
+
+
+
+console.log("✨ Part 20 Step 4 Interaction Loaded");
