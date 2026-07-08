@@ -3064,3 +3064,63 @@ opacity:0;
 visibility:hidden;
 
 }
+
+
+
+/* =====================================
+PREMIUM CURSOR
+===================================== */
+
+.cursor-dot{
+
+position:fixed;
+
+width:10px;
+
+height:10px;
+
+background:#4F46E5;
+
+border-radius:50%;
+
+pointer-events:none;
+
+z-index:999999;
+
+transform:translate(-50%,-50%);
+
+}
+
+
+.cursor-ring{
+
+position:fixed;
+
+width:45px;
+
+height:45px;
+
+border:2px solid #A855F7;
+
+border-radius:50%;
+
+pointer-events:none;
+
+z-index:999998;
+
+transform:translate(-50%,-50%);
+
+transition:.15s ease;
+
+}
+
+
+.cursor-ring.active{
+
+transform:
+translate(-50%,-50%)
+scale(1.7);
+
+background:rgba(168,85,247,.1);
+
+}
