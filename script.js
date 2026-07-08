@@ -903,3 +903,58 @@ faqItems.forEach(item => {
     });
 
 });
+
+/* ==================================
+   MOBILE MENU
+================================== */
+
+const menuToggle = document.querySelector(".menu-toggle");
+const navLinks = document.querySelector(".nav-links");
+const overlay = document.querySelector(".mobile-menu-overlay");
+
+menuToggle.addEventListener("click", () => {
+
+    navLinks.classList.toggle("active");
+    overlay.classList.toggle("active");
+
+    document.body.classList.toggle("menu-open");
+
+    if(navLinks.classList.contains("active")){
+
+        menuToggle.innerHTML = "✖";
+
+    }else{
+
+        menuToggle.innerHTML = "☰";
+
+    }
+
+});
+
+
+overlay.addEventListener("click", () => {
+
+    navLinks.classList.remove("active");
+    overlay.classList.remove("active");
+
+    document.body.classList.remove("menu-open");
+
+    menuToggle.innerHTML = "☰";
+
+});
+
+
+document.querySelectorAll(".nav-links li").forEach(item=>{
+
+    item.addEventListener("click",()=>{
+
+        navLinks.classList.remove("active");
+        overlay.classList.remove("active");
+
+        document.body.classList.remove("menu-open");
+
+        menuToggle.innerHTML="☰";
+
+    });
+
+});
