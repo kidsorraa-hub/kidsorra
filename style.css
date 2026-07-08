@@ -1158,6 +1158,18 @@ width:120px;
 height:95px;
 
 }
+footer{
+    padding: 60px 20px;
+}
+
+.footer-content{
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+}
+.footer-links{
+    justify-content: center;
+}
 
 /* =====================================
    THE KIDSORRA EXPERIENCE
