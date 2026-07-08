@@ -1,125 +1,118 @@
 // =====================================
 // KIDSORRA WEBSITE
-// Animation Controller
-// Version 1.0
+// Main JavaScript
+// Version 2.0
 // =====================================
 
+document.addEventListener("DOMContentLoaded", () => {
 
-document.addEventListener("DOMContentLoaded", function(){
+    console.log("⭐ Welcome to Kidsorra World!");
 
+    // =====================================
+    // HERO FADE IN
+    // =====================================
 
-console.log("Welcome to Kidsorra World 🌈");
+    const hero = document.querySelector(".hero");
 
+    if (hero) {
+        hero.style.opacity = "0";
 
-// Hero animation starter
+        setTimeout(() => {
+            hero.style.transition = "opacity 1s ease";
+            hero.style.opacity = "1";
+        }, 300);
+    }
 
-const hero = document.querySelector(".hero");
+    // =====================================
+    // BUTTON CLICK EFFECT
+    // =====================================
 
+    const buttons = document.querySelectorAll("button");
 
-if(hero){
+    buttons.forEach(button => {
 
-hero.style.opacity = "0";
+        button.addEventListener("click", () => {
 
+            console.log("Kidsorra Button Clicked ⭐");
 
-setTimeout(()=>{
-
-hero.style.transition="1s ease";
-
-hero.style.opacity="1";
-
-
-},300);
-
-
-}
-
-
-// Button interaction
-
-const buttons = document.querySelectorAll("button");
-
-
-buttons.forEach(button=>{
-
-
-button.addEventListener("click",()=>{
-
-
-console.log("Kidsorra button clicked ⭐");
-
-
-});
-
-
-});
-
-
-
-});
-
-
-const counters=document.querySelectorAll(".counter");
-
-counters.forEach(counter=>{
-
-counter.innerText="0";
-
-const updateCounter=()=>{
-
-const target=+counter.getAttribute("data-target");
-
-const current=+counter.innerText;
-
-const increment=target/120;
-
-if(current<target){
-
-counter.innerText=Math.ceil(current+increment);
-
-setTimeout(updateCounter,20);
-
-}else{
-
-counter.innerText=target;
-
-}
-
-}
-
-updateCounter();
-
-});
-const fadeElements = document.querySelectorAll(
-    ".section-title, .program-card, .why-card, .experience-card, .journey-step, .schools-container, .meet-container"
-);
-
-
-const observer = new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.classList.add("fade-up");
-
-            setTimeout(()=>{
-
-                entry.target.classList.add("show");
-
-            },100);
-
-        }
+        });
 
     });
 
-},
-{
-    threshold:0.15
-});
+    // =====================================
+    // COUNTER ANIMATION
+    // =====================================
 
+    const counters = document.querySelectorAll(".counter");
 
-fadeElements.forEach(element=>{
+    counters.forEach(counter => {
 
-    observer.observe(element);
+        counter.innerText = "0";
+
+        const target = Number(counter.dataset.target);
+
+        const updateCounter = () => {
+
+            const current = Number(counter.innerText);
+
+            const increment = target / 120;
+
+            if (current < target) {
+
+                counter.innerText = Math.ceil(current + increment);
+
+                requestAnimationFrame(updateCounter);
+
+            } else {
+
+                counter.innerText = target;
+
+            }
+
+        };
+
+        updateCounter();
+
+    });
+
+    // =====================================
+    // SCROLL ANIMATION
+    // =====================================
+
+    const fadeElements = document.querySelectorAll(
+        ".section-title, .program-card, .why-card, .experience-card, .journey-step, .schools-container, .meet-container, .testimonial, .stat"
+    );
+
+    fadeElements.forEach(element => {
+
+        element.classList.add("fade-up");
+
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+                entry.target.classList.add("show");
+
+                observer.unobserve(entry.target);
+
+            }
+
+        });
+
+    }, {
+
+        threshold: 0.15
+
+    });
+
+    fadeElements.forEach(element => {
+
+        observer.observe(element);
+
+    });
 
 });
