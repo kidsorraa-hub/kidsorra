@@ -1,11 +1,5 @@
-<!-- ===================================================
-     KIDSORRA WEBSITE
-     INDEX.HTML
-     PART 1 / 10
-=================================================== -->
-
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 
 <head>
 
@@ -14,25 +8,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-<title>
-Kidsorra | Smart Learning
-</title>
+<title>Kidsorra</title>
 
 
-<meta name="description"
-content="Kidsorra creates joyful smart learning experiences for children with technology and creativity.">
+<link rel="stylesheet" href="style.css">
 
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
-rel="stylesheet">
-
-
-<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 
 </head>
@@ -41,26 +23,62 @@ rel="stylesheet">
 <body>
 
 
-<!-- =========================================
-     PRELOADER
-========================================= -->
+<!-- =========================
+BACK TO TOP
+========================= -->
+
+<button class="back-to-top">
+
+⬆️
+
+</button>
+
+
+
+<!-- =========================
+PRELOADER
+========================= -->
 
 
 <div id="preloader">
 
-<div class="loader">
+
+<div class="loader-content">
+
+
+<div class="loader-logo">
+
 🌈
-</div>
 
 </div>
 
 
+<h2>
+
+Kidsorra
+
+</h2>
 
 
 
-<!-- =========================================
-     HEADER
-========================================= -->
+<div class="loader-bar">
+
+<span></span>
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<!-- ================= HEADER ================= -->
 
 
 <header>
@@ -69,60 +87,24 @@ rel="stylesheet">
 <nav class="navbar">
 
 
-<a href="#home" class="logo">
+<div class="logo">
 
-<span data-lang="logo">
-Kidsorra
-</span>
+⭐ Kidsorra
 
-</a>
-
+</div>
 
 
 
 <ul class="nav-links">
 
 
-<li>
-<a href="#home" data-lang="home">
-Home
-</a>
-</li>
+<li>Home</li>
 
+<li>Programs</li>
 
-<li>
-<a href="#about" data-lang="about">
-About
-</a>
-</li>
+<li>Schools</li>
 
-
-<li>
-<a href="#programs" data-lang="programs">
-Programs
-</a>
-</li>
-
-
-<li>
-<a href="#schools" data-lang="schools">
-Schools
-</a>
-</li>
-
-
-<li>
-<a href="#parents" data-lang="parents">
-Parents
-</a>
-</li>
-
-
-<li>
-<a href="#contact" data-lang="contact">
-Contact
-</a>
-</li>
+<li>Parents</li>
 
 
 </ul>
@@ -130,97 +112,23 @@ Contact
 
 
 
+<button class="demo-btn">
 
-<div class="header-actions">
-
-
-
-<div class="language-selector">
-
-
-<button class="language-current">
-
-🌐
+Free Demo
 
 </button>
 
 
 
-<div class="language-menu">
-
-
-<button class="language-btn"
-data-language="en">
-
-English
-
-</button>
-
-
-
-<button class="language-btn"
-data-language="fa">
-
-فارسی
-
-</button>
-
-
-
-<button class="language-btn"
-data-language="ar">
-
-العربية
-
-</button>
-
-
-
-<button class="language-btn"
-data-language="th">
-
-ไทย
-
-</button>
-
-
-
-<button class="language-btn"
-data-language="zh">
-
-中文
-
-</button>
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<a href="#booking"
-class="demo-btn"
-data-lang="demo">
-
-Book Demo
-
-</a>
-
-
-
-<button class="menu-toggle">
+<div class="menu-toggle">
 
 ☰
 
-</button>
-
-
 </div>
+
+
+
+<div class="mobile-menu-overlay"></div>
 
 
 
@@ -233,24 +141,29 @@ Book Demo
 
 
 
-<!-- =========================================
-     MOBILE OVERLAY
-========================================= -->
+<!-- ================= HERO ================= -->
 
 
-<div class="mobile-menu-overlay"></div>
-
+<section class="hero">
 
 
 
-
-<!-- =========================================
-     HERO SECTION
-========================================= -->
+<div class="magic-background">
 
 
-<section class="hero"
-id="home">
+<span class="star star-1">✦</span>
+
+<span class="star star-2">✦</span>
+
+<span class="star star-3">★</span>
+
+<span class="star star-4">✦</span>
+
+
+
+</div>
+
+
 
 
 
@@ -264,10 +177,9 @@ id="home">
 
 <div class="badge">
 
-✨ Smart Kids Education
+✨ Kidsorra World
 
 </div>
-
 
 
 
@@ -275,9 +187,12 @@ id="home">
 <h1>
 
 
-<span data-lang="heroTitle">
+Every Child Has
 
-Smart Learning For Every Child
+
+<span>
+
+A Superpower
 
 </span>
 
@@ -288,13 +203,15 @@ Smart Learning For Every Child
 
 
 
-<p data-lang="heroText">
+<p>
 
-Kidsorra creates joyful learning experiences with technology,
-creativity and care.
+
+Kidsorra helps children discover confidence,
+creativity and emotional skills through joyful
+learning experiences.
+
 
 </p>
-
 
 
 
@@ -302,23 +219,20 @@ creativity and care.
 <div class="hero-buttons">
 
 
-<a href="#booking"
-class="btn-primary"
-data-lang="start">
-
-Start Learning
-
-</a>
-
-
-
-<a href="#programs"
-class="btn-secondary"
-data-lang="explore">
+<button class="btn-primary">
 
 Explore Programs
 
-</a>
+</button>
+
+
+
+<button class="btn-secondary">
+
+For Schools
+
+</button>
+
 
 
 </div>
@@ -326,7 +240,6 @@ Explore Programs
 
 
 </div>
-
 
 
 
@@ -338,14 +251,19 @@ Explore Programs
 <div class="magic-circle"></div>
 
 
+
 <div class="character-card">
 
 
-<div class="character">
 
-🧒
+<div class="character-avatar">
 
-</div>
+
+<div class="avatar-head"></div>
+
+
+<div class="avatar-body"></div>
+
 
 
 </div>
@@ -355,23 +273,25 @@ Explore Programs
 
 <div class="floating-tag tag-one">
 
+💪 Confidence
+
+</div>
+
+
+
+
+<div class="floating-tag tag-two">
+
 🎨 Creativity
 
 </div>
 
 
 
-<div class="floating-tag tag-two">
-
-🚀 Future Skills
-
-</div>
-
-
 
 <div class="floating-tag tag-three">
 
-⭐ Happy Learning
+❤️ Emotions
 
 </div>
 
@@ -380,6 +300,8 @@ Explore Programs
 </div>
 
 
+
+</div>
 
 
 
@@ -389,417 +311,21 @@ Explore Programs
 
 </section>
 
-    <!-- ===================================================
-     KIDSORRA WEBSITE
-     INDEX.HTML
-     PART 1 / 10
-=================================================== -->
 
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
 
-<head>
 
-<meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-<title>
-Kidsorra | Smart Learning
-</title>
-
-
-<meta name="description"
-content="Kidsorra creates joyful smart learning experiences for children with technology and creativity.">
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
-rel="stylesheet">
-
-
-<link rel="stylesheet" href="css/style.css">
-
-
-</head>
-
-
-<body>
-
-
-<!-- =========================================
-     PRELOADER
-========================================= -->
-
-
-<div id="preloader">
-
-<div class="loader">
-🌈
-</div>
-
-</div>
-
-
-
-
-
-<!-- =========================================
-     HEADER
-========================================= -->
-
-
-<header>
-
-
-<nav class="navbar">
-
-
-<a href="#home" class="logo">
-
-<span data-lang="logo">
-Kidsorra
-</span>
-
-</a>
-
-
-
-
-<ul class="nav-links">
-
-
-<li>
-<a href="#home" data-lang="home">
-Home
-</a>
-</li>
-
-
-<li>
-<a href="#about" data-lang="about">
-About
-</a>
-</li>
-
-
-<li>
-<a href="#programs" data-lang="programs">
-Programs
-</a>
-</li>
-
-
-<li>
-<a href="#schools" data-lang="schools">
-Schools
-</a>
-</li>
-
-
-<li>
-<a href="#parents" data-lang="parents">
-Parents
-</a>
-</li>
-
-
-<li>
-<a href="#contact" data-lang="contact">
-Contact
-</a>
-</li>
-
-
-</ul>
-
-
-
-
-
-<div class="header-actions">
-
-
-
-<div class="language-selector">
-
-
-<button class="language-current">
-
-🌐
-
-</button>
-
-
-
-<div class="language-menu">
-
-
-<button class="language-btn"
-data-language="en">
-
-English
-
-</button>
-
-
-
-<button class="language-btn"
-data-language="fa">
-
-فارسی
-
-</button>
-
-
-
-<button class="language-btn"
-data-language="ar">
-
-العربية
-
-</button>
-
-
-
-<button class="language-btn"
-data-language="th">
-
-ไทย
-
-</button>
-
-
-
-<button class="language-btn"
-data-language="zh">
-
-中文
-
-</button>
-
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<a href="#booking"
-class="demo-btn"
-data-lang="demo">
-
-Book Demo
-
-</a>
-
-
-
-<button class="menu-toggle">
-
-☰
-
-</button>
-
-
-</div>
-
-
-
-</nav>
-
-
-</header>
-
-
-
-
-
-<!-- =========================================
-     MOBILE OVERLAY
-========================================= -->
-
-
-<div class="mobile-menu-overlay"></div>
-
-
-
-
-
-<!-- =========================================
-     HERO SECTION
-========================================= -->
-
-
-<section class="hero"
-id="home">
-
-
-
-<div class="hero-container">
-
-
-
-<div class="hero-content">
-
-
-
-<div class="badge">
-
-✨ Smart Kids Education
-
-</div>
-
-
-
-
-
-<h1>
-
-
-<span data-lang="heroTitle">
-
-Smart Learning For Every Child
-
-</span>
-
-
-</h1>
-
-
-
-
-
-<p data-lang="heroText">
-
-Kidsorra creates joyful learning experiences with technology,
-creativity and care.
-
-</p>
-
-
-
-
-
-<div class="hero-buttons">
-
-
-<a href="#booking"
-class="btn-primary"
-data-lang="start">
-
-Start Learning
-
-</a>
-
-
-
-<a href="#programs"
-class="btn-secondary"
-data-lang="explore">
-
-Explore Programs
-
-</a>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-<div class="hero-visual">
-
-
-<div class="magic-circle"></div>
-
-
-<div class="character-card">
-
-
-<div class="character">
-
-🧒
-
-</div>
-
-
-</div>
-
-
-
-
-<div class="floating-tag tag-one">
-
-🎨 Creativity
-
-</div>
-
-
-
-<div class="floating-tag tag-two">
-
-🚀 Future Skills
-
-</div>
-
-
-
-<div class="floating-tag tag-three">
-
-⭐ Happy Learning
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-</section>
-
-   <!-- ===================================================
-     KIDSORRA WEBSITE
-     INDEX.HTML
-     PART 2 / 10
-=================================================== -->
-
-
-<!-- =========================================
-     STATS SECTION
-========================================= -->
+<!-- ================= STATS ================= -->
 
 
 <section class="stats">
 
 
+
 <div class="stat">
 
 
-<h2 class="counter"
-data-target="5000">
+<h2 class="counter" data-target="12000">
 
 0
 
@@ -808,9 +334,10 @@ data-target="5000">
 
 <p>
 
-Happy Children
+Happy Kids
 
 </p>
+
 
 
 </div>
@@ -822,8 +349,7 @@ Happy Children
 <div class="stat">
 
 
-<h2 class="counter"
-data-target="120">
+<h2 class="counter" data-target="250">
 
 0
 
@@ -832,9 +358,10 @@ data-target="120">
 
 <p>
 
-Learning Programs
+Schools
 
 </p>
+
 
 
 </div>
@@ -846,8 +373,7 @@ Learning Programs
 <div class="stat">
 
 
-<h2 class="counter"
-data-target="50">
+<h2 class="counter" data-target="98">
 
 0
 
@@ -856,9 +382,10 @@ data-target="50">
 
 <p>
 
-Partner Schools
+Success Rate %
 
 </p>
+
 
 
 </div>
@@ -870,8 +397,7 @@ Partner Schools
 <div class="stat">
 
 
-<h2 class="counter"
-data-target="10">
+<h2 class="counter" data-target="35">
 
 0
 
@@ -880,9 +406,108 @@ data-target="10">
 
 <p>
 
-Countries
+Cities
 
 </p>
+
+
+
+</div>
+
+
+
+
+</section>
+
+
+
+
+
+<!-- ================= TESTIMONIALS ================= -->
+
+
+<section class="testimonials">
+
+
+
+<h2>
+
+What Parents Say
+
+</h2>
+
+
+
+
+<div class="testimonial-container">
+
+
+
+<div class="testimonial">
+
+
+<p>
+
+"Kidsorra helped my daughter become much more confident and creative."
+
+</p>
+
+
+<h4>
+
+Sarah M.
+
+</h4>
+
+
+</div>
+
+
+
+
+
+<div class="testimonial">
+
+
+<p>
+
+"The activities are engaging and educational. Highly recommended!"
+
+</p>
+
+
+<h4>
+
+David L.
+
+</h4>
+
+
+</div>
+
+
+
+
+
+<div class="testimonial">
+
+
+<p>
+
+"My son absolutely loves every session. Thank you Kidsorra!"
+
+</p>
+
+
+<h4>
+
+Emily R.
+
+</h4>
+
+
+</div>
+
 
 
 </div>
@@ -895,15 +520,10 @@ Countries
 
 
 
+<!-- ================= MEET KIDSORRA ================= -->
 
 
-<!-- =========================================
-     ABOUT SECTION
-========================================= -->
-
-
-<section class="meet-kidsorra"
-id="about">
+<section class="meet-kidsorra">
 
 
 
@@ -911,27 +531,25 @@ id="about">
 
 
 
-
-
 <div class="meet-image">
+
 
 
 <div class="kidsorra-avatar">
 
 
-<div class="avatar-icon">
-
-🌟
-
-</div>
+<div class="avatar-head"></div>
 
 
-</div>
+<div class="avatar-body"></div>
+
 
 
 </div>
 
 
+
+</div>
 
 
 
@@ -943,7 +561,7 @@ id="about">
 
 <span>
 
-About Kidsorra
+Meet Kidsorra
 
 </span>
 
@@ -952,45 +570,39 @@ About Kidsorra
 
 <h2>
 
-Growing Smart,
-Creative And Confident Kids
+
+Learning With Heart,
+Growing With Confidence.
+
 
 </h2>
 
 
 
 
-
 <p>
 
 
-Kidsorra combines technology,
-creativity and child-centered education
-to create meaningful learning journeys.
+Kidsorra is more than an English program.
+
+It is a joyful learning journey that combines
+SEL, creativity, communication,
+and confidence through play.
+
+Every activity is carefully designed to help
+children shine.
+
 
 </p>
 
 
 
 
+<button class="primary">
 
-<p>
+Start The Journey
 
-
-Our mission is to help every child discover
-their potential through fun and intelligent learning.
-
-</p>
-
-
-
-
-<a href="#programs"
-class="btn-primary">
-
-Discover More
-
-</a>
+</button>
 
 
 
@@ -998,272 +610,297 @@ Discover More
 
 
 
-
-
 </div>
+
 
 
 </section>
 
 
 
+<!-- ================= KIDSORRA METHOD ================= -->
 
+<section class="method-section">
 
+<div class="method-container">
 
+<div class="method-left">
 
+<span class="method-badge">
 
-
-<!-- =========================================
-     PROGRAMS SECTION
-========================================= -->
-
-
-<section class="programs"
-id="programs">
-
-
-
-<div class="section-title">
-
-
-
-<span>
-
-Programs
+🌈 The Kidsorra Method
 
 </span>
 
+<h2>
 
-
-<h2 data-lang="method">
-
-Our Learning Method
+A New Way To Help Children Grow
 
 </h2>
 
-
-
 <p>
 
-Interactive programs designed for every stage
-of childhood development.
+Kidsorra is not just an English program.
+
+It is a complete child development system designed to build confidence,
+communication, creativity and emotional intelligence through joyful learning.
 
 </p>
 
+<p>
 
+After four years of research by a multidisciplinary team including a psychologist,
+an NLP instructor, and a computer engineer, Kidsorra was developed as a practical
+growth system for children.
+
+</p>
+
+<p>
+
+Before becoming a complete educational program,
+Kidsorra was tested in real classrooms for more than two years,
+continuously refined through observation, feedback and professional evaluation.
+
+</p>
 
 </div>
 
 
 
+<div class="method-right">
 
+<div class="method-card">
 
-
-<div class="program-grid">
-
-
-
-
-
-<article class="program-card">
-
-
-
-<div class="icon">
-
-🎨
-
-</div>
-
-
-<h3>
-
-Creative Arts
-
-</h3>
-
-
-<p>
-
-Develop imagination,
-expression and creativity.
-
-</p>
-
-
-
-<button>
-
-Learn More
-
-</button>
-
-
-
-</article>
-
-
-
-
-
-
-
-<article class="program-card">
-
-
-
-<div class="icon">
+<div class="method-circle">
 
 🧠
 
 </div>
 
-
 <h3>
 
-Smart Thinking
+Research Based
 
 </h3>
 
+<ul>
 
-<p>
+<li>✔ Psychology</li>
 
-Build problem solving
-and critical thinking skills.
+<li>✔ SEL</li>
 
-</p>
+<li>✔ NLP</li>
 
+<li>✔ Creative Learning</li>
 
+<li>✔ Technology</li>
 
-<button>
+<li>✔ Two Years Field Testing</li>
 
-Learn More
-
-</button>
-
-
-
-</article>
-
-
-
-
-
-
-
-<article class="program-card">
-
-
-
-<div class="icon">
-
-💻
+</ul>
 
 </div>
 
-
-<h3>
-
-Digital Skills
-
-</h3>
-
-
-<p>
-
-Prepare children for
-future technology.
-
-</p>
-
-
-
-<button>
-
-Learn More
-
-</button>
-
-
-
-</article>
-
-
-
-
-
-
-
-<article class="program-card">
-
-
-
-<div class="icon">
-
-🌎
-
 </div>
 
-
-<h3>
-
-Global Learning
-
-</h3>
-
-
-<p>
-
-Language and cultural
-learning experiences.
-
-</p>
-
-
-
-<button>
-
-Learn More
-
-</button>
-
-
-
-</article>
-
-
-
-
-
-
 </div>
-
-
 
 </section>
 
-    <!-- ===================================================
-     KIDSORRA WEBSITE
-     INDEX.HTML
-     PART 3 / 10
-=================================================== -->
+<!-- ================= END METHOD ================= -->
+<!-- ================= WHY KIDSORRA ================= -->
 
-
-<!-- =========================================
-     SCHOOLS SECTION
-========================================= -->
-
-
-<section class="schools-premium"
-id="schools">
-
+<section class="why-parents">
 
 <div class="section-title">
 
-
 <span>
+💛 Why Kidsorra?
+</span>
 
-For Schools
+<h2>
+Why Families Choose Kidsorra
+</h2>
+
+<p>
+
+A joyful after-school experience where children grow,
+discover themselves and build skills for life.
+
+</p>
+
+</div>
+
+
+
+<div class="why-grid">
+
+<div class="why-box">
+
+<div class="why-icon">
+
+🎮
+
+</div>
+
+<h3>
+
+Play-Based Learning
+
+</h3>
+
+<p>
+
+Children learn naturally through games,
+stories and creative experiences.
+
+</p>
+
+</div>
+
+
+
+<div class="why-box">
+
+<div class="why-icon">
+
+🌱
+
+</div>
+
+<h3>
+
+Character Growth
+
+</h3>
+
+<p>
+
+Helping children become confident,
+kind and future-ready.
+
+</p>
+
+</div>
+
+
+
+<div class="why-box">
+
+<div class="why-icon">
+
+❤️
+
+</div>
+
+<h3>
+
+SEL Approach
+
+</h3>
+
+<p>
+
+Building emotional intelligence
+through meaningful experiences.
+
+</p>
+
+</div>
+
+
+
+<div class="why-box">
+
+<div class="why-icon">
+
+🧠
+
+</div>
+
+<h3>
+
+Future Skills
+
+</h3>
+
+<p>
+
+Preparing children for tomorrow,
+not only for today's classroom.
+
+</p>
+
+</div>
+
+
+
+<div class="why-box">
+
+<div class="why-icon">
+
+🌈
+
+</div>
+
+<h3>
+
+Safe Environment
+
+</h3>
+
+<p>
+
+A positive atmosphere where every child
+feels accepted and valued.
+
+</p>
+
+</div>
+
+
+
+<div class="why-box">
+
+<div class="why-icon">
+
+🚀
+
+</div>
+
+<h3>
+
+Growing Together
+
+</h3>
+
+<p>
+
+Every child grows at their own pace
+while enjoying the journey.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+    
+<!-- ================= FOR PARENTS ================= -->
+
+<section class="parents-section">
+
+
+<div class="parents-container">
+
+
+<div class="parents-content">
+
+
+<span class="parents-badge">
+
+👨‍👩‍👧 For Parents
 
 </span>
 
@@ -1271,7 +908,7 @@ For Schools
 
 <h2>
 
-Smart Education For Schools
+Helping Your Child Grow With Confidence
 
 </h2>
 
@@ -1279,10 +916,108 @@ Smart Education For Schools
 
 <p>
 
-Complete educational solutions
-for modern schools and learning centers.
+Every parent wants their child to be confident,
+creative and ready for the future.
+
+Kidsorra provides a safe and joyful after-school
+environment where children develop essential
+life skills through play, creativity and meaningful
+experiences.
 
 </p>
+
+
+
+<p>
+
+We focus on the whole child —
+their emotions, communication, confidence,
+creativity and personal growth.
+
+</p>
+
+
+
+
+<div class="parents-points">
+
+
+<div class="parent-point">
+
+<span>
+❤️
+</span>
+
+<div>
+
+<h3>
+Emotional Growth
+</h3>
+
+<p>
+Helping children understand themselves and others.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="parent-point">
+
+<span>
+🌱
+</span>
+
+<div>
+
+<h3>
+Building Confidence
+</h3>
+
+<p>
+Supporting children to express themselves freely.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="parent-point">
+
+<span>
+🚀
+</span>
+
+<div>
+
+<h3>
+Future Preparation
+</h3>
+
+<p>
+Developing skills children need for tomorrow.
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<button class="btn-primary">
+
+Start Your Child's Journey
+
+</button>
 
 
 
@@ -1292,189 +1027,823 @@ for modern schools and learning centers.
 
 
 
+<div class="parents-visual">
 
+
+<div class="parent-circle">
+
+🌈
+
+</div>
+
+
+<div class="parent-card">
+
+
+<h3>
+
+A Better Future Starts Today
+
+</h3>
+
+
+<p>
+
+Growing skills.
+Building character.
+Creating possibilities.
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+<!-- ================= END FOR PARENTS ================= -->
+
+<!-- ================= PROGRAMS ================= -->
+
+<section class="programs" id="programs">
+
+<div class="section-title">
+
+<span>
+🌈 Kidsorra Experiences
+</span>
+
+<h2>
+
+Explore The Kidsorra World
+
+</h2>
+
+<p>
+
+Every experience is designed to help children grow through play,
+creativity and meaningful life experiences.
+
+</p>
+
+</div>
+
+<div class="program-grid">
+
+<div class="program-card">
+
+<div class="icon">
+🎮
+</div>
+
+<h3>
+
+Play & Discovery
+
+</h3>
+
+<p>
+
+Children explore, imagine and discover the world through joyful activities.
+
+</p>
+
+<button>
+
+Explore
+
+</button>
+
+</div>
+
+<div class="program-card">
+
+<div class="icon">
+❤️
+</div>
+
+<h3>
+
+Character Growth
+
+</h3>
+
+<p>
+
+Developing confidence, emotional intelligence and positive habits.
+
+</p>
+
+<button>
+
+Explore
+
+</button>
+
+</div>
+
+<div class="program-card">
+
+<div class="icon">
+🎨
+</div>
+
+<h3>
+
+Creative Learning
+
+</h3>
+
+<p>
+
+Stories, art, movement and projects that inspire imagination.
+
+</p>
+
+<button>
+
+Explore
+
+</button>
+
+</div>
+
+<div class="program-card">
+
+<div class="icon">
+🚀
+</div>
+
+<h3>
+
+Future Skills
+
+</h3>
+
+<p>
+
+Preparing children for tomorrow with essential life skills.
+
+</p>
+
+<button>
+
+Explore
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+    <!-- ================= FOR SCHOOLS ================= -->
+
+<section class="schools-premium">
+
+<div class="section-title">
+
+<span>
+🏫 For Schools
+</span>
+
+<h2>
+
+Partner With Kidsorra
+
+</h2>
+
+<p>
+
+Bring joyful growth experiences into your school through
+creative after-school programs.
+
+</p>
+
+</div>
 
 <div class="school-premium-grid">
 
-
-
-
-
-<article class="school-premium-card">
-
+<div class="school-premium-card">
 
 <div class="school-icon">
-
-🏫
-
+🎯
 </div>
-
-
 
 <h3>
 
-School Partnership
+Ready-To-Run Programs
 
 </h3>
 
-
-
 <p>
 
-Connect your school with
-innovative digital learning programs.
+Professional activities prepared for schools with no extra workload.
 
 </p>
 
+</div>
 
-
-</article>
-
-
-
-
-
-
-
-<article class="school-premium-card">
-
+<div class="school-premium-card">
 
 <div class="school-icon">
-
 📚
-
 </div>
-
-
 
 <h3>
 
-Teacher Support
+Creative Workshops
 
 </h3>
 
-
-
 <p>
 
-Provide teachers with smart
-tools and educational resources.
+Interactive experiences combining creativity,
+communication and personal growth.
 
 </p>
 
+</div>
 
-
-</article>
-
-
-
-
-
-
-
-<article class="school-premium-card">
-
+<div class="school-premium-card">
 
 <div class="school-icon">
-
-📊
-
+🌈
 </div>
-
-
 
 <h3>
 
-Progress Tracking
+Long-Term Partnership
 
 </h3>
 
-
-
 <p>
 
-Monitor children's growth
-with intelligent reports.
+Supporting schools with continuous educational experiences.
 
 </p>
 
-
-
-</article>
-
-
-
-
-
-
 </div>
 
-
-
-
-
-
-
+</div>
 
 <div class="school-demo">
 
-
 <h3>
 
-Bring Kidsorra To Your School
+Interested in bringing Kidsorra to your school?
 
 </h3>
 
+<p>
+
+Book a free presentation session for your school.
+
+</p>
+
+<button class="btn-primary">
+
+Book School Demo
+
+</button>
+
+</div>
+
+</section>
+
+<!-- ================= FAQ ================= -->
+
+<section class="faq-section" id="faq">
+
+<div class="section-title">
+
+<span>
+❓ Parents FAQ
+</span>
+
+<h2>
+
+Frequently Asked Questions
+
+</h2>
+
+<p>
+
+Everything parents usually ask before starting the Kidsorra journey.
+
+</p>
+
+</div>
+
+
+<div class="faq-container">
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+Is Kidsorra an after-school program?
+
+<span>+</span>
+
+</button>
+
+<div class="faq-answer">
+
+<p>
+
+Yes.
+Kidsorra is a modern after-school growth program designed to help children build future skills through joyful experiences, creativity and meaningful activities.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+Does Kidsorra help children's development?
+
+<span>+</span>
+
+</button>
+
+<div class="faq-answer">
+
+<p>
+
+Yes.
+Kidsorra supports children's personal development by strengthening confidence, communication, emotional awareness, creativity and essential life skills.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+Does Kidsorra influence personality development?
+
+<span>+</span>
+
+</button>
+
+<div class="faq-answer">
+
+<p>
+
+Kidsorra encourages positive character development through carefully designed experiences that help children grow emotionally, socially and personally.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+Is Kidsorra based on scientific principles?
+
+<span>+</span>
+
+</button>
+
+<div class="faq-answer">
+
+<p>
+
+Yes.
+Kidsorra has been developed using concepts from child development, psychology, Social Emotional Learning (SEL), NLP and modern educational approaches.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+Has Kidsorra been tested?
+
+<span>+</span>
+
+</button>
+
+<div class="faq-answer">
+
+<p>
+
+Yes.
+The program has been researched, refined and practically implemented before becoming available as a professional educational experience.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+When can parents expect to see progress?
+
+<span>+</span>
+
+</button>
+
+<div class="faq-answer">
+
+<p>
+
+Every child grows differently.
+Many parents notice improvements in confidence and communication early, while deeper personal growth develops over time through continuous participation.
+
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="faq-item">
+
+<button class="faq-question">
+
+Is Kidsorra a therapy or treatment program?
+
+<span>+</span>
+
+</button>
+
+<div class="faq-answer">
+
+<p>
+
+No.
+Kidsorra is not a medical or therapeutic service.
+It is a personal growth program that helps children build confidence, self-awareness, communication and future-ready life skills.
+
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+<!-- ================= END FAQ ================= -->
+
+    <!-- =========================
+BOOKING FORM
+========================= -->
+
+<section class="booking-section" id="booking">
+
+
+<div class="section-title">
+
+
+<span>
+🌈 Free Demo Booking
+</span>
+
+
+<h2>
+Start Your Child's Kidsorra Journey
+</h2>
+
+
+<p>
+Fill the form and our team will contact you soon.
+</p>
+
+
+</div>
+
+
+
+
+<div class="booking-card">
+
+
+<form 
+class="booking-form"
+action="https://formspree.io/f/mlgyyeye"
+method="POST">
+
+
+
+<div class="form-row">
+
+
+<input
+type="text"
+name="first_name"
+placeholder="First Name"
+required>
+
+
+
+<input
+type="text"
+name="last_name"
+placeholder="Last Name"
+required>
+
+
+</div>
+
+
+
+
+<div class="form-row">
+
+
+<input
+type="number"
+name="child_age"
+placeholder="Child Age"
+min="2"
+max="18"
+required>
+
+
+
+<select
+name="relationship"
+required>
+
+
+<option value="">
+Your Relationship
+</option>
+
+
+<option>
+Mother
+</option>
+
+
+<option>
+Father
+</option>
+
+
+<option>
+Parent
+</option>
+
+
+<option>
+School Representative
+</option>
+
+
+<option>
+Other
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+<input
+type="email"
+name="email"
+placeholder="Email Address"
+required>
+
+
+
+
+
+<textarea
+name="message"
+placeholder="Tell us about your child (Optional)">
+</textarea>
+
+
+
+
+<input
+type="hidden"
+name="_subject"
+value="New Kidsorra Demo Booking">
+
+
+
+
+
+<button 
+type="submit"
+class="btn-primary">
+
+Book Free Demo
+
+</button>
+
+
+
+</form>
+
+
+</div>
+
+
+</section>
+
+<!-- =========================
+END BOOKING FORM
+========================= -->
+
+    
+    <!-- ================= CONTACT ================= -->
+
+<section class="contact-section" id="contact">
+
+
+<div class="section-title">
+
+<span>
+📩 Contact Kidsorra
+</span>
+
+
+<h2>
+
+Let's Grow Together
+
+</h2>
 
 
 <p>
 
-Create a better learning future
-for your students.
+Have questions? Our team is ready to help you start your child's growth journey.
+
+</p>
+
+</div>
+
+
+
+
+<div class="contact-container">
+
+
+<div class="contact-card">
+
+
+<div class="contact-icon">
+📧
+</div>
+
+<h3>
+Email
+</h3>
+
+<p>
+Kidsorraa@gmail.com
+</p>
+
+</div>
+
+
+
+
+<div class="contact-card">
+
+
+<div class="contact-icon">
+📷
+</div>
+
+<h3>
+Instagram
+</h3>
+
+<p>
+@kidsorraa
+</p>
+
+</div>
+
+
+
+
+<div class="contact-card">
+
+
+<div class="contact-icon">
+🌐
+</div>
+
+<h3>
+Website
+</h3>
+
+<p>
+www.kidsorra.com
+</p>
+
+</div>
+
+
+
+</div>
+
+
+
+
+<div class="contact-action">
+
+
+<h3>
+
+Ready to start your child's journey?
+
+</h3>
+
+
+<p>
+
+Book a free demo session with Kidsorra.
 
 </p>
 
 
+<a href="#booking" class="btn-primary">
 
-<a href="#booking"
-class="btn-primary">
-
-Request Demo
+Book Free Demo
 
 </a>
 
 
-
 </div>
-
 
 
 
 </section>
 
 
-
-
-
-
-
-
-
-<!-- =========================================
-     LEARNING JOURNEY SECTION
-========================================= -->
+<!-- ================= END CONTACT ================= -->
+<!-- =========================
+LEARNING JOURNEY
+========================= -->
 
 
 <section class="journey-section">
 
 
-
 <div class="section-title">
 
 
 <span>
 
-Journey
+Learning Journey
 
 </span>
 
@@ -1482,7 +1851,7 @@ Journey
 
 <h2>
 
-Every Child Has A Learning Path
+Every Child Grows Step By Step
 
 </h2>
 
@@ -1490,17 +1859,13 @@ Every Child Has A Learning Path
 
 <p>
 
-A simple journey from discovery
-to achievement.
+A joyful path designed to build confidence,
+communication and creativity.
 
 </p>
 
 
-
 </div>
-
-
-
 
 
 
@@ -1509,10 +1874,7 @@ to achievement.
 
 
 
-
-
 <div class="journey-step">
-
 
 
 <div class="step-number">
@@ -1522,7 +1884,6 @@ to achievement.
 </div>
 
 
-
 <h3>
 
 Discover
@@ -1530,20 +1891,15 @@ Discover
 </h3>
 
 
-
 <p>
 
-Children explore interests
-and abilities.
+Children explore English through stories,
+songs and games.
 
 </p>
 
 
-
 </div>
-
-
-
 
 
 
@@ -1552,12 +1908,7 @@ and abilities.
 
 
 
-
-
-
-
 <div class="journey-step">
-
 
 
 <div class="step-number">
@@ -1567,10 +1918,320 @@ and abilities.
 </div>
 
 
+<h3>
+
+Create
+
+</h3>
+
+
+<p>
+
+Creative projects make learning memorable.
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="journey-line"></div>
+
+
+
+<div class="journey-step">
+
+
+<div class="step-number">
+
+3
+
+</div>
+
 
 <h3>
 
-Learn
+Communicate
+
+</h3>
+
+
+<p>
+
+Students speak confidently through interaction.
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="journey-line"></div>
+
+
+
+
+<div class="journey-step">
+
+
+<div class="step-number">
+
+4
+
+</div>
+
+
+<h3>
+
+Shine
+
+</h3>
+
+
+<p>
+
+Confidence grows naturally in every lesson.
+
+</p>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- =========================
+WHY KIDSORRA
+========================= -->
+
+
+<section class="why-kidsorra">
+
+
+<div class="section-title">
+
+
+<span>
+
+Why Kidsorra?
+
+</span>
+
+
+
+<h2>
+
+Learning Beyond English
+
+</h2>
+
+
+
+<p>
+
+Helping children grow through creativity,
+confidence and communication.
+
+</p>
+
+
+</div>
+
+
+
+
+<div class="why-grid">
+
+
+
+<div class="why-card">
+
+
+<div class="why-icon">
+
+🧠
+
+</div>
+
+
+<h3>
+
+SEL Learning
+
+</h3>
+
+
+<p>
+
+Develop emotional intelligence,
+empathy and confidence.
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="why-card">
+
+
+<div class="why-icon">
+
+🎨
+
+</div>
+
+
+<h3>
+
+Creative Thinking
+
+</h3>
+
+
+<p>
+
+Learning through drawing,
+stories and imagination.
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="why-card">
+
+
+<div class="why-icon">
+
+🌍
+
+</div>
+
+
+<h3>
+
+Global English
+
+</h3>
+
+
+<p>
+
+Speak naturally through
+games and interaction.
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="why-card">
+
+
+<div class="why-icon">
+
+💛
+
+</div>
+
+
+<h3>
+
+Confidence
+
+</h3>
+
+
+<p>
+
+Helping every child
+believe in themselves.
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+<!-- =========================
+EXPERIENCE
+========================= -->
+
+
+<section class="experience">
+
+
+<h2>
+
+The Kidsorra Experience
+
+</h2>
+
+
+
+<p>
+
+Every child learns through play,
+creativity and discovery.
+
+</p>
+
+
+
+
+<div class="experience-grid">
+
+
+
+<div class="experience-card">
+
+
+<div class="experience-icon">
+
+🎲
+
+</div>
+
+
+
+<h3>
+
+Play
 
 </h3>
 
@@ -1578,8 +2239,7 @@ Learn
 
 <p>
 
-Interactive activities create
-deep understanding.
+Learning becomes a joyful adventure.
 
 </p>
 
@@ -1591,23 +2251,12 @@ deep understanding.
 
 
 
+<div class="experience-card">
 
 
-<div class="journey-line"></div>
+<div class="experience-icon">
 
-
-
-
-
-
-
-<div class="journey-step">
-
-
-
-<div class="step-number">
-
-3
+🎨
 
 </div>
 
@@ -1623,8 +2272,7 @@ Create
 
 <p>
 
-Children build confidence
-through creativity.
+Children express ideas through creativity.
 
 </p>
 
@@ -1636,23 +2284,45 @@ through creativity.
 
 
 
+<div class="experience-card">
 
 
-<div class="journey-line"></div>
+<div class="experience-icon">
 
+🧠
 
-
-
-
-
-
-<div class="journey-step">
+</div>
 
 
 
-<div class="step-number">
+<h3>
 
-4
+Discover
+
+</h3>
+
+
+
+<p>
+
+Every activity reveals new strengths.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+<div class="experience-card">
+
+
+<div class="experience-icon">
+
+🌟
 
 </div>
 
@@ -1668,7 +2338,7 @@ Grow
 
 <p>
 
-Skills develop for future success.
+Confidence grows with every experience.
 
 </p>
 
@@ -1678,834 +2348,39 @@ Skills develop for future success.
 
 
 
-
-
-
 </div>
-
-
 
 
 </section>
 
-    <!-- ===================================================
-     KIDSORRA WEBSITE
-     INDEX.HTML
-     PART 4 / 10
-=================================================== -->
 
 
-<!-- =========================================
-     WHY KIDSORRA SECTION
-========================================= -->
+<!-- =========================
+CONTACT SECTION
+========================= -->
 
-
-<section class="why-parents"
-id="why">
-
+<section class="contact-section">
 
 
 <div class="section-title">
 
-
-
 <span>
-
-Why Kidsorra
-
+📩 Contact Kidsorra
 </span>
-
-
 
 
 <h2>
-
-Why Parents Choose Us
-
+Let's Start The Journey
 </h2>
 
 
-
-
 <p>
-
-A safe and intelligent environment
-for children's growth.
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-
-<div class="why-grid">
-
-
-
-
-
-<article class="why-box">
-
-
-
-<div class="why-icon">
-
-💡
-
-</div>
-
-
-
-<h3>
-
-Smart Learning
-
-</h3>
-
-
-
-<p>
-
-Technology powered education
-designed for children.
-
-</p>
-
-
-
-</article>
-
-
-
-
-
-
-
-<article class="why-box">
-
-
-
-<div class="why-icon">
-
-❤️
-
-</div>
-
-
-
-<h3>
-
-Child Focused
-
-</h3>
-
-
-
-<p>
-
-Every activity follows
-children's needs and interests.
-
-</p>
-
-
-
-</article>
-
-
-
-
-
-
-
-<article class="why-box">
-
-
-
-<div class="why-icon">
-
-🚀
-
-</div>
-
-
-
-<h3>
-
-Future Skills
-
-</h3>
-
-
-
-<p>
-
-Preparing children with
-creative and digital skills.
-
-</p>
-
-
-
-</article>
-
-
-
-
-
-
-</div>
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================================
-     PARENTS SECTION
-========================================= -->
-
-
-<section class="parents-section"
-id="parents">
-
-
-
-
-
-<div class="parents-container">
-
-
-
-
-
-<div class="parents-content">
-
-
-
-<span class="parents-badge">
-
-For Parents
-
-</span>
-
-
-
-
-
-<h2>
-
-Helping Parents Support
-Children Better
-
-</h2>
-
-
-
-
-
-<p>
-
-Kidsorra gives parents
-confidence with clear progress,
-safe learning and meaningful activities.
-
-</p>
-
-
-
-
-
-
-
-
-<div class="parents-points">
-
-
-
-
-
-<div class="parent-point">
-
-
-
-<span>
-
-✓
-
-</span>
-
-
-
-<div>
-
-<h3>
-
-Safe Environment
-
-</h3>
-
-
-<p>
-
-A trusted space for children
-to learn and grow.
-
+Parents and schools can contact us for
+free demos and learning programs.
 </p>
 
 
 </div>
-
-
-
-</div>
-
-
-
-
-
-
-
-<div class="parent-point">
-
-
-
-<span>
-
-📈
-
-</span>
-
-
-
-<div>
-
-<h3>
-
-Progress Reports
-
-</h3>
-
-
-<p>
-
-Parents can understand
-their child's development.
-
-</p>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-<div class="parent-point">
-
-
-
-<span>
-
-🌱
-
-</span>
-
-
-
-<div>
-
-<h3>
-
-Personal Growth
-
-</h3>
-
-
-<p>
-
-Learning experiences
-built around each child.
-
-</p>
-
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="parents-visual">
-
-
-
-<div class="parent-circle">
-
-👨‍👩‍👧
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-</section>
-
-    
-<!-- ===================================================
-     KIDSORRA WEBSITE
-     INDEX.HTML
-     PART 5 / 10
-=================================================== -->
-
-
-<!-- =========================================
-     FAQ SECTION
-========================================= -->
-
-
-<section class="faq-section"
-id="faq">
-
-
-
-<div class="section-title">
-
-
-
-<span>
-
-FAQ
-
-</span>
-
-
-
-
-
-<h2>
-
-Frequently Asked Questions
-
-</h2>
-
-
-
-
-
-<p>
-
-Everything parents need to know
-about Kidsorra.
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="faq-container">
-
-
-
-
-
-
-
-<div class="faq-item">
-
-
-
-<button class="faq-question">
-
-
-<span>
-
-What is Kidsorra?
-
-</span>
-
-
-<span>
-
-+
-
-</span>
-
-
-</button>
-
-
-
-
-
-<div class="faq-answer">
-
-
-<p>
-
-Kidsorra is a smart learning platform
-that creates creative and enjoyable
-educational experiences for children.
-
-</p>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="faq-item">
-
-
-
-<button class="faq-question">
-
-
-<span>
-
-What ages can join Kidsorra?
-
-</span>
-
-
-<span>
-
-+
-
-</span>
-
-
-</button>
-
-
-
-
-
-<div class="faq-answer">
-
-
-<p>
-
-Our programs are designed for
-children with different learning levels
-and age groups.
-
-</p>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="faq-item">
-
-
-
-<button class="faq-question">
-
-
-<span>
-
-How does Kidsorra help children?
-
-</span>
-
-
-<span>
-
-+
-
-</span>
-
-
-</button>
-
-
-
-
-
-<div class="faq-answer">
-
-
-<p>
-
-Kidsorra develops creativity,
-problem solving, confidence and
-future-ready skills.
-
-</p>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="faq-item">
-
-
-
-<button class="faq-question">
-
-
-<span>
-
-Can schools use Kidsorra?
-
-</span>
-
-
-<span>
-
-+
-
-</span>
-
-
-</button>
-
-
-
-
-
-<div class="faq-answer">
-
-
-<p>
-
-Yes. Schools can partner with Kidsorra
-to provide modern learning solutions
-for students and teachers.
-
-</p>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="faq-item">
-
-
-
-<button class="faq-question">
-
-
-<span>
-
-How can parents book a demo?
-
-</span>
-
-
-<span>
-
-+
-
-</span>
-
-
-</button>
-
-
-
-
-
-<div class="faq-answer">
-
-
-<p>
-
-Parents can use the booking form
-or contact Kidsorra directly.
-
-</p>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================================
-     CONTACT SECTION
-========================================= -->
-
-
-<section class="contact-section"
-id="contact">
-
-
-
-<div class="section-title">
-
-
-
-<span>
-
-Contact
-
-</span>
-
-
-
-
-
-<h2>
-
-Contact Us
-
-</h2>
-
-
-
-
-
-<p>
-
-We are ready to answer your questions.
-
-</p>
-
-
-
-</div>
-
-
-
-
 
 
 
@@ -2514,105 +2389,30 @@ We are ready to answer your questions.
 
 
 
-
-
-
-<div class="contact-card">
-
-
-<div class="contact-icon">
-
-📧
-
-</div>
-
+<div class="contact-info">
 
 
 <h3>
-
-Email
-
+Get In Touch
 </h3>
 
 
-
 <p>
-
-hello@kidsorra.com
-
+📧 Kidsorraa@gmail.com
 </p>
 
 
-
-</div>
-
-
-
-
-
-
-
-
-<div class="contact-card">
-
-
-<div class="contact-icon">
-
-📞
-
-</div>
-
-
-
-<h3>
-
-Phone
-
-</h3>
-
-
-
 <p>
-
-+00 000 000 000
-
+🌐 www.kidsorra.com
 </p>
 
 
+<a href="https://www.instagram.com/kidsorraa?igsh=MTgzcmZ5cW9hZm8zbQ%3D%3D&utm_source=qr"
+target="_blank">
 
-</div>
+📸 Instagram
 
-
-
-
-
-
-
-
-<div class="contact-card">
-
-
-<div class="contact-icon">
-
-📍
-
-</div>
-
-
-
-<h3>
-
-Location
-
-</h3>
-
-
-
-<p>
-
-Global Online Learning
-
-</p>
+</a>
 
 
 
@@ -2622,276 +2422,46 @@ Global Online Learning
 
 
 
-
-
-</div>
-
+<div class="contact-form">
 
 
 
-
-</section>
-
-    <!-- ===================================================
-     KIDSORRA WEBSITE
-     INDEX.HTML
-     PART 6 / 10
-=================================================== -->
-
-
-<!-- =========================================
-     BOOKING SECTION
-========================================= -->
-
-
-<section class="booking-section"
-id="booking">
+<form>
 
 
 
-<div class="section-title">
-
-
-
-<span>
-
-Book Demo
-
-</span>
-
-
-
-
-<h2>
-
-Start Your Child's Journey
-
-</h2>
-
-
-
-
-<p>
-
-Complete the form and our team
-will contact you soon.
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="booking-card">
-
-
-
-
-
-<form class="booking-form"
-id="bookingForm">
-
-
-
-
-
-
-<div class="form-row">
-
-
-
-<input
-
+<input 
 type="text"
-
-id="childName"
-
-name="childName"
-
-placeholder="Child Name"
-
-required
-
->
-
-
+placeholder="Your Name"
+required>
 
 
 
 <input
-
-type="text"
-
-id="parentName"
-
-name="parentName"
-
-placeholder="Parent Name"
-
-required
-
->
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="form-row">
-
-
-
-<input
-
 type="email"
-
-id="email"
-
-name="email"
-
-placeholder="Email Address"
-
-required
-
->
-
-
+placeholder="Your Email"
+required>
 
 
 
 <input
-
-type="tel"
-
-id="phone"
-
-name="phone"
-
-placeholder="Phone Number"
-
-required
-
+type="text"
+placeholder="Parent or School"
 >
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<select
-
-id="program"
-
-name="program"
-
-required
-
->
-
-
-
-<option value="">
-
-Select Program
-
-</option>
-
-
-
-<option value="creative">
-
-Creative Arts
-
-</option>
-
-
-
-<option value="smart">
-
-Smart Thinking
-
-</option>
-
-
-
-<option value="digital">
-
-Digital Skills
-
-</option>
-
-
-
-<option value="global">
-
-Global Learning
-
-</option>
-
-
-
-</select>
-
-
-
-
-
-
 
 
 
 <textarea
-
-id="message"
-
-name="message"
-
-placeholder="Tell us about your child..."
-
-></textarea>
+placeholder="Your Message">
+</textarea>
 
 
 
+<button class="btn-primary">
 
-
-
-
-
-
-<button
-
-type="submit"
-
-class="btn-primary">
-
-Submit Booking
+Send Message
 
 </button>
-
-
-
-
 
 
 
@@ -2899,92 +2469,152 @@ Submit Booking
 
 
 
-
-
-
-
 </div>
 
 
 
 
-
+</div>
 
 
 </section>
+<!-- =========================
+BOOKING FORM
+========================= -->
+
+<section class="booking-section">
+
+    <div class="section-title">
+
+        <span>🌈 Free Demo Booking</span>
+
+        <h2>Reserve Your Kidsorra Session</h2>
+
+        <p>
+            Fill the form and our team will contact you soon.
+        </p>
+
+    </div>
+
+    <div class="booking-card">
+
+        <form
+            class="booking-form"
+            action="https://formspree.io/f/mlgyyeye"
+            method="POST">
+
+            <div class="form-row">
+
+                <input
+                    type="text"
+                    name="first_name"
+                    placeholder="First Name"
+                    required>
+
+                <input
+                    type="text"
+                    name="last_name"
+                    placeholder="Last Name"
+                    required>
+
+            </div>
+
+            <div class="form-row">
+
+                <input
+                    type="number"
+                    name="child_age"
+                    placeholder="Child Age"
+                    min="2"
+                    max="18"
+                    required>
+
+                <select
+                    name="relationship"
+                    required>
+
+                    <option value="">Relationship</option>
+                    <option>Mother</option>
+                    <option>Father</option>
+                    <option>Parent</option>
+                    <option>School</option>
+                    <option>Other</option>
+
+                </select>
+
+            </div>
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                required>
+
+            <textarea
+                name="message"
+                placeholder="Tell us about your child (Optional)"></textarea>
+
+            <input
+                type="hidden"
+                name="_subject"
+                value="New Kidsorra Demo Booking">
+
+            <input
+                type="hidden"
+                name="_next"
+                value="https://kidsorraa-hub.github.io/kidsorra/">
+
+            <button
+                type="submit"
+                class="btn-primary">
+<input
+type="hidden"
+name="_subject"
+value="New Kidsorra Demo Booking">
 
 
+<input
+type="hidden"
+name="_next"
+value="https://www.kidsorra.com/thank-you.html">
+                Book Free Demo
 
+            </button>
 
+        </form>
 
+    </div>
 
-
-
-
-<!-- =========================================
-     FOOTER
-========================================= -->
-
+</section>د
+<!-- ================= PREMIUM FOOTER ================= -->
 
 <footer class="footer">
 
-
-
-
-
 <div class="footer-container">
 
-
-
-
-
+<!-- LEFT -->
 
 <div class="footer-column">
 
+<h2 class="footer-logo">
 
+🌈 Kidsorra
 
-<div class="footer-logo">
-
-Kidsorra
-
-</div>
-
-
-
+</h2>
 
 <p>
 
-Smart learning experiences
-for children around the world.
+Helping children build confidence,
+creativity and future-ready life skills
+through joyful after-school experiences.
 
 </p>
 
-
-
-
-<a href="#booking"
-class="footer-btn">
-
-Book Demo
-
-</a>
-
-
-
-
 </div>
 
-
-
-
-
-
-
-
+<!-- LINKS -->
 
 <div class="footer-column">
-
-
 
 <h3>
 
@@ -2992,84 +2622,25 @@ Quick Links
 
 </h3>
 
-
-
-
 <ul>
 
+<li><a href="#home">Home</a></li>
 
+<li><a href="#programs">Programs</a></li>
 
-<li>
+<li><a href="#parents">Parents</a></li>
 
-<a href="#home">
+<li><a href="#schools">Schools</a></li>
 
-Home
-
-</a>
-
-</li>
-
-
-
-
-<li>
-
-<a href="#programs">
-
-Programs
-
-</a>
-
-</li>
-
-
-
-
-
-<li>
-
-<a href="#schools">
-
-Schools
-
-</a>
-
-</li>
-
-
-
-
-
-<li>
-
-<a href="#parents">
-
-Parents
-
-</a>
-
-</li>
-
-
+<li><a href="#booking">Book Demo</a></li>
 
 </ul>
 
-
-
-
 </div>
 
-
-
-
-
-
-
-
+<!-- CONTACT -->
 
 <div class="footer-column">
-
-
 
 <h3>
 
@@ -3077,1221 +2648,60 @@ Contact
 
 </h3>
 
-
-
-
 <p>
 
-📧 hello@kidsorra.com
+📧 Kidsorraa@gmail.com
 
 </p>
 
-
-
-
 <p>
 
-🌍 Online Learning
+🌐 www.kidsorra.com
 
 </p>
 
-
-
-
 <p>
 
-📞 +00 000 000 000
+📷 @kidsorraa
 
 </p>
 
+<a
 
+href="https://www.instagram.com/kidsorraa?igsh=MTgzcmZ5cW9hZm8zbQ%3D%3D&utm_source=qr"
 
+target="_blank"
+
+class="footer-btn">
+
+Visit Instagram
+
+</a>
 
 </div>
 
-
-
-
-
-
-
-
 </div>
-
-
-
-
-
-
-
 
 <div class="footer-bottom">
 
 <p>
 
-© 2026 Kidsorra. All Rights Reserved.
+© 2026 Kidsorra.
+All Rights Reserved.
 
 </p>
 
 </div>
-
-
-
-
-
 
 </footer>
-    <!-- ===================================================
-     KIDSORRA WEBSITE
-     INDEX.HTML
-     PART 7 / 10
-=================================================== -->
 
+<!-- ================= END FOOTER ================= -->
 
-<!-- =========================================
-     EXTRA LEARNING METHOD SECTION
-========================================= -->
 
+<!-- =========================
+JAVASCRIPT
+========================= -->
 
-<section class="method-section"
-id="method">
-
-
-
-<div class="section-title">
-
-
-
-<span>
-
-Method
-
-</span>
-
-
-
-
-<h2>
-
-Our Learning Method
-
-</h2>
-
-
-
-
-<p>
-
-A balanced approach combining creativity,
-technology and child development.
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="method-grid">
-
-
-
-
-
-
-<article class="method-card">
-
-
-
-<div class="method-icon">
-
-🧩
-
-</div>
-
-
-
-
-<h3>
-
-Interactive Learning
-
-</h3>
-
-
-
-
-<p>
-
-Children learn through games,
-activities and experiences.
-
-</p>
-
-
-
-
-</article>
-
-
-
-
-
-
-
-
-
-<article class="method-card">
-
-
-
-<div class="method-icon">
-
-🎯
-
-</div>
-
-
-
-
-<h3>
-
-Personal Goals
-
-</h3>
-
-
-
-
-<p>
-
-Learning paths are adjusted
-to every child's needs.
-
-</p>
-
-
-
-
-</article>
-
-
-
-
-
-
-
-
-
-<article class="method-card">
-
-
-
-<div class="method-icon">
-
-🌟
-
-</div>
-
-
-
-
-<h3>
-
-Confidence Building
-
-</h3>
-
-
-
-
-<p>
-
-Children grow confidence
-through successful experiences.
-
-</p>
-
-
-
-
-</article>
-
-
-
-
-
-
-
-
-
-<article class="method-card">
-
-
-
-<div class="method-icon">
-
-🤖
-
-</div>
-
-
-
-
-<h3>
-
-Smart Technology
-
-</h3>
-
-
-
-
-<p>
-
-Modern tools support
-better learning outcomes.
-
-</p>
-
-
-
-
-</article>
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================================
-     EXPERIENCE SECTION
-========================================= -->
-
-
-<section class="experience-section">
-
-
-
-
-
-<div class="section-title">
-
-
-
-<span>
-
-Experience
-
-</span>
-
-
-
-
-<h2>
-
-A Happy Learning Experience
-
-</h2>
-
-
-
-
-<p>
-
-Designed to make children excited
-about discovering new skills.
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="experience-grid">
-
-
-
-
-
-
-<div class="experience-card">
-
-
-
-<h3>
-
-Creative Space
-
-</h3>
-
-
-
-<p>
-
-A colorful environment
-where imagination grows.
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="experience-card">
-
-
-
-<h3>
-
-Safe Learning
-
-</h3>
-
-
-
-<p>
-
-A protected environment
-for every child.
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="experience-card">
-
-
-
-<h3>
-
-Future Ready
-
-</h3>
-
-
-
-<p>
-
-Skills that prepare children
-for tomorrow.
-
-</p>
-
-
-
-</div>
-
-<!-- ===================================================
-     KIDSORRA WEBSITE
-     INDEX.HTML
-     PART 8 / 10
-=================================================== -->
-
-
-<!-- =========================================
-     TESTIMONIALS SECTION
-========================================= -->
-
-
-<section class="testimonials-section">
-
-
-
-<div class="section-title">
-
-
-
-<span>
-
-Testimonials
-
-</span>
-
-
-
-
-<h2>
-
-What Parents Say
-
-</h2>
-
-
-
-
-<p>
-
-Real experiences from Kidsorra families.
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="testimonial-grid">
-
-
-
-
-
-
-<article class="testimonial">
-
-
-
-<div class="testimonial-avatar">
-
-👩
-
-</div>
-
-
-
-<h3>
-
-Sarah
-
-</h3>
-
-
-
-<p>
-
-"Kidsorra helped my child become
-more creative and confident."
-
-</p>
-
-
-
-</article>
-
-
-
-
-
-
-
-
-
-<article class="testimonial">
-
-
-
-<div class="testimonial-avatar">
-
-👨
-
-</div>
-
-
-
-<h3>
-
-David
-
-</h3>
-
-
-
-<p>
-
-"The learning activities are fun,
-smart and effective."
-
-</p>
-
-
-
-</article>
-
-
-
-
-
-
-
-
-
-<article class="testimonial">
-
-
-
-<div class="testimonial-avatar">
-
-👩‍👧
-
-</div>
-
-
-
-<h3>
-
-Emma
-
-</h3>
-
-
-
-<p>
-
-"I can clearly see my child's
-progress every week."
-
-</p>
-
-
-
-</article>
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================================
-     GALLERY / ACTIVITIES SECTION
-========================================= -->
-
-
-<section class="gallery-section">
-
-
-
-<div class="section-title">
-
-
-
-<span>
-
-Activities
-
-</span>
-
-
-
-
-<h2>
-
-Learning Through Fun
-
-</h2>
-
-
-
-
-<p>
-
-Children discover skills through
-creative activities.
-
-</p>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="gallery-grid">
-
-
-
-
-
-
-<div class="gallery-item">
-
-🎨
-
-<span>
-
-Art
-
-</span>
-
-</div>
-
-
-
-
-
-
-
-
-<div class="gallery-item">
-
-🧪
-
-<span>
-
-Science
-
-</span>
-
-</div>
-
-
-
-
-
-
-
-
-<div class="gallery-item">
-
-💻
-
-<span>
-
-Technology
-
-</span>
-
-</div>
-
-
-
-
-
-
-
-
-<div class="gallery-item">
-
-🎵
-
-<span>
-
-Music
-
-</span>
-
-</div>
-
-
-
-
-
-
-
-
-<div class="gallery-item">
-
-🌱
-
-<span>
-
-Nature
-
-</span>
-
-</div>
-
-
-
-
-
-
-
-
-<div class="gallery-item">
-
-📚
-
-<span>
-
-Reading
-
-</span>
-
-</div>
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-</section>
-
-    <!-- ===================================================
-     KIDSORRA WEBSITE
-     INDEX.HTML
-     PART 9 / 10
-=================================================== -->
-
-
-<!-- =========================================
-     PARENTS SECTION
-========================================= -->
-
-
-<section class="parents-section"
-id="parents">
-
-
-
-<div class="parents-container">
-
-
-
-
-
-
-<div class="parents-content">
-
-
-
-<span class="parents-badge">
-
-For Parents
-
-</span>
-
-
-
-
-
-
-<h2>
-
-Helping Parents Support Growth
-
-</h2>
-
-
-
-
-
-
-<p>
-
-Kidsorra gives parents the tools
-to understand progress, encourage
-creativity and support their child's
-learning journey.
-
-</p>
-
-
-
-
-
-
-
-<div class="parents-points">
-
-
-
-
-
-<div class="parent-point">
-
-
-
-<span>
-
-📈
-
-</span>
-
-
-
-<div>
-
-<h3>
-
-Progress Tracking
-
-</h3>
-
-
-
-<p>
-
-Follow your child's learning
-development easily.
-
-</p>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="parent-point">
-
-
-
-<span>
-
-❤️
-
-</span>
-
-
-
-<div>
-
-<h3>
-
-Positive Learning
-
-</h3>
-
-
-
-<p>
-
-Build motivation through
-fun experiences.
-
-</p>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="parent-point">
-
-
-
-<span>
-
-🌍
-
-</span>
-
-
-
-<div>
-
-<h3>
-
-Global Skills
-
-</h3>
-
-
-
-<p>
-
-Prepare children for
-future opportunities.
-
-</p>
-
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<div class="parents-visual">
-
-
-
-<div class="parent-circle">
-
-👨‍👩‍👧
-
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================================
-     NEWSLETTER SECTION
-========================================= -->
-
-
-<section class="newsletter-section">
-
-
-
-<div class="newsletter-card">
-
-
-
-
-
-<h2>
-
-Stay Connected With Kidsorra
-
-</h2>
-
-
-
-
-
-
-<p>
-
-Get updates about programs,
-activities and learning tips.
-
-</p>
-
-
-
-
-
-
-
-<form class="newsletter-form">
-
-
-
-
-
-<input
-
-type="email"
-
-placeholder="Your email address"
-
->
-
-
-
-
-
-<button
-
-type="submit"
-
-class="btn-primary">
-
-Subscribe
-
-</button>
-
-
-
-
-
-</form>
-
-
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-</section>
-
-    
-
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-</section>
-
-    <!-- ===================================================
-     KIDSORRA WEBSITE
-     INDEX.HTML
-     PART 10 / 10
-=================================================== -->
-
-
-<!-- =========================================
-     SCRIPTS CONNECTION
-========================================= -->
-
-
-<!-- Main JavaScript -->
 
 <script src="script.js"></script>
 
