@@ -4900,3 +4900,133 @@ margin-top:40px;
 }
 
 }
+/* =================================
+   BOOKING FORM
+================================= */
+
+.booking-section{
+
+padding:100px 8%;
+
+background:#fff7ef;
+
+}
+
+.booking-card{
+
+max-width:850px;
+
+margin:50px auto 0;
+
+background:white;
+
+padding:50px;
+
+border-radius:35px;
+
+box-shadow:0 25px 60px rgba(0,0,0,.08);
+
+}
+
+.booking-form{
+
+display:flex;
+
+flex-direction:column;
+
+gap:22px;
+
+}
+
+.form-row{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:20px;
+
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea{
+
+width:100%;
+
+padding:18px 20px;
+
+border-radius:18px;
+
+border:2px solid #f1f1f1;
+
+font-size:16px;
+
+font-family:'Poppins',sans-serif;
+
+transition:.3s;
+
+background:white;
+
+}
+
+.booking-form textarea{
+
+min-height:140px;
+
+resize:none;
+
+}
+
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus{
+
+outline:none;
+
+border-color:#ffb84d;
+
+box-shadow:0 0 15px rgba(255,184,77,.25);
+
+}
+
+.booking-form button{
+
+align-self:center;
+
+margin-top:10px;
+
+padding:18px 45px;
+
+font-size:18px;
+
+border-radius:40px;
+
+cursor:pointer;
+
+transition:.35s;
+
+}
+
+.booking-form button:hover{
+
+transform:translateY(-3px);
+
+}
+
+@media(max-width:768px){
+
+.booking-card{
+
+padding:30px 22px;
+
+}
+
+.form-row{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
