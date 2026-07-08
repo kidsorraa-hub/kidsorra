@@ -2775,3 +2775,99 @@ button:active{
 
 
 }
+
+/* =====================================
+   PART 20 — STEP 4
+   RIPPLE + CURSOR GLOW
+===================================== */
+
+
+/* ===============================
+   RIPPLE EFFECT
+=============================== */
+
+button,
+.btn-primary,
+.btn-secondary,
+.primary,
+.secondary,
+.demo-btn{
+
+    overflow:hidden;
+    position:relative;
+
+}
+
+.ripple{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.45);
+
+    transform:scale(0);
+
+    animation:rippleEffect .6s linear;
+
+    pointer-events:none;
+
+}
+
+@keyframes rippleEffect{
+
+    to{
+
+        transform:scale(4);
+
+        opacity:0;
+
+    }
+
+}
+
+
+
+/* ===============================
+   CURSOR GLOW
+=============================== */
+
+.cursor-glow{
+
+    position:fixed;
+
+    width:26px;
+
+    height:26px;
+
+    border-radius:50%;
+
+    background:rgba(91,77,255,.18);
+
+    pointer-events:none;
+
+    transform:translate(-50%,-50%);
+
+    transition:
+    left .05s linear,
+    top .05s linear;
+
+    z-index:9999;
+
+    filter:blur(10px);
+
+}
+
+
+
+/* موبایل */
+
+@media(max-width:900px){
+
+.cursor-glow{
+
+display:none;
+
+}
+
+}
