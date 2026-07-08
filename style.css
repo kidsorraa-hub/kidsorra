@@ -5305,3 +5305,45 @@ overflow:hidden;
 }
 
 }
+
+/* ===============================
+   SCROLL ANIMATION
+=============================== */
+
+section,
+.program-card,
+.why-card,
+.experience-card,
+.contact-card,
+.faq-item{
+
+opacity:0;
+
+transform:translateY(40px);
+
+transition:.8s ease;
+
+}
+
+.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+
+/* ===============================
+   STICKY HEADER
+=============================== */
+
+header.sticky{
+
+background:white;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+transition:.3s;
+
+}
