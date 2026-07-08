@@ -756,5 +756,50 @@ cursorRing.classList.remove("active");
 });
 
 
-}ب  
+}  
+/* =====================================
+PART 20 STEP 6
+SCROLL REVEAL
+===================================== */
+
+
+const revealElements = document.querySelectorAll(
+    ".program-card, .why-card, .experience-card, .testimonial, .stat, .journey-step"
+);
+
+
+const revealObserver = new IntersectionObserver((entries)=>{
+
+
+    entries.forEach(entry=>{
+
+
+        if(entry.isIntersecting){
+
+
+            entry.target.classList.add("active");
+
+
+        }
+
+
+    });
+
+
+},{
+    threshold:.15
+});
+
+
+
+revealElements.forEach(el=>{
+
+
+    el.classList.add("reveal");
+
+
+    revealObserver.observe(el);
+
+
+});   
 });
