@@ -2012,6 +2012,79 @@ background:#ffd6e7;
 
 0%{
 
+   /* ==========================
+WHY KIDSORRA
+========================== */
+
+.why-kidsorra{
+
+padding:120px 8%;
+
+background:#f8f7ff;
+
+}
+
+.why-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:30px;
+
+margin-top:70px;
+
+}
+
+.why-card{
+
+background:white;
+
+padding:40px 30px;
+
+border-radius:30px;
+
+text-align:center;
+
+box-shadow:0 20px 60px rgba(0,0,0,.08);
+
+transition:.35s;
+
+}
+
+.why-card:hover{
+
+transform:translateY(-12px);
+
+box-shadow:0 35px 70px rgba(91,77,255,.15);
+
+}
+
+.why-icon{
+
+font-size:60px;
+
+margin-bottom:20px;
+
+}
+
+.why-card h3{
+
+color:#4F46E5;
+
+font-size:26px;
+
+margin-bottom:15px;
+
+}
+
+.why-card p{
+
+color:#666;
+
+line-height:1.8;
+
+}
 transform:translateY(0);
 
 }
