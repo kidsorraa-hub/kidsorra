@@ -828,4 +828,55 @@ revealElements.forEach(el=>{
 
 
 });   
+
+ /* =====================================
+PART 20 STEP 9
+MOUSE PARALLAX EFFECT
+===================================== */
+
+
+const heroVisual = document.querySelector(".hero-visual");
+
+const stars = document.querySelectorAll(".star");
+
+
+if(heroVisual){
+
+
+document.addEventListener("mousemove",(e)=>{
+
+
+    const x =
+    (window.innerWidth / 2 - e.clientX) / 40;
+
+
+    const y =
+    (window.innerHeight / 2 - e.clientY) / 40;
+
+
+
+    heroVisual.style.transform =
+    `translate(${x}px, ${y}px)`;
+
+
+
+    stars.forEach((star,index)=>{
+
+
+        const speed = (index + 1) * 3;
+
+
+        star.style.transform =
+        `translate(${x * speed}px, ${y * speed}px)`;
+
+
+
+    });
+
+
+
+});
+
+
+}  
 });
