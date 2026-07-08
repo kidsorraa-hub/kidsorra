@@ -129,8 +129,63 @@ document.addEventListener("DOMContentLoaded", () => {
        MOBILE MENU
     ===================================== */
 
-    const menuButton = document.querySelector(".menu-toggle");
-    const nav = document.querySelector(".nav-links");
+    /* =====================================
+   PREMIUM MOBILE MENU
+===================================== */
+
+
+const menuButton = document.querySelector(".menu-toggle");
+
+const nav = document.querySelector(".nav-links");
+
+const overlay = document.querySelector(".mobile-menu-overlay");
+
+
+if(menuButton && nav && overlay){
+
+
+    menuButton.addEventListener("click",()=>{
+
+
+        nav.classList.toggle("active");
+
+        overlay.classList.toggle("active");
+
+
+    });
+
+
+
+    overlay.addEventListener("click",()=>{
+
+
+        nav.classList.remove("active");
+
+        overlay.classList.remove("active");
+
+
+    });
+
+
+
+    nav.querySelectorAll("li").forEach(link=>{
+
+
+        link.addEventListener("click",()=>{
+
+
+            nav.classList.remove("active");
+
+            overlay.classList.remove("active");
+
+
+        });
+
+
+    });
+
+
+}
 
     if (menuButton && nav) {
 
