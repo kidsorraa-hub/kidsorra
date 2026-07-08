@@ -3523,4 +3523,15 @@ FLOATING MAGIC EFFECTS
 
 }
 
+/* =================================
+PART 20 STEP 8
+PRELOADER EXIT
+================================= */
 
+#preloader{
+
+transition:
+opacity .8s ease,
+visibility .8s ease;
+
+}
