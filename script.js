@@ -1,921 +1,809 @@
-/* ==========================================
-   KIDSORRA
-   SCRIPT.JS
-   PART 1
-==========================================*/
+/*==================================================
+ KIDSORRA
+ script.js
+ PART 1 / 15
+ Core Engine
+==================================================*/
+
+"use strict";
+
+/*==================================================
+CONFIG
+==================================================*/
+
+const Kidsorra = {
+
+    version: "3.0.0",
+
+    debug: false,
+
+    selectors: {
+
+        body: document.body,
+
+        header: document.querySelector(".header"),
+
+        hero: document.querySelector(".hero"),
+
+        navbar: document.querySelector(".navbar"),
+
+        navLinks: document.querySelector(".nav-links"),
+
+        menuToggle: document.querySelector(".menu-toggle"),
+
+        overlay: document.querySelector(".mobile-menu-overlay"),
+
+        preloader: document.querySelector("#preloader"),
+
+        backTop: document.querySelector(".back-to-top")
+
+    }
+
+};
 
 
-/* =========================
-PRELOADER
-========================= */
+/*==================================================
+HELPERS
+==================================================*/
 
-window.addEventListener("load", () => {
+const $ = (selector, parent = document) =>
+    parent.querySelector(selector);
 
-    const preloader = document.getElementById("preloader");
+const $$ = (selector, parent = document) =>
+    [...parent.querySelectorAll(selector)];
 
-    if (preloader) {
+const on = (element, event, callback, options = false) => {
 
-        preloader.style.opacity = "0";
+    if (!element) return;
 
-        preloader.style.visibility = "hidden";
+    element.addEventListener(event, callback, options);
+
+};
+
+const clamp = (value, min, max) =>
+    Math.min(Math.max(value, min), max);
+
+const lerp = (start, end, t) =>
+    start + (end - start) * t;
+
+const debounce = (callback, delay = 100) => {
+
+    let timeout;
+
+    return (...args) => {
+
+        clearTimeout(timeout);
+
+        timeout = setTimeout(() => {
+
+            callback(...args);
+
+        }, delay);
+
+    };
+
+};
+
+const throttle = (callback, limit = 16) => {
+
+    let waiting = false;
+
+    return (...args) => {
+
+        if (waiting) return;
+
+        waiting = true;
+
+        callback(...args);
 
         setTimeout(() => {
 
-            preloader.style.display = "none";
+            waiting = false;
 
-        }, 500);
+        }, limit);
 
-    }
+    };
 
-});
+};
 
 
-/* =========================
-BACK TO TOP BUTTON
-========================= */
+/*==================================================
+PRELOADER
+==================================================*/
 
-const backToTop = document.querySelector(".back-to-top");
+const Preloader = {
 
-window.addEventListener("scroll", () => {
+    init() {
 
-    if (!backToTop) return;
+        const loader = Kidsorra.selectors.preloader;
 
-    if (window.scrollY > 300) {
+        if (!loader) return;
 
-        backToTop.classList.add("show");
+        window.addEventListener("load", () => {
 
-    } else {
+            loader.classList.add("loaded");
 
-        backToTop.classList.remove("show");
+            setTimeout(() => {
 
-    }
+                loader.remove();
 
-});
-
-if (backToTop) {
-
-    backToTop.addEventListener("click", () => {
-
-        window.scrollTo({
-
-            top: 0,
-
-            behavior: "smooth"
+            }, 600);
 
         });
 
-    });
+    }
 
-}
-
-
-/* =========================
-MOBILE MENU
-========================= */
-
-const menuToggle = document.querySelector(".menu-toggle");
-
-const navLinks = document.querySelector(".nav-links");
-
-const overlay = document.querySelector(".mobile-menu-overlay");
-
-if (menuToggle && navLinks) {
-
-    menuToggle.addEventListener("click", () => {
-
-        navLinks.classList.toggle("active");
-
-        overlay.classList.toggle("active");
-
-    });
-
-}
-
-if (overlay) {
-
-    overlay.addEventListener("click", () => {
-
-        navLinks.classList.remove("active");
-
-        overlay.classList.remove("active");
-
-    });
-
-}
+};
 
 
-/* =========================
-SMOOTH SCROLL
-========================= */
+/*==================================================
+BACK TO TOP
+==================================================*/
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+const BackToTop = {
 
-    anchor.addEventListener("click", function (e) {
+    init() {
 
-        e.preventDefault();
+        const button = Kidsorra.selectors.backTop;
 
-        const target = document.querySelector(this.getAttribute("href"));
+        if (!button) return;
 
-        if (target) {
+        const toggle = throttle(() => {
 
-            target.scrollIntoView({
+            if (window.scrollY > 400) {
+
+                button.classList.add("show");
+
+            } else {
+
+                button.classList.remove("show");
+
+            }
+
+        });
+
+        window.addEventListener("scroll", toggle);
+
+        button.addEventListener("click", () => {
+
+            window.scrollTo({
+
+                top: 0,
 
                 behavior: "smooth"
 
             });
 
-        }
+        });
 
-    });
+    }
 
-});
-
-/* ==========================================
-   KIDSORRA
-   SCRIPT.JS
-   PART 2
-==========================================*/
+};
 
 
-/* =========================
-COUNTER ANIMATION
-========================= */
+/*==================================================
+MOBILE MENU
+==================================================*/
 
-const counters = document.querySelectorAll(".counter");
+const MobileMenu = {
 
-const counterObserver = new IntersectionObserver((entries) => {
+    init() {
 
-    entries.forEach(entry => {
+        const toggle = Kidsorra.selectors.menuToggle;
 
-        if (entry.isIntersecting) {
+        const menu = Kidsorra.selectors.navLinks;
 
-            const counter = entry.target;
+        const overlay = Kidsorra.selectors.overlay;
 
-            const target = +counter.dataset.target;
+        if (!toggle || !menu) return;
 
-            let current = 0;
+        const closeMenu = () => {
 
-            const speed = target / 100;
+            menu.classList.remove("active");
 
-            const updateCounter = () => {
+            overlay?.classList.remove("active");
 
-                current += speed;
+            document.body.classList.remove("menu-open");
 
-                if (current < target) {
+        };
 
-                    counter.innerText = Math.ceil(current);
+        toggle.addEventListener("click", () => {
 
-                    requestAnimationFrame(updateCounter);
+            menu.classList.toggle("active");
 
-                } else {
+            overlay?.classList.toggle("active");
 
-                    counter.innerText = target;
+            document.body.classList.toggle("menu-open");
+
+        });
+
+        overlay?.addEventListener("click", closeMenu);
+
+        $$(".nav-links a").forEach(link => {
+
+            link.addEventListener("click", closeMenu);
+
+        });
+
+    }
+
+};
+
+
+/*==================================================
+APP
+==================================================*/
+
+const App = {
+
+    init() {
+
+        Preloader.init();
+
+        BackToTop.init();
+
+        MobileMenu.init();
+
+    }
+
+};
+
+App.init();
+
+/*==================================================
+ KIDSORRA
+ script.js
+ PART 2 / 15
+ Navigation + Smooth Scroll
+==================================================*/
+
+"use strict";
+
+/*==================================================
+SMOOTH SCROLL WITH HEADER OFFSET
+==================================================*/
+
+const SmoothScroll = {
+
+    headerOffset: 90,
+
+    init() {
+
+        $$('a[href^="#"]').forEach(link => {
+
+            link.addEventListener("click", event => {
+
+                const href = link.getAttribute("href");
+
+                if (!href || href === "#") return;
+
+                const target = $(href);
+
+                if (!target) return;
+
+                event.preventDefault();
+
+                const top =
+                    target.getBoundingClientRect().top +
+                    window.pageYOffset -
+                    this.headerOffset;
+
+                window.scrollTo({
+
+                    top,
+
+                    behavior: "smooth"
+
+                });
+
+            });
+
+        });
+
+    }
+
+};
+
+
+/*==================================================
+STICKY HEADER
+==================================================*/
+
+const Header = {
+
+    init() {
+
+        const header = Kidsorra.selectors.header;
+
+        if (!header) return;
+
+        const update = throttle(() => {
+
+            if (window.scrollY > 40) {
+
+                header.classList.add("sticky");
+
+            } else {
+
+                header.classList.remove("sticky");
+
+            }
+
+        });
+
+        window.addEventListener("scroll", update);
+
+        update();
+
+    }
+
+};
+
+
+/*==================================================
+ACTIVE NAVIGATION / SCROLL SPY
+==================================================*/
+
+const ScrollSpy = {
+
+    init() {
+
+        const sections = $$("section[id]");
+
+        const links = $$(".nav-links a");
+
+        if (!sections.length || !links.length) return;
+
+        const activate = throttle(() => {
+
+            let current = "";
+
+            sections.forEach(section => {
+
+                const top = section.offsetTop - 140;
+
+                if (window.scrollY >= top) {
+
+                    current = section.id;
 
                 }
 
-            };
+            });
 
-            updateCounter();
+            links.forEach(link => {
 
-            counterObserver.unobserve(counter);
+                link.classList.remove("active");
 
-        }
+                if (link.getAttribute("href") === `#${current}`) {
 
-    });
+                    link.classList.add("active");
 
-}, {
+                }
 
-    threshold: 0.5
-
-});
-
-counters.forEach(counter => {
-
-    counterObserver.observe(counter);
-
-});
-
-
-
-/* =========================
-FAQ ACCORDION
-========================= */
-
-const faqQuestions = document.querySelectorAll(".faq-question");
-
-faqQuestions.forEach(question => {
-
-    question.addEventListener("click", () => {
-
-        const faqItem = question.parentElement;
-
-        const answer = faqItem.querySelector(".faq-answer");
-
-        const plus = question.querySelector("span");
-
-        document.querySelectorAll(".faq-answer").forEach(item => {
-
-            if (item !== answer) {
-
-                item.style.display = "none";
-
-            }
+            });
 
         });
 
-        document.querySelectorAll(".faq-question span").forEach(icon => {
+        window.addEventListener("scroll", activate);
 
-            if (icon !== plus) {
+        activate();
 
-                icon.innerHTML = "+";
+    }
 
-            }
-
-        });
-
-        if (answer.style.display === "block") {
-
-            answer.style.display = "none";
-
-            plus.innerHTML = "+";
-
-        } else {
-
-            answer.style.display = "block";
-
-            plus.innerHTML = "−";
-
-        }
-
-    });
-
-});
+};
 
 
+/*==================================================
+SECTION HELPER
+==================================================*/
 
-/* =========================
-BUTTON HOVER EFFECT
-========================= */
+window.scrollToSection = function (id) {
 
-document.querySelectorAll("button").forEach(btn => {
+    const target = document.getElementById(id);
 
-    btn.addEventListener("mouseenter", () => {
+    if (!target) return;
 
-        btn.style.transform = "translateY(-4px)";
+    const top =
+        target.getBoundingClientRect().top +
+        window.pageYOffset -
+        90;
+
+    window.scrollTo({
+
+        top,
+
+        behavior: "smooth"
 
     });
 
-    btn.addEventListener("mouseleave", () => {
+};
 
-        btn.style.transform = "translateY(0px)";
 
-    });
+/*==================================================
+INIT PART 2
+==================================================*/
 
-});
+SmoothScroll.init();
 
-/* ==========================================
-   KIDSORRA
-   SCRIPT.JS
-   PART 3
-==========================================*/
+Header.init();
 
+ScrollSpy.init();
+/*==================================================
+ KIDSORRA
+ PART 3 / 15
+ Hero Engine
+==================================================*/
 
-/* =========================
-SCROLL REVEAL
-========================= */
+const HeroEngine = {
 
-const revealItems = document.querySelectorAll(
+    init() {
 
-".section-title,.hero-content,.hero-visual,.card,.program-card,.why-card,.experience-card,.lifeskill-card,.testimonial,.contact-card,.faq-item,.journey-step,.method-card,.school-card,.trust-card"
+        this.parallax();
 
-);
+        this.floating();
 
-const revealObserver = new IntersectionObserver((entries) => {
+        this.mouseGlow();
 
-    entries.forEach(entry => {
+    },
 
-        if (entry.isIntersecting) {
+    /*==========================================
+      HERO PARALLAX
+    ==========================================*/
 
-            entry.target.classList.add("fade-up");
+    parallax() {
 
-            revealObserver.unobserve(entry.target);
+        const hero = document.querySelector(".hero");
+        const visual = document.querySelector(".hero-visual");
+        const content = document.querySelector(".hero-content");
 
-        }
+        if (!hero || !visual) return;
 
-    });
+        hero.addEventListener("mousemove", (e) => {
 
-}, {
+            const rect = hero.getBoundingClientRect();
 
-    threshold: 0.15
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
 
-});
-
-revealItems.forEach(item => {
-
-    revealObserver.observe(item);
-
-});
-
-
-
-/* =========================
-HERO FLOATING TAGS
-========================= */
-
-const floatingTags = document.querySelectorAll(".floating-tag");
-
-floatingTags.forEach((tag, index) => {
-
-    tag.style.animationDelay = `${index * 0.6}s`;
-
-});
-
-
-
-/* =========================
-CURRENT YEAR FOOTER
-========================= */
-
-const footerYear = document.querySelector(".footer-year");
-
-if (footerYear) {
-
-    footerYear.textContent = new Date().getFullYear();
-
-}
-
-
-
-/* =========================
-CONSOLE MESSAGE
-========================= */
-
-console.log(
-
-"%cKidsorra",
-
-"color:#ff7a18;font-size:22px;font-weight:bold;"
-
-);
-
-console.log(
-
-"Helping children build confidence, creativity and future-ready life skills."
-
-);
-
-
-
-
-
-/* ==========================================================
-   PART 30
-   PRODUCTION READY
-========================================================== */
-
-/* ---------- Prevent Layout Shift ---------- */
-
-img{
-
-    height:auto;
-
-}
-
-/* ---------- Better Rendering ---------- */
-
-body{
-
-    text-rendering:optimizeLegibility;
-
-}
-
-/* ---------- Disable Animation for Accessibility ---------- */
-
-@media (prefers-reduced-motion:reduce){
-
-*{
-
-animation:none!important;
-
-transition:none!important;
-
-scroll-behavior:auto!important;
-
-}
-
-}
-
-/* ---------- Dark Browser Theme ---------- */
-
-:root{
-
-color-scheme:light;
-
-}
-
-/* ---------- Print ---------- */
-
-@media print{
-
-header,
-footer,
-.back-to-top,
-.demo-btn,
-.hero-buttons{
-
-display:none!important;
-
-}
-
-section{
-
-padding:20px 0;
-
-page-break-inside:avoid;
-
-}
-
-body{
-
-background:white;
-
-color:black;
-
-}
-
-}
-
-/* ---------- Final Helpers ---------- */
-
-.round-xl{
-
-border-radius:32px;
-
-}
-
-.round-full{
-
-border-radius:999px;
-
-}
-
-.flex-center{
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-}
-
-.grid-center{
-
-display:grid;
-
-place-items:center;
-
-}
-
-.text-primary{
-
-color:var(--primary);
-
-}
-
-.text-dark{
-
-color:var(--dark);
-
-}
-
-.bg-light{
-
-background:var(--light);
-
-}
-
-.bg-white{
-
-background:white;
-
-}
-
-/* ==========================================================
-   END OF KIDSORRA PREMIUM CSS
-========================================================== */
-
-/* ==========================================
-   KIDSORRA
-   SCRIPT.JS
-   PART 2 / 15
-==========================================*/
-
-/* =====================================================
-   HERO PARALLAX
-===================================================== */
-
-(() => {
-
-    const hero = document.querySelector(".hero");
-
-    const visual = document.querySelector(".hero-visual");
-    const content = document.querySelector(".hero-content");
-    const circle = document.querySelector(".magic-circle");
-
-    if (!hero) return;
-
-    hero.addEventListener("mousemove", (e) => {
-
-        const rect = hero.getBoundingClientRect();
-
-        const x = (e.clientX - rect.left) / rect.width;
-        const y = (e.clientY - rect.top) / rect.height;
-
-        const moveX = (x - 0.5) * 30;
-        const moveY = (y - 0.5) * 30;
-
-        if (visual) {
+            const moveX = (x - 0.5) * 20;
+            const moveY = (y - 0.5) * 20;
 
             visual.style.transform =
                 `translate(${moveX}px,${moveY}px)`;
 
-        }
+            if (content) {
 
-        if (content) {
+                content.style.transform =
+                    `translate(${moveX * .35}px,${moveY * .35}px)`;
 
-            content.style.transform =
-                `translate(${moveX * .3}px,${moveY * .3}px)`;
+            }
 
-        }
+        });
 
-        if (circle) {
-
-            circle.style.transform =
-                `translate(${moveX * .6}px,${moveY * .6}px) scale(1.05)`;
-
-        }
-
-    });
-
-    hero.addEventListener("mouseleave", () => {
-
-        if (visual) {
+        hero.addEventListener("mouseleave", () => {
 
             visual.style.transform = "";
 
-        }
+            if (content) {
 
-        if (content) {
+                content.style.transform = "";
 
-            content.style.transform = "";
+            }
 
-        }
+        });
 
-        if (circle) {
+    },
 
-            circle.style.transform = "";
+    /*==========================================
+      FLOATING ELEMENTS
+    ==========================================*/
 
-        }
+    floating() {
 
-    });
+        const items = document.querySelectorAll(
+            ".floating-tag,.star,.magic-circle"
+        );
 
-})();
+        items.forEach((item, index) => {
 
+            item.animate(
 
-/* =====================================================
-   HERO MOUSE GLOW
-===================================================== */
+                [
 
-(() => {
+                    {
 
-    const hero = document.querySelector(".hero");
+                        transform: "translateY(0px)"
 
-    if (!hero) return;
+                    },
 
-    const glow = document.createElement("div");
+                    {
 
-    glow.className = "hero-glow";
+                        transform:
+                            `translateY(${-10 - (index * 2)}px)`
 
-    Object.assign(glow.style, {
+                    },
 
-        position: "absolute",
+                    {
 
-        width: "240px",
+                        transform: "translateY(0px)"
 
-        height: "240px",
+                    }
 
-        borderRadius: "50%",
-
-        pointerEvents: "none",
-
-        filter: "blur(70px)",
-
-        opacity: ".22",
-
-        background: "rgba(255,122,24,.45)",
-
-        transform: "translate(-50%,-50%)",
-
-        transition: "left .08s linear, top .08s linear"
-
-    });
-
-    hero.appendChild(glow);
-
-    hero.addEventListener("mousemove", (e) => {
-
-        const rect = hero.getBoundingClientRect();
-
-        glow.style.left = (e.clientX - rect.left) + "px";
-
-        glow.style.top = (e.clientY - rect.top) + "px";
-
-    });
-
-})();
-
-
-/* =====================================================
-   FLOATING TAGS ANIMATION
-===================================================== */
-
-(() => {
-
-    const tags = document.querySelectorAll(".floating-tag");
-
-    if (!tags.length) return;
-
-    tags.forEach((tag, index) => {
-
-        tag.animate(
-
-            [
+                ],
 
                 {
-                    transform: "translateY(0px)"
-                },
 
-                {
-                    transform: "translateY(-12px)"
-                },
+                    duration: 3500 + (index * 400),
 
-                {
-                    transform: "translateY(0px)"
+                    iterations: Infinity,
+
+                    easing: "ease-in-out"
+
                 }
 
-            ],
+            );
+
+        });
+
+    },
+
+    /*==========================================
+      HERO GLOW
+    ==========================================*/
+
+    mouseGlow() {
+
+        const hero = document.querySelector(".hero");
+
+        if (!hero) return;
+
+        const glow = document.createElement("div");
+
+        glow.className = "hero-mouse-glow";
+
+        Object.assign(glow.style, {
+
+            position: "absolute",
+
+            width: "260px",
+
+            height: "260px",
+
+            borderRadius: "50%",
+
+            pointerEvents: "none",
+
+            background:
+                "radial-gradient(circle,rgba(255,122,24,.28),transparent 70%)",
+
+            filter: "blur(45px)",
+
+            transform: "translate(-50%,-50%)",
+
+            opacity: ".9",
+
+            transition: "left .08s linear, top .08s linear"
+
+        });
+
+        hero.appendChild(glow);
+
+        hero.addEventListener("mousemove", (e) => {
+
+            const rect = hero.getBoundingClientRect();
+
+            glow.style.left =
+                (e.clientX - rect.left) + "px";
+
+            glow.style.top =
+                (e.clientY - rect.top) + "px";
+
+        });
+
+    }
+
+};
+
+HeroEngine.init();
+/*==================================================
+ KIDSORRA
+ PART 4 / 15
+ Scroll Reveal + Card Engine
+==================================================*/
+
+const CardEngine = {
+
+    init() {
+
+        this.scrollReveal();
+
+        this.cardTilt();
+
+        this.cardHover();
+
+    },
+
+    /*==========================================
+      SCROLL REVEAL
+    ==========================================*/
+
+    scrollReveal() {
+
+        const elements = document.querySelectorAll(
+
+            ".card,\
+.program-card,\
+.school-card,\
+.trust-card,\
+.testimonial,\
+.method-card,\
+.lifeskill-card,\
+.experience-card,\
+.journey-step,\
+.contact-card"
+
+        );
+
+        if (!elements.length) return;
+
+        const observer = new IntersectionObserver(
+
+            (entries) => {
+
+                entries.forEach(entry => {
+
+                    if (!entry.isIntersecting) return;
+
+                    entry.target.animate(
+
+                        [
+
+                            {
+
+                                opacity: 0,
+
+                                transform:
+                                "translateY(45px)"
+
+                            },
+
+                            {
+
+                                opacity: 1,
+
+                                transform:
+                                "translateY(0)"
+
+                            }
+
+                        ],
+
+                        {
+
+                            duration: 700,
+
+                            easing: "ease-out",
+
+                            fill: "forwards"
+
+                        }
+
+                    );
+
+                    observer.unobserve(entry.target);
+
+                });
+
+            },
 
             {
 
-                duration: 3500 + (index * 400),
-
-                iterations: Infinity,
-
-                easing: "ease-in-out"
+                threshold: .15
 
             }
 
         );
 
-    });
+        elements.forEach(el => observer.observe(el));
 
-})();
+    },
 
+    /*==========================================
+      PREMIUM CARD TILT
+    ==========================================*/
 
-/* =====================================================
-   MAGIC STARS
-===================================================== */
+    cardTilt() {
 
-(() => {
+        const cards = document.querySelectorAll(
 
-    const stars = document.querySelectorAll(".star");
-
-    if (!stars.length) return;
-
-    stars.forEach((star, i) => {
-
-        star.animate(
-
-            [
-
-                {
-                    transform: "scale(1)"
-                },
-
-                {
-                    transform: "scale(1.25)"
-                },
-
-                {
-                    transform: "scale(1)"
-                }
-
-            ],
-
-            {
-
-                duration: 2200 + (i * 500),
-
-                iterations: Infinity,
-
-                easing: "ease-in-out"
-
-            }
+            ".program-card,\
+.school-card,\
+.trust-card,\
+.method-card"
 
         );
 
-    });
+        cards.forEach(card => {
 
-})();
+            card.addEventListener("mousemove", e => {
 
-/* ==========================================
-   KIDSORRA
-   SCRIPT.JS
-   PART 3 / 15
-==========================================*/
+                const rect =
 
-/* =====================================================
-   CARD TILT EFFECT
-===================================================== */
+                    card.getBoundingClientRect();
 
-(() => {
+                const x =
 
-    const cards = document.querySelectorAll(
+                    e.clientX - rect.left;
 
-        ".program-card,.lifeskill-card,.school-card,.trust-card,.testimonial,.journey-step,.method-card"
+                const y =
 
-    );
+                    e.clientY - rect.top;
 
-    if (!cards.length) return;
+                const rotateY =
 
-    cards.forEach(card => {
+                    ((x / rect.width) - .5) * 10;
 
-        card.addEventListener("mousemove", e => {
+                const rotateX =
 
-            const rect = card.getBoundingClientRect();
+                    ((y / rect.height) - .5) * -10;
 
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+                card.style.transform =
 
-            const rotateY = ((x / rect.width) - .5) * 12;
-            const rotateX = ((y / rect.height) - .5) * -12;
-
-            card.style.transform =
-                `perspective(1000px)
-                 rotateX(${rotateX}deg)
-                 rotateY(${rotateY}deg)
-                 translateY(-8px)`;
-
-        });
-
-        card.addEventListener("mouseleave", () => {
-
-            card.style.transform = "";
-
-        });
-
-    });
-
-})();
-
-/* =====================================================
-   RIPPLE EFFECT
-===================================================== */
-
-(() => {
-
-    const buttons = document.querySelectorAll(
-
-        ".btn-primary,.btn-secondary,.demo-btn,button"
-
-    );
-
-    buttons.forEach(btn => {
-
-        btn.style.position = "relative";
-        btn.style.overflow = "hidden";
-
-        btn.addEventListener("click", e => {
-
-            const ripple = document.createElement("span");
-
-            const rect = btn.getBoundingClientRect();
-
-            const size = Math.max(rect.width, rect.height);
-
-            ripple.style.position = "absolute";
-            ripple.style.width = size + "px";
-            ripple.style.height = size + "px";
-            ripple.style.left = (e.clientX - rect.left - size / 2) + "px";
-            ripple.style.top = (e.clientY - rect.top - size / 2) + "px";
-            ripple.style.borderRadius = "50%";
-            ripple.style.background = "rgba(255,255,255,.35)";
-            ripple.style.transform = "scale(0)";
-            ripple.style.transition = ".6s";
-            ripple.style.pointerEvents = "none";
-
-            btn.appendChild(ripple);
-
-            requestAnimationFrame(() => {
-
-                ripple.style.transform = "scale(2.8)";
-                ripple.style.opacity = "0";
+                    `perspective(900px)
+                     rotateX(${rotateX}deg)
+                     rotateY(${rotateY}deg)
+                     translateY(-8px)`;
 
             });
 
-            setTimeout(() => ripple.remove(), 600);
+            card.addEventListener("mouseleave", () => {
+
+                card.style.transform = "";
+
+            });
 
         });
 
-    });
+    },
 
-})();
+    /*==========================================
+      HOVER SHADOW
+    ==========================================*/
 
-/* ==========================================
-   KIDSORRA
-   SCRIPT.JS
-   PART 4 / 15
-==========================================*/
+    cardHover() {
 
-/* =====================================================
-   PREMIUM COUNTERS
-===================================================== */
+        const cards = document.querySelectorAll(
 
-(() => {
+            ".card,\
+.program-card,\
+.school-card,\
+.trust-card"
 
-    const counters = document.querySelectorAll(".counter");
+        );
 
-    if (!counters.length) return;
+        cards.forEach(card => {
 
-    const observer = new IntersectionObserver(entries => {
+            card.addEventListener("mouseenter", () => {
 
-        entries.forEach(entry => {
+                card.style.boxShadow =
 
-            if (!entry.isIntersecting) return;
+                    "0 24px 55px rgba(0,0,0,.15)";
 
-            const el = entry.target;
+            });
 
-            const target = Number(el.dataset.target);
+            card.addEventListener("mouseleave", () => {
 
-            let current = 0;
+                card.style.boxShadow = "";
 
-            const duration = 1800;
-
-            const step = target / (duration / 16);
-
-            const update = () => {
-
-                current += step;
-
-                if (current < target) {
-
-                    el.textContent =
-                        Math.floor(current).toLocaleString();
-
-                    requestAnimationFrame(update);
-
-                } else {
-
-                    el.textContent =
-                        target.toLocaleString();
-
-                }
-
-            };
-
-            update();
-
-            observer.unobserve(el);
+            });
 
         });
 
-    }, {
+    }
 
-        threshold: .4
+};
 
-    });
-
-    counters.forEach(counter => observer.observe(counter));
-
-})();
-
-/* =====================================================
-   COUNTUP SYMBOLS
-===================================================== */
-
-(() => {
-
-    document.querySelectorAll("[data-plus]").forEach(item => {
-
-        const value = item.dataset.plus;
-
-        item.innerHTML += value;
-
-    });
-
-})();
-
+CardEngine.init();
 
 /* ==========================================
    KIDSORRA
@@ -923,38 +811,46 @@ background:white;
    PART 5 / 15
 ==========================================*/
 
+"use strict";
+
 /* =====================================================
-   PREMIUM FAQ
+   FAQ ACCORDION
 ===================================================== */
 
 (() => {
 
-    const items = document.querySelectorAll(".faq-item");
+    const faqItems = document.querySelectorAll(".faq-item");
 
-    if (!items.length) return;
+    if (!faqItems.length) return;
 
-    items.forEach(item => {
+    faqItems.forEach(item => {
 
         const question = item.querySelector(".faq-question");
-        const answer = item.querySelector(".faq-answer");
+        const answer   = item.querySelector(".faq-answer");
+        const icon     = item.querySelector(".faq-icon");
+
+        if (!question || !answer) return;
 
         answer.style.maxHeight = "0px";
         answer.style.overflow = "hidden";
-        answer.style.transition = ".4s ease";
+        answer.style.transition = "max-height .35s ease";
 
         question.addEventListener("click", () => {
 
-            items.forEach(other => {
+            faqItems.forEach(other => {
 
-                if (other !== item) {
+                if (other === item) return;
 
-                    other.classList.remove("active");
+                other.classList.remove("active");
 
-                    const a = other.querySelector(".faq-answer");
+                const otherAnswer = other.querySelector(".faq-answer");
+                const otherIcon   = other.querySelector(".faq-icon");
 
-                    if (a) a.style.maxHeight = "0px";
+                if (otherAnswer)
+                    otherAnswer.style.maxHeight = "0px";
 
-                }
+                if (otherIcon)
+                    otherIcon.classList.remove("rotate");
 
             });
 
@@ -963,11 +859,17 @@ background:white;
             if (item.classList.contains("active")) {
 
                 answer.style.maxHeight =
-                answer.scrollHeight + "px";
+                    answer.scrollHeight + "px";
+
+                if (icon)
+                    icon.classList.add("rotate");
 
             } else {
 
                 answer.style.maxHeight = "0px";
+
+                if (icon)
+                    icon.classList.remove("rotate");
 
             }
 
@@ -977,93 +879,97 @@ background:white;
 
 })();
 
+
 /* =====================================================
-   BOOKING FORM
+   BUTTON RIPPLE EFFECT
 ===================================================== */
 
 (() => {
 
-    const form = document.querySelector(".booking-form");
+    const buttons = document.querySelectorAll(
 
-    if (!form) return;
+        ".btn-primary,.btn-secondary,.btn-outline,.demo-btn"
 
-    form.addEventListener("submit", e => {
+    );
 
-        e.preventDefault();
+    if (!buttons.length) return;
 
-        let valid = true;
+    buttons.forEach(button => {
 
-        form.querySelectorAll("input,textarea,select")
+        button.style.position = "relative";
+        button.style.overflow = "hidden";
 
-        .forEach(field => {
+        button.addEventListener("click", e => {
 
-            field.style.borderColor="#ddd";
+            const ripple = document.createElement("span");
 
-            if(field.hasAttribute("required")){
+            const rect = button.getBoundingClientRect();
 
-                if(field.value.trim()===""){
+            const size = Math.max(rect.width, rect.height);
 
-                    valid=false;
+            ripple.style.position = "absolute";
+            ripple.style.width = size + "px";
+            ripple.style.height = size + "px";
+            ripple.style.left =
+                (e.clientX - rect.left - size / 2) + "px";
+            ripple.style.top =
+                (e.clientY - rect.top - size / 2) + "px";
 
-                    field.style.borderColor="#ff4d4f";
+            ripple.style.borderRadius = "50%";
+            ripple.style.background = "rgba(255,255,255,.35)";
+            ripple.style.transform = "scale(0)";
+            ripple.style.transition = ".6s";
+            ripple.style.pointerEvents = "none";
 
-                }
+            button.appendChild(ripple);
 
-            }
+            requestAnimationFrame(() => {
 
-            if(field.type==="email"){
+                ripple.style.transform = "scale(3)";
+                ripple.style.opacity = "0";
 
-                const email=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            });
 
-                if(!email.test(field.value)){
+            setTimeout(() => {
 
-                    valid=false;
+                ripple.remove();
 
-                    field.style.borderColor="#ff4d4f";
-
-                }
-
-            }
+            }, 650);
 
         });
 
-        if(!valid){
+    });
 
-            return;
+})();
 
-        }
 
-        const btn=form.querySelector("button");
+/* =====================================================
+   HERO BUTTON FLOAT
+===================================================== */
 
-        if(btn){
+(() => {
 
-            const old=btn.innerHTML;
+    const heroButtons = document.querySelectorAll(
 
-            btn.disabled=true;
+        ".hero .btn-primary,.hero .btn-secondary"
 
-            btn.innerHTML="Sending...";
+    );
 
-            setTimeout(()=>{
+    heroButtons.forEach(btn => {
 
-                btn.innerHTML="✓ Submitted";
+        btn.addEventListener("mouseenter", () => {
 
-                btn.style.background="#35c759";
+            btn.style.transform =
+                "translateY(-6px)";
 
-                form.reset();
+        });
 
-                setTimeout(()=>{
+        btn.addEventListener("mouseleave", () => {
 
-                    btn.disabled=false;
+            btn.style.transform =
+                "";
 
-                    btn.innerHTML=old;
-
-                    btn.style.background="";
-
-                },2500);
-
-            },1200);
-
-        }
+        });
 
     });
 
@@ -1072,859 +978,6 @@ background:white;
    KIDSORRA
    SCRIPT.JS
    PART 6 / 15
-==========================================*/
-
-/* =====================================================
-   LAZY IMAGES
-===================================================== */
-
-(() => {
-
-    const images=document.querySelectorAll("img[data-src]");
-
-    if(!images.length) return;
-
-    const observer=new IntersectionObserver(entries=>{
-
-        entries.forEach(entry=>{
-
-            if(!entry.isIntersecting) return;
-
-            const img=entry.target;
-
-            img.src=img.dataset.src;
-
-            img.onload=()=>{
-
-                img.classList.add("lazy-loaded");
-
-            };
-
-            observer.unobserve(img);
-
-        });
-
-    },{
-
-        threshold:.2
-
-    });
-
-    images.forEach(img=>observer.observe(img));
-
-})();
-
-/* =====================================================
-   SCROLL TO SECTION
-===================================================== */
-
-window.scrollToSection=function(id){
-
-    const section=document.getElementById(id);
-
-    if(!section) return;
-
-    section.scrollIntoView({
-
-        behavior:"smooth",
-
-        block:"start"
-
-    });
-
-};
-
-/* =====================================================
-   HEADER OFFSET
-===================================================== */
-
-(() => {
-
-    document.querySelectorAll('a[href^="#"]').forEach(link=>{
-
-        link.addEventListener("click",e=>{
-
-            const href=link.getAttribute("href");
-
-            if(href==="#") return;
-
-            const target=document.querySelector(href);
-
-            if(!target) return;
-
-            e.preventDefault();
-
-            const top=
-
-                target.getBoundingClientRect().top+
-
-                window.pageYOffset-90;
-
-            window.scrollTo({
-
-                top,
-
-                behavior:"smooth"
-
-            });
-
-        });
-
-    });
-
-})();
-
-/* =====================================================
-   CONSOLE
-===================================================== */
-
-console.log("%cKidsorra Engine Loaded",
-"color:#ff7a18;font-size:18px;font-weight:bold;");
-
-
-/* ==========================================
-   KIDSORRA
-   SCRIPT.JS
-   PART 7 / 15
-==========================================*/
-
-"use strict";
-
-/* =====================================================
-   HERO PARTICLE ENGINE
-===================================================== */
-
-(() => {
-
-    const hero = document.querySelector(".hero");
-
-    if (!hero) return;
-
-    const particleContainer = document.createElement("div");
-
-    particleContainer.className = "hero-particles";
-
-    Object.assign(particleContainer.style, {
-
-        position: "absolute",
-
-        inset: "0",
-
-        overflow: "hidden",
-
-        pointerEvents: "none",
-
-        zIndex: "0"
-
-    });
-
-    hero.appendChild(particleContainer);
-
-    function createParticle() {
-
-        const p = document.createElement("span");
-
-        const size = Math.random() * 8 + 4;
-
-        const left = Math.random() * 100;
-
-        const duration = Math.random() * 8 + 8;
-
-        Object.assign(p.style, {
-
-            position: "absolute",
-
-            width: size + "px",
-
-            height: size + "px",
-
-            borderRadius: "50%",
-
-            left: left + "%",
-
-            bottom: "-20px",
-
-            background:
-
-            Math.random() > .5
-
-                ? "rgba(255,209,102,.45)"
-
-                : "rgba(108,99,255,.25)",
-
-            filter: "blur(1px)",
-
-            animation:
-
-            `kidsorraParticle ${duration}s linear forwards`
-
-        });
-
-        particleContainer.appendChild(p);
-
-        setTimeout(() => {
-
-            p.remove();
-
-        }, duration * 1000);
-
-    }
-
-    setInterval(createParticle, 700);
-
-})();
-
-/* =====================================================
-   PARTICLE KEYFRAMES
-===================================================== */
-
-(() => {
-
-    const style = document.createElement("style");
-
-    style.innerHTML = `
-
-    @keyframes kidsorraParticle{
-
-        0%{
-
-            transform:translateY(0) scale(1);
-
-            opacity:0;
-
-        }
-
-        10%{
-
-            opacity:1;
-
-        }
-
-        100%{
-
-            transform:translateY(-110vh) scale(.4);
-
-            opacity:0;
-
-        }
-
-    }
-
-    `;
-
-    document.head.appendChild(style);
-
-})();
-
-/* =====================================================
-   CURSOR GLOW
-===================================================== */
-
-(() => {
-
-    const glow = document.createElement("div");
-
-    glow.className = "cursor-glow";
-
-    Object.assign(glow.style, {
-
-        position: "fixed",
-
-        width: "24px",
-
-        height: "24px",
-
-        borderRadius: "50%",
-
-        background: "rgba(255,122,24,.18)",
-
-        pointerEvents: "none",
-
-        transform: "translate(-50%,-50%)",
-
-        zIndex: "999999",
-
-        transition:
-
-        "transform .08s linear,width .2s,height .2s"
-
-    });
-
-    document.body.appendChild(glow);
-
-    window.addEventListener("mousemove", e => {
-
-        glow.style.left = e.clientX + "px";
-
-        glow.style.top = e.clientY + "px";
-
-    });
-
-    document.querySelectorAll("a,button").forEach(el => {
-
-        el.addEventListener("mouseenter", () => {
-
-            glow.style.width = "60px";
-
-            glow.style.height = "60px";
-
-        });
-
-        el.addEventListener("mouseleave", () => {
-
-            glow.style.width = "24px";
-
-            glow.style.height = "24px";
-
-        });
-
-    });
-
-})();
-
-/* =====================================================
-   FLOATING OBJECT ENGINE
-===================================================== */
-
-(() => {
-
-    const objects = document.querySelectorAll(
-
-        ".floating-tag,.star,.magic-circle"
-
-    );
-
-    if (!objects.length) return;
-
-    objects.forEach((item, index) => {
-
-        item.animate(
-
-            [
-
-                {
-
-                    transform:
-
-                    "translateY(0px)"
-
-                },
-
-                {
-
-                    transform:
-
-                    `translateY(${-12 - index * 3}px)`
-
-                },
-
-                {
-
-                    transform:
-
-                    "translateY(0px)"
-
-                }
-
-            ],
-
-            {
-
-                duration:
-
-                3500 + index * 450,
-
-                iterations: Infinity,
-
-                easing: "ease-in-out"
-
-            }
-
-        );
-
-    });
-
-})();
-
-/* =====================================================
-   HERO MOUSE DEPTH
-===================================================== */
-
-(() => {
-
-    const hero = document.querySelector(".hero");
-
-    const visual = document.querySelector(".hero-visual");
-
-    if (!hero || !visual) return;
-
-    hero.addEventListener("mousemove", e => {
-
-        const rect = hero.getBoundingClientRect();
-
-        const x =
-
-        (e.clientX - rect.left) / rect.width;
-
-        const y =
-
-        (e.clientY - rect.top) / rect.height;
-
-        visual.style.transform =
-
-        `translate(
-
-        ${(x-.5)*18}px,
-
-        ${(y-.5)*18}px
-
-        )`;
-
-    });
-
-    hero.addEventListener("mouseleave", () => {
-
-        visual.style.transform = "";
-
-    });
-
-})();
-
-/* ==========================================
-   KIDSORRA
-   SCRIPT.JS
-   PART 8 / 15
-==========================================*/
-
-"use strict";
-
-/* =====================================================
-   TOAST NOTIFICATION SYSTEM
-===================================================== */
-
-const Toast = (() => {
-
-    const container = document.createElement("div");
-
-    container.className = "kidsorra-toast-container";
-
-    Object.assign(container.style, {
-
-        position: "fixed",
-
-        top: "30px",
-
-        right: "30px",
-
-        zIndex: "999999",
-
-        display: "flex",
-
-        flexDirection: "column",
-
-        gap: "12px"
-
-    });
-
-    document.body.appendChild(container);
-
-    function show(message, color = "#35c759") {
-
-        const toast = document.createElement("div");
-
-        toast.innerHTML = message;
-
-        Object.assign(toast.style, {
-
-            background: color,
-
-            color: "#fff",
-
-            padding: "16px 22px",
-
-            borderRadius: "16px",
-
-            fontWeight: "600",
-
-            boxShadow: "0 15px 35px rgba(0,0,0,.15)",
-
-            opacity: "0",
-
-            transform: "translateX(40px)",
-
-            transition: ".35s"
-
-        });
-
-        container.appendChild(toast);
-
-        requestAnimationFrame(() => {
-
-            toast.style.opacity = "1";
-            toast.style.transform = "translateX(0)";
-
-        });
-
-        setTimeout(() => {
-
-            toast.style.opacity = "0";
-            toast.style.transform = "translateX(40px)";
-
-            setTimeout(() => {
-
-                toast.remove();
-
-            }, 400);
-
-        }, 3500);
-
-    }
-
-    return { show };
-
-})();
-
-/* =====================================================
-   CONTACT FORM
-===================================================== */
-
-(() => {
-
-    const form = document.querySelector(".contact-form");
-
-    if (!form) return;
-
-    form.addEventListener("submit", e => {
-
-        e.preventDefault();
-
-        let valid = true;
-
-        form.querySelectorAll("input, textarea").forEach(field => {
-
-            field.style.borderColor = "#ddd";
-
-            if (field.value.trim() === "") {
-
-                valid = false;
-                field.style.borderColor = "#ff4d4f";
-
-            }
-
-        });
-
-        const email = form.querySelector('input[type="email"]');
-
-        if (email) {
-
-            const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-            if (!pattern.test(email.value)) {
-
-                valid = false;
-                email.style.borderColor = "#ff4d4f";
-
-            }
-
-        }
-
-        if (!valid) {
-
-            Toast.show("Please complete all required fields.", "#ff4d4f");
-
-            return;
-
-        }
-
-        const btn = form.querySelector("button");
-
-        const original = btn.innerHTML;
-
-        btn.disabled = true;
-
-        btn.innerHTML = "Sending...";
-
-        setTimeout(() => {
-
-            btn.innerHTML = "✓ Message Sent";
-
-            btn.style.background = "#35c759";
-
-            Toast.show("Thank you! We'll contact you soon.");
-
-            form.reset();
-
-            setTimeout(() => {
-
-                btn.disabled = false;
-                btn.innerHTML = original;
-                btn.style.background = "";
-
-            }, 2500);
-
-        }, 1200);
-
-    });
-
-})();
-
-/* ==========================================
-   KIDSORRA
-   SCRIPT.JS
-   PART 9 / 15
-==========================================*/
-
-"use strict";
-
-/* =====================================================
-   MAGIC CURSOR
-===================================================== */
-
-(() => {
-
-    const cursor = document.createElement("div");
-
-    cursor.className = "magic-cursor";
-
-    Object.assign(cursor.style, {
-
-        position: "fixed",
-
-        width: "18px",
-
-        height: "18px",
-
-        borderRadius: "50%",
-
-        background: "#ff7a18",
-
-        pointerEvents: "none",
-
-        zIndex: "999999",
-
-        transform: "translate(-50%,-50%)",
-
-        transition:
-            "width .25s,height .25s,background .25s"
-
-    });
-
-    document.body.appendChild(cursor);
-
-    window.addEventListener("mousemove", e => {
-
-        cursor.style.left = e.clientX + "px";
-        cursor.style.top = e.clientY + "px";
-
-    });
-
-    document.querySelectorAll(
-
-        "button,a,.card,.program-card,.school-card"
-
-    ).forEach(item => {
-
-        item.addEventListener("mouseenter", () => {
-
-            cursor.style.width = "42px";
-            cursor.style.height = "42px";
-            cursor.style.background =
-                "rgba(255,122,24,.18)";
-
-        });
-
-        item.addEventListener("mouseleave", () => {
-
-            cursor.style.width = "18px";
-            cursor.style.height = "18px";
-            cursor.style.background = "#ff7a18";
-
-        });
-
-    });
-
-})();
-
-/* =====================================================
-   ADVANCED SCROLL SPY
-===================================================== */
-
-(() => {
-
-    const sections = document.querySelectorAll("section[id]");
-
-    const links = document.querySelectorAll(".nav-links a");
-
-    if (!sections.length) return;
-
-    function activateMenu() {
-
-        let current = "";
-
-        sections.forEach(section => {
-
-            const top =
-
-                section.offsetTop - 140;
-
-            if (window.scrollY >= top) {
-
-                current = section.id;
-
-            }
-
-        });
-
-        links.forEach(link => {
-
-            link.classList.remove("active");
-
-            if (
-
-                link.getAttribute("href") === "#" + current
-
-            ) {
-
-                link.classList.add("active");
-
-            }
-
-        });
-
-    }
-
-    window.addEventListener("scroll", activateMenu);
-
-    activateMenu();
-
-})();
-
-/* =====================================================
-   PERFORMANCE ENGINE
-===================================================== */
-
-(() => {
-
-    function debounce(func, wait = 80) {
-
-        let timeout;
-
-        return (...args) => {
-
-            clearTimeout(timeout);
-
-            timeout = setTimeout(() => {
-
-                func.apply(this, args);
-
-            }, wait);
-
-        };
-
-    }
-
-    const optimizedResize = debounce(() => {
-
-        document.body.classList.add("resized");
-
-        setTimeout(() => {
-
-            document.body.classList.remove("resized");
-
-        }, 300);
-
-    });
-
-    window.addEventListener("resize", optimizedResize);
-
-})();
-
-/* =====================================================
-   SECTION APPEAR EFFECT
-===================================================== */
-
-(() => {
-
-    const blocks = document.querySelectorAll(
-
-        ".card,.program-card,.school-card,.testimonial,.trust-card"
-
-    );
-
-    if (!blocks.length) return;
-
-    const observer = new IntersectionObserver(
-
-        entries => {
-
-            entries.forEach(entry => {
-
-                if (!entry.isIntersecting) return;
-
-                entry.target.animate(
-
-                    [
-
-                        {
-
-                            opacity: 0,
-
-                            transform:
-
-                                "translateY(40px)"
-
-                        },
-
-                        {
-
-                            opacity: 1,
-
-                            transform:
-
-                                "translateY(0)"
-
-                        }
-
-                    ],
-
-                    {
-
-                        duration: 700,
-
-                        easing: "ease-out",
-
-                        fill: "forwards"
-
-                    }
-
-                );
-
-                observer.unobserve(entry.target);
-
-            });
-
-        },
-
-        {
-
-            threshold: .15
-
-        }
-
-    );
-
-    blocks.forEach(block => observer.observe(block));
-
-})();
-
-/* ==========================================
-   END PART 9
-==========================================*/
-
-/* ==========================================
-   KIDSORRA
-   SCRIPT.JS
-   PART 10 / 15
 ==========================================*/
 
 "use strict";
@@ -1939,7 +992,7 @@ const Toast = (() => {
 
     if (!images.length) return;
 
-    const observer = new IntersectionObserver((entries) => {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
 
         entries.forEach(entry => {
 
@@ -1951,15 +1004,51 @@ const Toast = (() => {
 
             img.onload = () => {
 
-                img.classList.add("lazy-loaded");
-
-                img.style.opacity = "1";
-
-                img.style.transform = "scale(1)";
+                img.classList.add("loaded");
 
             };
 
             observer.unobserve(img);
+
+        });
+
+    }, {
+        rootMargin: "100px",
+        threshold: 0.1
+    });
+
+    images.forEach(img => {
+
+        imageObserver.observe(img);
+
+    });
+
+})();
+
+
+/* =====================================================
+   SECTION REVEAL
+===================================================== */
+
+(() => {
+
+    const sections = document.querySelectorAll(
+
+        ".section,.program-card,.lifeskill-card,.school-card,.trust-card,.testimonial"
+
+    );
+
+    if (!sections.length) return;
+
+    const observer = new IntersectionObserver(entries => {
+
+        entries.forEach(entry => {
+
+            if (!entry.isIntersecting) return;
+
+            entry.target.classList.add("visible");
+
+            observer.unobserve(entry.target);
 
         });
 
@@ -1969,33 +1058,34 @@ const Toast = (() => {
 
     });
 
-    images.forEach(img => {
+    sections.forEach(section => {
 
-        img.style.opacity = "0";
-
-        img.style.transform = "scale(.96)";
-
-        img.style.transition = ".6s ease";
-
-        observer.observe(img);
+        observer.observe(section);
 
     });
 
 })();
 
+
 /* =====================================================
-   NUMBER FORMATTER
+   HEADER SCROLL EFFECT
 ===================================================== */
 
 (() => {
 
-    document.querySelectorAll("[data-format-number]").forEach(item => {
+    const header = document.querySelector("header");
 
-        const value = Number(item.innerText);
+    if (!header) return;
 
-        if (!isNaN(value)) {
+    window.addEventListener("scroll", () => {
 
-            item.innerText = value.toLocaleString();
+        if (window.scrollY > 40) {
+
+            header.classList.add("scrolled");
+
+        } else {
+
+            header.classList.remove("scrolled");
 
         }
 
@@ -2003,31 +1093,28 @@ const Toast = (() => {
 
 })();
 
+
 /* =====================================================
-   BUTTON LOADING EFFECT
+   AUTO CLOSE MOBILE MENU
 ===================================================== */
 
 (() => {
 
-    document.querySelectorAll(".loading-button").forEach(button => {
+    const navLinks = document.querySelectorAll(".nav-links a");
 
-        button.addEventListener("click", () => {
+    const nav = document.querySelector(".nav-links");
 
-            if (button.classList.contains("loading")) return;
+    const overlay = document.querySelector(".mobile-menu-overlay");
 
-            button.classList.add("loading");
+    if (!navLinks.length) return;
 
-            const original = button.innerHTML;
+    navLinks.forEach(link => {
 
-            button.innerHTML = "Loading...";
+        link.addEventListener("click", () => {
 
-            setTimeout(() => {
+            nav?.classList.remove("active");
 
-                button.classList.remove("loading");
-
-                button.innerHTML = original;
-
-            }, 1800);
+            overlay?.classList.remove("active");
 
         });
 
@@ -2035,49 +1122,93 @@ const Toast = (() => {
 
 })();
 
+
 /* =====================================================
-   HERO PARALLAX BACKGROUND
+   HERO BUTTON ANIMATION
 ===================================================== */
 
 (() => {
 
-    const hero = document.querySelector(".hero");
+    document.querySelectorAll(".hero .btn").forEach(btn => {
 
-    const background = document.querySelector(".magic-background");
+        btn.addEventListener("mouseenter", () => {
 
-    if (!hero || !background) return;
+            btn.animate([
 
-    hero.addEventListener("mousemove", e => {
+                {
 
-        const rect = hero.getBoundingClientRect();
+                    transform: "translateY(0)"
 
-        const x = (e.clientX - rect.left) / rect.width;
+                },
 
-        const y = (e.clientY - rect.top) / rect.height;
+                {
 
-        background.style.transform =
+                    transform: "translateY(-6px)"
 
-            `translate(${(x - .5) * 20}px, ${(y - .5) * 20}px)`;
+                }
 
-    });
+            ], {
 
-    hero.addEventListener("mouseleave", () => {
+                duration: 180,
 
-        background.style.transform = "";
+                fill: "forwards"
+
+            });
+
+        });
+
+        btn.addEventListener("mouseleave", () => {
+
+            btn.animate([
+
+                {
+
+                    transform: "translateY(-6px)"
+
+                },
+
+                {
+
+                    transform: "translateY(0)"
+
+                }
+
+            ], {
+
+                duration: 180,
+
+                fill: "forwards"
+
+            });
+
+        });
 
     });
 
 })();
 
+
 /* =====================================================
-   SCROLL HELPER
+   SAFE SCROLL FUNCTION
 ===================================================== */
 
-window.scrollToTopSmooth = function () {
+window.scrollToSection = function (selector) {
+
+    const target = document.querySelector(selector);
+
+    if (!target) return;
+
+    const offset = 90;
+
+    const top = target.getBoundingClientRect().top +
+
+        window.pageYOffset -
+
+        offset;
 
     window.scrollTo({
 
-        top: 0,
+        top,
 
         behavior: "smooth"
 
@@ -2085,28 +1216,948 @@ window.scrollToTopSmooth = function () {
 
 };
 
+
 /* =====================================================
-   GLOBAL HELPER
+   ENGINE LOG
 ===================================================== */
 
-window.KidsorraUtils = {
+console.log(
 
-    random(min, max) {
+    "%cKidsorra Engine Part 6 Ready",
 
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+    "color:#35c759;font-size:15px;font-weight:bold;"
+
+);
+
+/* ==========================================
+   KIDSORRA
+   SCRIPT.JS
+   PART 7 / 15
+==========================================*/
+
+"use strict";
+
+/* =====================================================
+   PREMIUM COUNTERS
+===================================================== */
+
+(() => {
+
+    const counters = document.querySelectorAll("[data-counter]");
+
+    if (!counters.length) return;
+
+    const animateCounter = (el) => {
+
+        const target = Number(el.dataset.counter);
+
+        const duration = 1800;
+
+        let start = 0;
+
+        const startTime = performance.now();
+
+        function update(now) {
+
+            const progress = Math.min((now - startTime) / duration, 1);
+
+            const value = Math.floor(progress * target);
+
+            el.textContent = value.toLocaleString();
+
+            if (progress < 1) {
+
+                requestAnimationFrame(update);
+
+            } else {
+
+                el.textContent = target.toLocaleString();
+
+            }
+
+        }
+
+        requestAnimationFrame(update);
+
+    };
+
+    const observer = new IntersectionObserver(entries => {
+
+        entries.forEach(entry => {
+
+            if (!entry.isIntersecting) return;
+
+            animateCounter(entry.target);
+
+            observer.unobserve(entry.target);
+
+        });
+
+    }, {
+
+        threshold: .35
+
+    });
+
+    counters.forEach(counter => observer.observe(counter));
+
+})();
+
+
+/* =====================================================
+   STATISTICS CARDS HOVER
+===================================================== */
+
+(() => {
+
+    const cards = document.querySelectorAll(".stats-card");
+
+    if (!cards.length) return;
+
+    cards.forEach(card => {
+
+        card.addEventListener("mouseenter", () => {
+
+            card.style.transform = "translateY(-8px)";
+
+        });
+
+        card.addEventListener("mouseleave", () => {
+
+            card.style.transform = "";
+
+        });
+
+    });
+
+})();
+
+
+/* =====================================================
+   NUMBER FORMATTER
+===================================================== */
+
+window.KidsorraNumber = {
+
+    format(value) {
+
+        return Number(value).toLocaleString();
 
     },
 
-    clamp(value, min, max) {
+    percent(value) {
 
-        return Math.min(Math.max(value, min), max);
+        return value + "%";
 
     }
 
 };
 
-console.log("%cKidsorra Engine Part 10 Loaded",
-"color:#6c63ff;font-weight:bold;font-size:15px;");
+
+/* =====================================================
+   HERO BADGES ANIMATION
+===================================================== */
+
+(() => {
+
+    const badges = document.querySelectorAll(".hero-badge");
+
+    if (!badges.length) return;
+
+    badges.forEach((badge, index) => {
+
+        badge.animate(
+
+            [
+
+                {
+
+                    transform: "translateY(0px)"
+
+                },
+
+                {
+
+                    transform: "translateY(-8px)"
+
+                },
+
+                {
+
+                    transform: "translateY(0px)"
+
+                }
+
+            ],
+
+            {
+
+                duration: 2600 + (index * 300),
+
+                iterations: Infinity,
+
+                easing: "ease-in-out"
+
+            }
+
+        );
+
+    });
+
+})();
+
+
+/* =====================================================
+   SECTION TITLE ANIMATION
+===================================================== */
+
+(() => {
+
+    const titles = document.querySelectorAll(".section-title");
+
+    if (!titles.length) return;
+
+    const observer = new IntersectionObserver(entries => {
+
+        entries.forEach(entry => {
+
+            if (!entry.isIntersecting) return;
+
+            entry.target.animate(
+
+                [
+
+                    {
+
+                        opacity: 0,
+
+                        transform: "translateY(30px)"
+
+                    },
+
+                    {
+
+                        opacity: 1,
+
+                        transform: "translateY(0)"
+
+                    }
+
+                ],
+
+                {
+
+                    duration: 700,
+
+                    easing: "ease-out",
+
+                    fill: "forwards"
+
+                }
+
+            );
+
+            observer.unobserve(entry.target);
+
+        });
+
+    }, {
+
+        threshold: .25
+
+    });
+
+    titles.forEach(title => observer.observe(title));
+
+})();
+
+
+console.log(
+    "%cKidsorra Engine Part 7 Ready",
+    "color:#FFD166;font-weight:bold;"
+);
+/* ==========================================
+   KIDSORRA
+   SCRIPT.JS
+   PART 8 / 15
+==========================================*/
+
+"use strict";
+
+/* =====================================================
+   TESTIMONIAL SLIDER
+===================================================== */
+
+(() => {
+
+    const slider = document.querySelector(".testimonial-slider");
+    const items = document.querySelectorAll(".testimonial");
+
+    if (!slider || items.length <= 1) return;
+
+    let current = 0;
+
+    function showSlide(index) {
+
+        items.forEach((item, i) => {
+
+            item.classList.toggle("active", i === index);
+
+        });
+
+    }
+
+    function nextSlide() {
+
+        current++;
+
+        if (current >= items.length) {
+
+            current = 0;
+
+        }
+
+        showSlide(current);
+
+    }
+
+    showSlide(current);
+
+    setInterval(nextSlide, 6000);
+
+})();
+
+
+/* =====================================================
+   TESTIMONIAL DOTS
+===================================================== */
+
+(() => {
+
+    const slider = document.querySelector(".testimonial-slider");
+    const items = document.querySelectorAll(".testimonial");
+
+    if (!slider || items.length <= 1) return;
+
+    const dots = document.createElement("div");
+    dots.className = "testimonial-dots";
+
+    items.forEach((_, index) => {
+
+        const dot = document.createElement("button");
+
+        dot.className = "testimonial-dot";
+
+        if (index === 0) {
+
+            dot.classList.add("active");
+
+        }
+
+        dot.addEventListener("click", () => {
+
+            document.querySelectorAll(".testimonial").forEach((item, i) => {
+
+                item.classList.toggle("active", i === index);
+
+            });
+
+            document.querySelectorAll(".testimonial-dot").forEach((d, i) => {
+
+                d.classList.toggle("active", i === index);
+
+            });
+
+        });
+
+        dots.appendChild(dot);
+
+    });
+
+    slider.appendChild(dots);
+
+})();
+
+
+/* =====================================================
+   BUTTON CLICK SCALE
+===================================================== */
+
+(() => {
+
+    document.querySelectorAll(
+
+        ".btn,.btn-primary,.btn-secondary"
+
+    ).forEach(button => {
+
+        button.addEventListener("mousedown", () => {
+
+            button.style.transform = "scale(.96)";
+
+        });
+
+        button.addEventListener("mouseup", () => {
+
+            button.style.transform = "";
+
+        });
+
+        button.addEventListener("mouseleave", () => {
+
+            button.style.transform = "";
+
+        });
+
+    });
+
+})();
+
+
+/* =====================================================
+   HERO SCROLL INDICATOR
+===================================================== */
+
+(() => {
+
+    const indicator = document.querySelector(".scroll-indicator");
+
+    if (!indicator) return;
+
+    indicator.addEventListener("click", () => {
+
+        const nextSection = document.querySelector("section");
+
+        if (!nextSection) return;
+
+        nextSection.scrollIntoView({
+
+            behavior: "smooth"
+
+        });
+
+    });
+
+})();
+
+
+/* =====================================================
+   SECTION BACKGROUND PARALLAX
+===================================================== */
+
+(() => {
+
+    const sections = document.querySelectorAll(".parallax-section");
+
+    if (!sections.length) return;
+
+    window.addEventListener("scroll", () => {
+
+        const scroll = window.pageYOffset;
+
+        sections.forEach(section => {
+
+            section.style.backgroundPositionY =
+                (scroll * 0.25) + "px";
+
+        });
+
+    });
+
+})();
+
+
+console.log(
+    "%cKidsorra Engine Part 8 Ready",
+    "color:#35C759;font-weight:bold;"
+);
+
+/* ==========================================
+   KIDSORRA
+   SCRIPT.JS
+   PART 9 / 15
+==========================================*/
+
+"use strict";
+
+/* =====================================================
+   CONTACT FORM VALIDATION
+===================================================== */
+
+(() => {
+
+    const form = document.querySelector(".contact-form");
+
+    if (!form) return;
+
+    const emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    form.addEventListener("submit", e => {
+
+        e.preventDefault();
+
+        let valid = true;
+
+        form.querySelectorAll("input,textarea,select")
+        .forEach(field => {
+
+            field.classList.remove("error");
+
+            if (field.hasAttribute("required")) {
+
+                if (field.value.trim() === "") {
+
+                    valid = false;
+                    field.classList.add("error");
+
+                }
+
+            }
+
+            if (field.type === "email") {
+
+                if (!emailPattern.test(field.value.trim())) {
+
+                    valid = false;
+                    field.classList.add("error");
+
+                }
+
+            }
+
+        });
+
+        if (!valid) {
+
+            if (window.Toast) {
+
+                Toast.show(
+                    "Please complete all required fields.",
+                    "#ff4d4f"
+                );
+
+            }
+
+            return;
+
+        }
+
+        const button = form.querySelector("button");
+
+        if (button) {
+
+            const original = button.innerHTML;
+
+            button.disabled = true;
+            button.innerHTML = "Sending...";
+
+            setTimeout(() => {
+
+                button.innerHTML = "✓ Message Sent";
+
+                if (window.Toast) {
+
+                    Toast.show(
+                        "Thank you! We will contact you soon.",
+                        "#35C759"
+                    );
+
+                }
+
+                form.reset();
+
+                setTimeout(() => {
+
+                    button.disabled = false;
+                    button.innerHTML = original;
+
+                }, 2500);
+
+            }, 1200);
+
+        }
+
+    });
+
+})();
+
+
+/* =====================================================
+   INPUT ANIMATION
+===================================================== */
+
+(() => {
+
+    document.querySelectorAll(
+
+        ".contact-form input,.contact-form textarea,.contact-form select"
+
+    ).forEach(field => {
+
+        field.addEventListener("focus", () => {
+
+            field.classList.add("focused");
+
+        });
+
+        field.addEventListener("blur", () => {
+
+            if (field.value.trim() === "") {
+
+                field.classList.remove("focused");
+
+            }
+
+        });
+
+    });
+
+})();
+
+
+/* =====================================================
+   COPY PHONE NUMBER
+===================================================== */
+
+(() => {
+
+    const phone = document.querySelector("[data-copy-phone]");
+
+    if (!phone) return;
+
+    phone.addEventListener("click", () => {
+
+        navigator.clipboard.writeText(phone.dataset.copyPhone);
+
+        if (window.Toast) {
+
+            Toast.show(
+
+                "Phone number copied.",
+
+                "#6C63FF"
+
+            );
+
+        }
+
+    });
+
+})();
+
+
+/* =====================================================
+   COPY EMAIL
+===================================================== */
+
+(() => {
+
+    const email = document.querySelector("[data-copy-email]");
+
+    if (!email) return;
+
+    email.addEventListener("click", () => {
+
+        navigator.clipboard.writeText(email.dataset.copyEmail);
+
+        if (window.Toast) {
+
+            Toast.show(
+
+                "Email copied.",
+
+                "#6C63FF"
+
+            );
+
+        }
+
+    });
+
+})();
+
+
+/* =====================================================
+   CONTACT CARD HOVER
+===================================================== */
+
+(() => {
+
+    document.querySelectorAll(".contact-card")
+
+    .forEach(card => {
+
+        card.addEventListener("mouseenter", () => {
+
+            card.style.transform =
+
+                "translateY(-8px)";
+
+        });
+
+        card.addEventListener("mouseleave", () => {
+
+            card.style.transform = "";
+
+        });
+
+    });
+
+})();
+
+
+console.log(
+
+    "%cKidsorra Engine Part 9 Ready",
+
+    "color:#6C63FF;font-weight:bold;"
+
+);
+
+/* ==========================================
+   KIDSORRA
+   SCRIPT.JS
+   PART 10 / 15
+==========================================*/
+
+"use strict";
+
+/* =====================================================
+   SCROLL PROGRESS BAR
+===================================================== */
+
+(() => {
+
+    const progress = document.querySelector(".scroll-progress");
+
+    if (!progress) return;
+
+    function updateProgress() {
+
+        const scrollTop = window.pageYOffset;
+
+        const docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+
+        const percent = (scrollTop / docHeight) * 100;
+
+        progress.style.width = percent + "%";
+
+    }
+
+    window.addEventListener("scroll", updateProgress, {
+        passive: true
+    });
+
+    updateProgress();
+
+})();
+
+
+/* =====================================================
+   ACTIVE NAVIGATION
+===================================================== */
+
+(() => {
+
+    const sections = document.querySelectorAll("section[id]");
+
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    if (!sections.length || !navLinks.length) return;
+
+    function updateNavigation() {
+
+        let current = "";
+
+        sections.forEach(section => {
+
+            const top = section.offsetTop - 120;
+
+            const height = section.offsetHeight;
+
+            if (
+                window.pageYOffset >= top &&
+                window.pageYOffset < top + height
+            ) {
+
+                current = section.id;
+
+            }
+
+        });
+
+        navLinks.forEach(link => {
+
+            link.classList.remove("active");
+
+            if (
+                link.getAttribute("href") === "#" + current
+            ) {
+
+                link.classList.add("active");
+
+            }
+
+        });
+
+    }
+
+    window.addEventListener("scroll", updateNavigation, {
+        passive: true
+    });
+
+    updateNavigation();
+
+})();
+
+
+/* =====================================================
+   CARD STAGGER REVEAL
+===================================================== */
+
+(() => {
+
+    const groups = document.querySelectorAll(
+
+        ".program-grid,.school-grid,.trust-grid,.testimonial-grid"
+
+    );
+
+    if (!groups.length) return;
+
+    const observer = new IntersectionObserver(entries => {
+
+        entries.forEach(entry => {
+
+            if (!entry.isIntersecting) return;
+
+            [...entry.target.children].forEach((item, index) => {
+
+                item.animate(
+
+                    [
+
+                        {
+
+                            opacity: 0,
+
+                            transform: "translateY(40px)"
+
+                        },
+
+                        {
+
+                            opacity: 1,
+
+                            transform: "translateY(0)"
+
+                        }
+
+                    ],
+
+                    {
+
+                        duration: 650,
+
+                        delay: index * 120,
+
+                        easing: "ease-out",
+
+                        fill: "forwards"
+
+                    }
+
+                );
+
+            });
+
+            observer.unobserve(entry.target);
+
+        });
+
+    }, {
+
+        threshold: .15
+
+    });
+
+    groups.forEach(group => observer.observe(group));
+
+})();
+
+
+/* =====================================================
+   HERO SCROLL INDICATOR
+===================================================== */
+
+(() => {
+
+    const indicator = document.querySelector(".scroll-indicator");
+
+    if (!indicator) return;
+
+    indicator.addEventListener("click", () => {
+
+        const next = document.querySelector("main section");
+
+        if (!next) return;
+
+        next.scrollIntoView({
+
+            behavior: "smooth"
+
+        });
+
+    });
+
+})();
+
+
+/* =====================================================
+   SECTION PARALLAX BACKGROUND
+===================================================== */
+
+(() => {
+
+    const parallax = document.querySelectorAll(".parallax-section");
+
+    if (!parallax.length) return;
+
+    window.addEventListener("scroll", () => {
+
+        const offset = window.pageYOffset;
+
+        parallax.forEach(section => {
+
+            section.style.backgroundPositionY =
+                `${offset * 0.18}px`;
+
+        });
+
+    }, {
+
+        passive: true
+
+    });
+
+})();
+
+
+/* =====================================================
+   SAFE INITIALIZER
+===================================================== */
+
+window.Kidsorra = window.Kidsorra || {};
+
+Kidsorra.version = "1.0.0";
+
+console.log(
+    "%cKidsorra Engine Part 10 Ready",
+    "color:#35C759;font-size:15px;font-weight:bold;"
+);
+
 /* ==========================================
    KIDSORRA
    SCRIPT.JS
@@ -2115,6 +2166,7 @@ console.log("%cKidsorra Engine Part 10 Loaded",
 
 "use strict";
 
+
 /* =====================================================
    PREMIUM LIGHTBOX
 ===================================================== */
@@ -2122,168 +2174,301 @@ console.log("%cKidsorra Engine Part 10 Loaded",
 (() => {
 
     const images = document.querySelectorAll(
-        ".gallery img,.program-card img,.school-card img,.image-soft img"
+
+        ".gallery img,\
+.program-card img,\
+.school-card img,\
+.image-card img"
+
     );
 
+
     if (!images.length) return;
+
 
     const overlay = document.createElement("div");
 
     overlay.className = "kidsorra-lightbox";
 
-    Object.assign(overlay.style,{
 
-        position:"fixed",
+    Object.assign(overlay.style, {
 
-        inset:"0",
+        position: "fixed",
 
-        background:"rgba(0,0,0,.92)",
+        inset: "0",
 
-        display:"flex",
+        background: "rgba(0,0,0,.88)",
 
-        alignItems:"center",
+        display: "flex",
 
-        justifyContent:"center",
+        alignItems: "center",
 
-        opacity:"0",
+        justifyContent: "center",
 
-        visibility:"hidden",
+        opacity: "0",
 
-        transition:".35s ease",
+        visibility: "hidden",
 
-        zIndex:"999999"
+        transition: ".35s ease",
 
-    });
-
-    const image = document.createElement("img");
-
-    Object.assign(image.style,{
-
-        maxWidth:"90%",
-
-        maxHeight:"88%",
-
-        borderRadius:"18px",
-
-        boxShadow:"0 20px 60px rgba(0,0,0,.35)",
-
-        transform:"scale(.9)",
-
-        transition:".35s ease"
+        zIndex: "999999"
 
     });
 
-    overlay.appendChild(image);
+
+
+    const preview = document.createElement("img");
+
+
+    Object.assign(preview.style, {
+
+        maxWidth: "90%",
+
+        maxHeight: "85vh",
+
+        borderRadius: "24px",
+
+        objectFit: "contain",
+
+        transform: "scale(.85)",
+
+        transition: ".35s ease",
+
+        boxShadow:
+        "0 25px 80px rgba(0,0,0,.35)"
+
+    });
+
+
+
+    overlay.appendChild(preview);
 
     document.body.appendChild(overlay);
 
-    images.forEach(img=>{
 
-        img.style.cursor="zoom-in";
 
-        img.addEventListener("click",()=>{
+    images.forEach(img => {
 
-            image.src=img.src;
 
-            overlay.style.opacity="1";
+        img.style.cursor = "zoom-in";
 
-            overlay.style.visibility="visible";
 
-            image.style.transform="scale(1)";
+        img.addEventListener("click", () => {
 
-            document.body.style.overflow="hidden";
 
-        });
+            preview.src = img.currentSrc || img.src;
 
-    });
 
-    overlay.addEventListener("click",()=>{
+            overlay.style.opacity = "1";
 
-        overlay.style.opacity="0";
+            overlay.style.visibility = "visible";
 
-        overlay.style.visibility="hidden";
 
-        image.style.transform="scale(.9)";
+            preview.style.transform = "scale(1)";
 
-        document.body.style.overflow="";
 
-    });
+            document.body.style.overflow = "hidden";
 
-    document.addEventListener("keydown",(e)=>{
-
-        if(e.key==="Escape"){
-
-            overlay.click();
-
-        }
-
-    });
-
-})();
-
-/* =====================================================
-   IMAGE HOVER ZOOM
-===================================================== */
-
-(() => {
-
-    document.querySelectorAll(
-
-        ".gallery img,.program-card img,.school-card img"
-
-    ).forEach(img=>{
-
-        img.style.transition=".45s ease";
-
-        img.addEventListener("mouseenter",()=>{
-
-            img.style.transform="scale(1.05)";
 
         });
 
-        img.addEventListener("mouseleave",()=>{
-
-            img.style.transform="scale(1)";
-
-        });
 
     });
 
-})();
 
-/* =====================================================
-   PARALLAX IMAGE EFFECT
-===================================================== */
 
-(() => {
+    function closeLightbox(){
 
-    const visuals=document.querySelectorAll(
+        overlay.style.opacity = "0";
 
-        ".hero-visual,.meet-image,.parents-visual"
+        overlay.style.visibility = "hidden";
+
+        preview.style.transform = "scale(.85)";
+
+        document.body.style.overflow = "";
+
+    }
+
+
+
+    overlay.addEventListener(
+
+        "click",
+
+        closeLightbox
 
     );
 
-    if(!visuals.length) return;
 
-    window.addEventListener("scroll",()=>{
 
-        const offset=window.pageYOffset;
+    document.addEventListener(
 
-        visuals.forEach(el=>{
+        "keydown",
 
-            el.style.transform=
+        e => {
 
-            `translateY(${offset*0.04}px)`;
+            if(e.key === "Escape"){
 
-        });
+                closeLightbox();
 
-    });
+            }
+
+        }
+
+    );
+
 
 })();
 
+
+
 /* =====================================================
-   END PART 11
-==========================================*/
+   IMAGE HOVER MICRO ANIMATION
+===================================================== */
+
+(() => {
+
+
+    const images = document.querySelectorAll(
+
+        ".gallery img,\
+.program-card img,\
+.school-card img"
+
+    );
+
+
+    images.forEach(img => {
+
+
+        img.addEventListener(
+
+            "mouseenter",
+
+            () => {
+
+                img.style.transform =
+                "scale(1.04)";
+
+            }
+
+        );
+
+
+
+        img.addEventListener(
+
+            "mouseleave",
+
+            () => {
+
+                img.style.transform =
+                "";
+
+            }
+
+        );
+
+
+    });
+
+
+})();
+
+
+
+/* =====================================================
+   IMAGE LOADING FADE
+===================================================== */
+
+(() => {
+
+
+    const images = document.querySelectorAll("img");
+
+
+    images.forEach(img => {
+
+
+        img.addEventListener(
+
+            "load",
+
+            () => {
+
+                img.classList.add(
+
+                    "image-loaded"
+
+                );
+
+            }
+
+        );
+
+
+    });
+
+
+})();
+
+
+
+/* =====================================================
+   GALLERY COUNTER
+===================================================== */
+
+(() => {
+
+
+    const galleries = document.querySelectorAll(
+
+        "[data-gallery-count]"
+
+    );
+
+
+    galleries.forEach(item => {
+
+
+        const count =
+
+            item.querySelector(".gallery-count");
+
+
+        const images =
+
+            item.querySelectorAll("img").length;
+
+
+
+        if(count){
+
+            count.textContent = images;
+
+        }
+
+
+    });
+
+
+})();
+
+
+
+/* =====================================================
+   ENGINE STATUS
+===================================================== */
+
+
+console.log(
+
+    "%cKidsorra Engine Part 11 Ready",
+
+    "color:#ff7a18;font-size:15px;font-weight:bold;"
+
+);
+
 /* ==========================================
    KIDSORRA
    SCRIPT.JS
@@ -2292,11 +2477,13 @@ console.log("%cKidsorra Engine Part 10 Loaded",
 
 "use strict";
 
+
 /* =====================================================
    CONFETTI ENGINE
 ===================================================== */
 
 const KidsorraConfetti = (() => {
+
 
     const colors = [
 
@@ -2312,47 +2499,60 @@ const KidsorraConfetti = (() => {
 
     ];
 
-    function createPiece() {
 
-        const piece = document.createElement("div");
 
-        const size = Math.random() * 10 + 6;
+    function createPiece(){
+
+
+        const piece = document.createElement("span");
+
+
+        const size =
+
+            Math.random() * 10 + 6;
+
+
 
         Object.assign(piece.style, {
 
-            position: "fixed",
+            position:"fixed",
 
-            top: "-20px",
+            top:"-20px",
 
-            left: Math.random() * 100 + "vw",
+            left:
+            Math.random() * 100 + "vw",
 
-            width: size + "px",
+            width:size + "px",
 
-            height: size * 1.4 + "px",
+            height:size * 1.4 + "px",
 
             background:
 
-                colors[Math.floor(Math.random() * colors.length)],
+            colors[
+                Math.floor(
+                    Math.random()*colors.length
+                )
+            ],
 
-            borderRadius: "3px",
+            borderRadius:"4px",
 
-            opacity: ".95",
+            pointerEvents:"none",
 
-            zIndex: "999999",
-
-            transform:
-
-                `rotate(${Math.random() * 360}deg)`,
-
-            pointerEvents: "none"
+            zIndex:"999999"
 
         });
 
+
+
         document.body.appendChild(piece);
+
+
 
         const duration =
 
-            Math.random() * 2500 + 2500;
+            Math.random()*2000 + 2500;
+
+
 
         piece.animate(
 
@@ -2361,21 +2561,19 @@ const KidsorraConfetti = (() => {
                 {
 
                     transform:
+                    "translateY(0) rotate(0)",
 
-                        `translateY(0) rotate(0deg)`,
-
-                    opacity: 1
+                    opacity:1
 
                 },
 
                 {
 
                     transform:
+                    `translateY(110vh)
+                    rotate(${720}deg)`,
 
-                        `translateY(110vh)
-                        rotate(${720 + Math.random() * 720}deg)`,
-
-                    opacity: 0
+                    opacity:0
 
                 }
 
@@ -2385,33 +2583,45 @@ const KidsorraConfetti = (() => {
 
                 duration,
 
-                easing: "linear"
+                easing:"linear"
 
             }
 
         );
 
-        setTimeout(() => {
+
+
+        setTimeout(()=>{
 
             piece.remove();
 
         }, duration);
 
+
+
     }
 
-    function burst(count = 80) {
 
-        for (let i = 0; i < count; i++) {
 
-            setTimeout(() => {
+    function burst(amount = 80){
+
+
+        for(let i=0;i<amount;i++){
+
+
+            setTimeout(()=>{
 
                 createPiece();
 
-            }, i * 12);
+            }, i * 15);
+
 
         }
 
+
     }
+
+
 
     return {
 
@@ -2419,185 +2629,275 @@ const KidsorraConfetti = (() => {
 
     };
 
-})();
-
-/* =====================================================
-   SUCCESS BUTTON CELEBRATION
-===================================================== */
-
-(() => {
-
-    document.querySelectorAll(
-
-        ".celebrate-button"
-
-    ).forEach(button => {
-
-        button.addEventListener("click", () => {
-
-            KidsorraConfetti.burst(90);
-
-        });
-
-    });
 
 })();
 
+
+
+
 /* =====================================================
-   AUTO CELEBRATION
+   GLOBAL CELEBRATION FUNCTION
 ===================================================== */
 
-window.kidsorraCelebrate = function () {
+window.kidsorraCelebrate = function(){
 
     KidsorraConfetti.burst(120);
 
 };
 
+
+
+
 /* =====================================================
-   SUCCESS SCALE EFFECT
+   SUCCESS BUTTON ACTION
 ===================================================== */
 
 (() => {
 
-    document.querySelectorAll(
 
-        ".success-pop"
+    const buttons = document.querySelectorAll(
 
-    ).forEach(item => {
+        ".celebrate-button,\
+.success-button,\
+.demo-success"
 
-        item.addEventListener("click", () => {
+    );
 
-            item.animate(
 
-                [
+
+    buttons.forEach(button=>{
+
+
+        button.addEventListener(
+
+            "click",
+
+            ()=>{
+
+
+                KidsorraConfetti.burst(90);
+
+
+                button.animate(
+
+                    [
+
+                        {
+
+                            transform:"scale(1)"
+
+                        },
+
+                        {
+
+                            transform:"scale(1.08)"
+
+                        },
+
+                        {
+
+                            transform:"scale(1)"
+
+                        }
+
+                    ],
 
                     {
 
-                        transform: "scale(1)"
+                        duration:450,
 
-                    },
-
-                    {
-
-                        transform: "scale(1.08)"
-
-                    },
-
-                    {
-
-                        transform: "scale(1)"
+                        easing:"ease"
 
                     }
 
-                ],
+                );
 
-                {
-
-                    duration: 500,
-
-                    easing: "ease"
-
-                }
-
-            );
-
-        });
-
-    });
-
-})();
-
-/* =====================================================
-   FLOATING EMOJIS
-===================================================== */
-
-(() => {
-
-    const emojis = [
-
-        "🎉",
-
-        "✨",
-
-        "🌈",
-
-        "⭐",
-
-        "🎈"
-
-    ];
-
-    window.showFloatingEmoji = function () {
-
-        const emoji = document.createElement("div");
-
-        emoji.innerHTML =
-
-            emojis[Math.floor(Math.random() * emojis.length)];
-
-        Object.assign(emoji.style, {
-
-            position: "fixed",
-
-            left: Math.random() * 90 + "vw",
-
-            bottom: "20px",
-
-            fontSize: "30px",
-
-            zIndex: "999999",
-
-            pointerEvents: "none"
-
-        });
-
-        document.body.appendChild(emoji);
-
-        emoji.animate(
-
-            [
-
-                {
-
-                    transform: "translateY(0)",
-
-                    opacity: 1
-
-                },
-
-                {
-
-                    transform: "translateY(-300px)",
-
-                    opacity: 0
-
-                }
-
-            ],
-
-            {
-
-                duration: 2500,
-
-                easing: "ease-out"
 
             }
 
         );
 
-        setTimeout(() => {
 
-            emoji.remove();
+    });
 
-        }, 2500);
-
-    };
 
 })();
 
-/* ==========================================
-   END PART 12
-==========================================*/
+
+
+
+/* =====================================================
+   FLOATING EMOJI EFFECT
+===================================================== */
+
+window.showKidsorraEmoji = function(){
+
+
+    const emojis = [
+
+        "🌈",
+
+        "⭐",
+
+        "✨",
+
+        "🎈",
+
+        "🚀",
+
+        "🦄"
+
+    ];
+
+
+
+    const emoji = document.createElement("div");
+
+
+
+    emoji.textContent =
+
+        emojis[
+            Math.floor(
+                Math.random()*emojis.length
+            )
+        ];
+
+
+
+    Object.assign(emoji.style, {
+
+        position:"fixed",
+
+        left:
+        Math.random()*90+"vw",
+
+        bottom:"20px",
+
+        fontSize:"32px",
+
+        zIndex:"99999",
+
+        pointerEvents:"none"
+
+    });
+
+
+
+    document.body.appendChild(emoji);
+
+
+
+    emoji.animate(
+
+        [
+
+            {
+
+                transform:"translateY(0)",
+
+                opacity:1
+
+            },
+
+            {
+
+                transform:
+                "translateY(-280px)",
+
+                opacity:0
+
+            }
+
+        ],
+
+        {
+
+            duration:2500,
+
+            easing:"ease-out"
+
+        }
+
+    );
+
+
+
+    setTimeout(()=>{
+
+        emoji.remove();
+
+    },2500);
+
+
+};
+
+
+
+
+/* =====================================================
+   MAGIC MESSAGE
+===================================================== */
+
+window.showKidsorraMessage = function(){
+
+
+    const messages = [
+
+        "Dream Big ✨",
+
+        "Keep Learning 🌈",
+
+        "You Can Do It 🚀",
+
+        "Future Starts Here ⭐",
+
+        "Learning Is Fun 🎨"
+
+    ];
+
+
+
+    const message =
+
+        messages[
+            Math.floor(
+                Math.random()*messages.length
+            )
+        ];
+
+
+
+    if(window.Toast){
+
+        Toast.show(
+
+            message,
+
+            "#6C63FF"
+
+        );
+
+    }
+
+
+};
+
+
+
+
+/* =====================================================
+   ENGINE STATUS
+===================================================== */
+
+console.log(
+
+    "%cKidsorra Engine Part 12 Ready",
+
+    "color:#FFD166;font-size:15px;font-weight:bold;"
+
+);
+
 /* ==========================================
    KIDSORRA
    SCRIPT.JS
@@ -2606,114 +2906,123 @@ window.kidsorraCelebrate = function () {
 
 "use strict";
 
+
 /* =====================================================
-   CURSOR TRAIL
+   PREMIUM CURSOR EFFECT
 ===================================================== */
 
 (() => {
 
-    const colors = [
-        "#ff7a18",
-        "#FFD166",
-        "#6C63FF"
-    ];
 
-    window.addEventListener("mousemove", e => {
+    if (window.innerWidth < 768) return;
 
-        const dot = document.createElement("span");
 
-        Object.assign(dot.style, {
+    const cursor = document.createElement("div");
 
-            position: "fixed",
 
-            left: e.clientX + "px",
+    cursor.className = "kidsorra-cursor";
 
-            top: e.clientY + "px",
 
-            width: "10px",
+    Object.assign(cursor.style, {
 
-            height: "10px",
+        position:"fixed",
 
-            borderRadius: "50%",
+        width:"18px",
 
-            background:
-            colors[Math.floor(Math.random()*colors.length)],
+        height:"18px",
 
-            pointerEvents: "none",
+        borderRadius:"50%",
 
-            zIndex: "999999",
+        background:"#ff7a18",
 
-            opacity: ".7"
+        pointerEvents:"none",
 
-        });
+        zIndex:"999999",
 
-        document.body.appendChild(dot);
+        transform:"translate(-50%,-50%)",
 
-        dot.animate([
+        transition:
+        "width .25s ease,height .25s ease,opacity .25s ease",
 
-            {
-
-                transform:"translate(-50%,-50%) scale(1)",
-
-                opacity:.8
-
-            },
-
-            {
-
-                transform:"translate(-50%,-50%) scale(0)",
-
-                opacity:0
-
-            }
-
-        ],{
-
-            duration:700,
-
-            easing:"ease-out"
-
-        });
-
-        setTimeout(()=>{
-
-            dot.remove();
-
-        },700);
+        opacity:"0.8"
 
     });
 
-})();
 
-/* =====================================================
-   EASTER EGG
-===================================================== */
 
-(() => {
+    document.body.appendChild(cursor);
 
-    let count = 0;
 
-    const logo = document.querySelector(".logo");
 
-    if(!logo) return;
+    window.addEventListener(
 
-    logo.addEventListener("click",()=>{
+        "mousemove",
 
-        count++;
+        e=>{
 
-        if(count===7){
+            cursor.style.left =
+                e.clientX+"px";
 
-            count=0;
-
-            KidsorraConfetti.burst(180);
-
-            Toast.show("🌈 Welcome to the Kidsorra Magic World!");
+            cursor.style.top =
+                e.clientY+"px";
 
         }
 
+    );
+
+
+
+    document.querySelectorAll(
+
+        "a,button,.card,.program-card,.school-card"
+
+    )
+
+    .forEach(element=>{
+
+
+        element.addEventListener(
+
+            "mouseenter",
+
+            ()=>{
+
+                cursor.style.width="45px";
+
+                cursor.style.height="45px";
+
+                cursor.style.opacity=".35";
+
+            }
+
+        );
+
+
+
+        element.addEventListener(
+
+            "mouseleave",
+
+            ()=>{
+
+                cursor.style.width="18px";
+
+                cursor.style.height="18px";
+
+                cursor.style.opacity=".8";
+
+            }
+
+        );
+
+
     });
 
+
 })();
+
+
+
 
 /* =====================================================
    CARD SHINE EFFECT
@@ -2721,67 +3030,229 @@ window.kidsorraCelebrate = function () {
 
 (() => {
 
+
     const cards = document.querySelectorAll(
 
-        ".program-card,.school-card,.trust-card"
+        ".program-card,\
+.school-card,\
+.trust-card,\
+.lifeskill-card"
 
     );
 
+
+
+    if(!cards.length) return;
+
+
+
     cards.forEach(card=>{
 
-        card.addEventListener("mousemove",e=>{
 
-            const rect = card.getBoundingClientRect();
+        card.addEventListener(
 
-            const x = e.clientX-rect.left;
+            "mousemove",
 
-            const y = e.clientY-rect.top;
+            e=>{
 
-            card.style.background=
 
-            `radial-gradient(circle at ${x}px ${y}px,
+                const rect =
+                    card.getBoundingClientRect();
 
-            rgba(255,255,255,.9),
 
-            #ffffff 45%)`;
 
-        });
+                const x =
+                    e.clientX - rect.left;
 
-        card.addEventListener("mouseleave",()=>{
 
-            card.style.background="#fff";
 
-        });
+                const y =
+                    e.clientY - rect.top;
+
+
+
+                card.style.background =
+
+                `radial-gradient(
+                    circle at ${x}px ${y}px,
+                    rgba(255,255,255,.9),
+                    #ffffff 45%
+                )`;
+
+
+
+            }
+
+        );
+
+
+
+        card.addEventListener(
+
+            "mouseleave",
+
+            ()=>{
+
+
+                card.style.background="";
+
+
+            }
+
+        );
+
 
     });
 
+
 })();
 
+
+
+
 /* =====================================================
-   RANDOM FLOATING EMOJI
+   CARD HOVER LIFT
 ===================================================== */
 
 (() => {
 
-    const emojis=["🌟","✨","🎈","🌈","🦄"];
 
-    setInterval(()=>{
+    const elements = document.querySelectorAll(
 
-        const item=document.createElement("div");
+        ".card,\
+.program-card,\
+.school-card,\
+.testimonial"
 
-        item.innerHTML=
+    );
 
-        emojis[Math.floor(Math.random()*emojis.length)];
 
-        Object.assign(item.style,{
+
+    elements.forEach(item=>{
+
+
+        item.addEventListener(
+
+            "mouseenter",
+
+            ()=>{
+
+                item.style.transform =
+                "translateY(-10px)";
+
+            }
+
+        );
+
+
+
+        item.addEventListener(
+
+            "mouseleave",
+
+            ()=>{
+
+                item.style.transform="";
+
+            }
+
+        );
+
+
+    });
+
+
+})();
+
+
+
+
+/* =====================================================
+   LINK UNDERLINE ANIMATION
+===================================================== */
+
+(() => {
+
+
+    document.querySelectorAll(
+
+        ".nav-links a"
+
+    )
+
+    .forEach(link=>{
+
+
+        link.addEventListener(
+
+            "mouseenter",
+
+            ()=>{
+
+                link.style.transition=".3s";
+
+                link.style.transform =
+                "translateY(-2px)";
+
+            }
+
+        );
+
+
+
+        link.addEventListener(
+
+            "mouseleave",
+
+            ()=>{
+
+                link.style.transform="";
+
+            }
+
+        );
+
+
+    });
+
+
+})();
+
+
+
+
+/* =====================================================
+   RANDOM MAGIC SPARK
+===================================================== */
+
+(() => {
+
+
+    function createSpark(){
+
+
+        const spark =
+            document.createElement("span");
+
+
+
+        Object.assign(spark.style,{
 
             position:"fixed",
 
-            left:Math.random()*90+"vw",
+            width:"6px",
 
-            bottom:"-40px",
+            height:"6px",
 
-            fontSize:"28px",
+            borderRadius:"50%",
+
+            background:"#FFD166",
+
+            left:
+            Math.random()*100+"vw",
+
+            top:
+            Math.random()*100+"vh",
 
             pointerEvents:"none",
 
@@ -2789,69 +3260,83 @@ window.kidsorraCelebrate = function () {
 
         });
 
-        document.body.appendChild(item);
 
-        item.animate([
+
+        document.body.appendChild(spark);
+
+
+
+        spark.animate(
+
+            [
+
+                {
+
+                    transform:"scale(1)",
+
+                    opacity:1
+
+                },
+
+                {
+
+                    transform:"scale(0)",
+
+                    opacity:0
+
+                }
+
+            ],
 
             {
 
-                transform:"translateY(0)",
+                duration:1200,
 
-                opacity:0
-
-            },
-
-            {
-
-                opacity:1
-
-            },
-
-            {
-
-                transform:"translateY(-120vh)",
-
-                opacity:0
+                easing:"ease-out"
 
             }
 
-        ],{
+        );
 
-            duration:9000,
 
-            easing:"linear"
-
-        });
 
         setTimeout(()=>{
 
-            item.remove();
+            spark.remove();
 
-        },9000);
+        },1200);
 
-    },4500);
 
-})();
+    }
 
-/* =====================================================
-   PAGE LOADED MESSAGE
-===================================================== */
 
-window.addEventListener("load",()=>{
 
-    console.log(
+    setInterval(
 
-        "%cKidsorra Premium Engine Active",
+        createSpark,
 
-        "color:#ff7a18;font-size:18px;font-weight:bold;"
+        4000
 
     );
 
-});
 
-/* ==========================================
-   END PART 13
-==========================================*/
+})();
+
+
+
+
+/* =====================================================
+   ENGINE STATUS
+===================================================== */
+
+
+console.log(
+
+    "%cKidsorra Engine Part 13 Ready",
+
+    "color:#6C63FF;font-size:15px;font-weight:bold;"
+
+);
 
 /* ==========================================
    KIDSORRA
@@ -2861,39 +3346,52 @@ window.addEventListener("load",()=>{
 
 "use strict";
 
+
 /* =====================================================
-   ADVANCED ANIMATION ENGINE
+   CENTRAL ANIMATION CONTROLLER
 ===================================================== */
 
-const KidsorraAnimation = (() => {
+const KidsorraAnimation = {
 
-    function animate(element, options = {}) {
 
-        if (!element) return;
+    reveal(element, options = {}){
+
+
+        if(!element) return;
+
 
         const {
 
-            translateY = 30,
-
-            opacity = 0,
+            delay = 0,
 
             duration = 700,
 
-            easing = "ease-out"
+            distance = 35
 
         } = options;
+
+
 
         element.animate(
 
             [
 
                 {
-                    transform: `translateY(${translateY}px)`,
-                    opacity
+
+                    opacity:0,
+
+                    transform:
+                    `translateY(${distance}px)`
+
                 },
+
                 {
-                    transform: "translateY(0)",
-                    opacity: 1
+
+                    opacity:1,
+
+                    transform:
+                    "translateY(0)"
+
                 }
 
             ],
@@ -2902,107 +3400,200 @@ const KidsorraAnimation = (() => {
 
                 duration,
 
-                easing,
+                delay,
 
-                fill: "forwards"
+                easing:"ease-out",
+
+                fill:"forwards"
 
             }
 
         );
 
+
+    },
+
+
+
+    pulse(element){
+
+
+        if(!element) return;
+
+
+        element.animate(
+
+            [
+
+                {
+
+                    transform:"scale(1)"
+
+                },
+
+                {
+
+                    transform:"scale(1.05)"
+
+                },
+
+                {
+
+                    transform:"scale(1)"
+
+                }
+
+            ],
+
+            {
+
+                duration:500,
+
+                easing:"ease"
+
+            }
+
+        );
+
+
     }
 
-    return {
 
-        animate
+};
 
-    };
 
-})();
+
+window.KidsorraAnimation = KidsorraAnimation;
+
+
+
 
 /* =====================================================
-   SMART OBSERVER
+   SMART REVEAL OBSERVER
 ===================================================== */
 
 (() => {
 
-    const targets = document.querySelectorAll(
 
-        ".program-card,.school-card,.trust-card,.testimonial,.journey-step,.lifeskill-card,.experience-card"
+    const items = document.querySelectorAll(
+
+        ".fade-element,\
+.program-card,\
+.school-card,\
+.trust-card,\
+.testimonial,\
+.journey-step,\
+.lifeskill-card"
 
     );
 
-    if (!targets.length) return;
+
+
+    if(!items.length) return;
+
+
 
     const observer = new IntersectionObserver(
 
-        entries => {
+        entries=>{
 
-            entries.forEach(entry => {
 
-                if (!entry.isIntersecting) return;
+            entries.forEach(entry=>{
 
-                KidsorraAnimation.animate(
+
+                if(!entry.isIntersecting) return;
+
+
+
+                KidsorraAnimation.reveal(
 
                     entry.target,
 
                     {
 
-                        translateY: 45,
-
-                        duration: 800
+                        duration:750
 
                     }
 
                 );
 
-                observer.unobserve(entry.target);
+
+
+                observer.unobserve(
+
+                    entry.target
+
+                );
+
 
             });
+
 
         },
 
         {
 
-            threshold: .18
+            threshold:.15
 
         }
 
     );
 
-    targets.forEach(target => observer.observe(target));
+
+
+    items.forEach(item=>{
+
+
+        observer.observe(item);
+
+
+    });
+
+
 
 })();
 
+
+
+
 /* =====================================================
-   HERO AUTO FLOAT
+   HERO AUTO MOTION
 ===================================================== */
 
 (() => {
 
-    const visual = document.querySelector(".hero-visual");
 
-    if (!visual) return;
+    const heroVisual =
+        document.querySelector(".hero-visual");
 
-    visual.animate(
+
+
+    if(!heroVisual) return;
+
+
+
+    heroVisual.animate(
 
         [
 
             {
 
-                transform: "translateY(0px)"
+                transform:
+                "translateY(0)"
 
             },
 
             {
 
-                transform: "translateY(-14px)"
+                transform:
+                "translateY(-12px)"
 
             },
 
             {
 
-                transform: "translateY(0px)"
+                transform:
+                "translateY(0)"
 
             }
 
@@ -3010,340 +3601,144 @@ const KidsorraAnimation = (() => {
 
         {
 
-            duration: 4200,
+            duration:4500,
 
-            iterations: Infinity,
+            iterations:Infinity,
 
-            easing: "ease-in-out"
+            easing:"ease-in-out"
 
         }
 
     );
 
+
 })();
 
+
+
+
 /* =====================================================
-   AUTO THEME DETECTOR
+   PERFORMANCE MODE
 ===================================================== */
 
 (() => {
 
-    const prefersDark =
 
-        window.matchMedia("(prefers-color-scheme: dark)");
+    let timer;
 
-    function detectTheme() {
 
-        if (prefersDark.matches) {
 
-            document.body.classList.add("system-dark");
+    function optimize(){
 
-        } else {
 
-            document.body.classList.remove("system-dark");
+        document.body.classList.add(
 
-        }
-
-    }
-
-    detectTheme();
-
-    prefersDark.addEventListener("change", detectTheme);
-
-})();
-
-/* =====================================================
-   RANDOM MAGIC MESSAGE
-===================================================== */
-
-(() => {
-
-    const messages = [
-
-        "Keep Learning 🌈",
-
-        "Dream Big ✨",
-
-        "Small Steps Every Day 🚀",
-
-        "Future Starts Here 🌍",
-
-        "You Can Do It ⭐"
-
-    ];
-
-    window.showMagicMessage = function () {
-
-        Toast.show(
-
-            messages[Math.floor(Math.random() * messages.length)],
-
-            "#6C63FF"
+            "performance-mode"
 
         );
 
-    };
 
-})();
 
-/* =====================================================
-   PAGE IDLE ANIMATION
-===================================================== */
+        clearTimeout(timer);
 
-(() => {
 
-    let idle;
 
-    function resetIdle() {
+        timer=setTimeout(()=>{
 
-        clearTimeout(idle);
 
-        document.body.classList.remove("page-idle");
+            document.body.classList.remove(
 
-        idle = setTimeout(() => {
+                "performance-mode"
 
-            document.body.classList.add("page-idle");
+            );
 
-        }, 15000);
+
+        },500);
+
 
     }
 
-    [
 
-        "mousemove",
 
-        "keydown",
+    window.addEventListener(
 
-        "touchstart",
+        "scroll",
 
-        "scroll"
+        optimize,
 
-    ].forEach(event => {
+        {
 
-        window.addEventListener(event, resetIdle);
-
-    });
-
-    resetIdle();
-
-})();
-
-/* =====================================================
-   END PART 14
-==========================================*/
-
-/* ==========================================
-   KIDSORRA
-   SCRIPT.JS
-   PART 15 / 15
-==========================================*/
-
-"use strict";
-
-/* =====================================================
-   GLOBAL ERROR HANDLER
-===================================================== */
-
-window.addEventListener("error", function (event) {
-
-    console.warn(
-
-        "[Kidsorra]",
-
-        event.message
-
-    );
-
-});
-
-window.addEventListener("unhandledrejection", function (event) {
-
-    console.warn(
-
-        "[Kidsorra Promise]",
-
-        event.reason
-
-    );
-
-});
-
-/* =====================================================
-   PERFORMANCE OPTIMIZER
-===================================================== */
-
-(() => {
-
-    let ticking = false;
-
-    function update() {
-
-        ticking = false;
-
-    }
-
-    window.addEventListener("scroll", () => {
-
-        if (!ticking) {
-
-            requestAnimationFrame(update);
-
-            ticking = true;
-
-        }
-
-    });
-
-})();
-
-/* =====================================================
-   MEMORY CLEANER
-===================================================== */
-
-(() => {
-
-    const clean = () => {
-
-        document.querySelectorAll(
-
-            ".temporary,.hero-particle,.cursor-trail"
-
-        ).forEach(el => {
-
-            if (!document.body.contains(el)) {
-
-                el.remove();
-
-            }
-
-        });
-
-    };
-
-    setInterval(clean,15000);
-
-})();
-
-/* =====================================================
-   VISIBILITY API
-===================================================== */
-
-(() => {
-
-    document.addEventListener(
-
-        "visibilitychange",
-
-        () => {
-
-            if(document.hidden){
-
-                console.log("Kidsorra paused");
-
-            }else{
-
-                console.log("Kidsorra resumed");
-
-            }
+            passive:true
 
         }
 
     );
 
+
+
 })();
 
-/* =====================================================
-   DEVICE DETECTOR
-===================================================== */
 
-window.KidsorraDevice = {
 
-    mobile(){
-
-        return window.innerWidth < 768;
-
-    },
-
-    tablet(){
-
-        return window.innerWidth >=768 &&
-
-               window.innerWidth <1100;
-
-    },
-
-    desktop(){
-
-        return window.innerWidth >=1100;
-
-    }
-
-};
 
 /* =====================================================
-   RANDOM HELPERS
+   REDUCE MOTION SUPPORT
 ===================================================== */
 
-window.KidsorraHelpers = {
+(() => {
 
-    random(min,max){
 
-        return Math.floor(
+    const reduceMotion =
 
-            Math.random()*(max-min+1)
+        window.matchMedia(
 
-        )+min;
-
-    },
-
-    uuid(){
-
-        return Math.random()
-
-        .toString(36)
-
-        .substring(2,10);
-
-    },
-
-    sleep(ms){
-
-        return new Promise(resolve=>
-
-            setTimeout(resolve,ms)
+            "(prefers-reduced-motion: reduce)"
 
         );
 
+
+
+    function apply(){
+
+
+        if(reduceMotion.matches){
+
+
+            document.body.classList.add(
+
+                "reduce-motion"
+
+            );
+
+
+        }
+
+
     }
 
-};
 
-/* =====================================================
-   AUTO PRELOAD IMAGES
-===================================================== */
 
-(() => {
+    apply();
 
-    const images=[
 
-        ...document.images
 
-    ];
+    reduceMotion.addEventListener(
 
-    images.forEach(img=>{
+        "change",
 
-        if(img.complete) return;
+        apply
 
-        const preload=new Image();
+    );
 
-        preload.src=img.src;
 
-    });
 
 })();
 
+
+
+
 /* =====================================================
-   WELCOME MESSAGE
+   WINDOW LOAD FINAL CHECK
 ===================================================== */
 
 window.addEventListener(
@@ -3352,39 +3747,356 @@ window.addEventListener(
 
     ()=>{
 
-        console.log(
 
-"%cKidsorra Premium Version Loaded",
+        document.body.classList.add(
 
-"color:#ff7a18;font-size:20px;font-weight:bold;"
+            "kidsorra-ready"
 
         );
+
+
+
+        console.log(
+
+            "%cKidsorra UI Fully Initialized",
+
+            "color:#35C759;font-size:16px;font-weight:bold;"
+
+        );
+
 
     }
 
 );
 
+
+
+
 /* =====================================================
-   FINAL INITIALIZER
+   END PART 14
+=====================================================*/
+/* ==========================================
+   KIDSORRA
+   SCRIPT.JS
+   PART 15 / 15
+   FINAL PRODUCTION BUILD
+==========================================*/
+
+"use strict";
+
+
+/* =====================================================
+   GLOBAL ERROR PROTECTION
+===================================================== */
+
+window.addEventListener(
+    "error",
+    (event)=>{
+
+        console.warn(
+            "[Kidsorra Error]",
+            event.message
+        );
+
+    }
+);
+
+
+window.addEventListener(
+    "unhandledrejection",
+    (event)=>{
+
+        console.warn(
+            "[Kidsorra Promise Error]",
+            event.reason
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   DEVICE INFORMATION
+===================================================== */
+
+window.KidsorraDevice = {
+
+
+    isMobile(){
+
+        return window.innerWidth < 768;
+
+    },
+
+
+    isTablet(){
+
+        return (
+            window.innerWidth >= 768 &&
+            window.innerWidth < 1100
+        );
+
+    },
+
+
+    isDesktop(){
+
+        return window.innerWidth >= 1100;
+
+    }
+
+
+};
+
+
+
+
+/* =====================================================
+   GLOBAL HELPERS
+===================================================== */
+
+window.KidsorraHelpers = {
+
+
+    random(min,max){
+
+        return Math.floor(
+
+            Math.random() *
+            (max-min+1)
+
+        ) + min;
+
+    },
+
+
+    sleep(ms){
+
+        return new Promise(resolve=>{
+
+            setTimeout(resolve,ms);
+
+        });
+
+    },
+
+
+    id(){
+
+        return (
+
+            "kidsorra-" +
+
+            Math.random()
+            .toString(36)
+            .substring(2,10)
+
+        );
+
+    }
+
+
+};
+
+
+
+
+/* =====================================================
+   IMAGE PRELOAD ENGINE
 ===================================================== */
 
 (() => {
 
-    const modules=[
 
-        "Hero",
+    const images = [
+
+        ...document.images
+
+    ];
+
+
+
+    images.forEach(img=>{
+
+
+        if(img.complete) return;
+
+
+
+        const preload = new Image();
+
+
+
+        preload.src = img.src;
+
+
+
+    });
+
+
+
+})();
+
+
+
+
+/* =====================================================
+   CLEAN TEMP ELEMENTS
+===================================================== */
+
+(() => {
+
+
+    function cleanup(){
+
+
+        document.querySelectorAll(
+
+            ".kidsorra-temp,\
+.hero-particles span,\
+.magic-cursor,\
+.cursor-glow"
+
+        )
+
+        .forEach(element=>{
+
+
+            if(
+                !document.body.contains(element)
+            ){
+
+                element.remove();
+
+            }
+
+
+        });
+
+
+    }
+
+
+
+    setInterval(
+
+        cleanup,
+
+        20000
+
+    );
+
+
+})();
+
+
+
+
+/* =====================================================
+   VISIBILITY OPTIMIZATION
+===================================================== */
+
+(() => {
+
+
+    document.addEventListener(
+
+        "visibilitychange",
+
+        ()=>{
+
+
+            if(document.hidden){
+
+
+                document.body.classList.add(
+
+                    "page-hidden"
+
+                );
+
+
+            }
+
+            else{
+
+
+                document.body.classList.remove(
+
+                    "page-hidden"
+
+                );
+
+
+            }
+
+
+        }
+
+    );
+
+
+})();
+
+
+
+
+/* =====================================================
+   FINAL PAGE READY
+===================================================== */
+
+window.addEventListener(
+
+    "load",
+
+    ()=>{
+
+
+        document.documentElement.classList.add(
+
+            "kidsorra-loaded"
+
+        );
+
+
+
+        console.log(
+
+            "%cKIDSORRA PREMIUM WEBSITE READY",
+
+            "color:#ff7a18;font-size:20px;font-weight:bold;"
+
+        );
+
+
+    }
+
+);
+
+
+
+
+/* =====================================================
+   MODULE STATUS
+===================================================== */
+
+(() => {
+
+
+    const modules = [
 
         "Navigation",
 
+        "Hero",
+
         "Cards",
 
-        "Journey",
+        "Animations",
 
         "FAQ",
 
-        "Booking",
-
-        "Contact",
+        "Forms",
 
         "Gallery",
 
@@ -3392,19 +4104,26 @@ window.addEventListener(
 
     ];
 
+
+
     modules.forEach(module=>{
+
 
         console.log(
 
-            "✓ "+module+" Ready"
+            "✓ " + module + " initialized"
 
         );
 
+
     });
+
 
 })();
 
+
+
 /* =====================================================
-   END OF KIDSORRA ENGINE
-===================================================== */
+   END OF KIDSORRA SCRIPT ENGINE
+=====================================================*/
 
