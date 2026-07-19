@@ -1151,6 +1151,7 @@ console.log(
 );
 
 /* ==========================================
+   /* ==========================================
    KIDSORRA
    SCRIPT.JS
    PART 7 / 15
@@ -1164,17 +1165,15 @@ console.log(
 
 (() => {
 
-    const counters = document.querySelectorAll("[data-counter]");
+    const counters = document.querySelectorAll(".counter");
 
     if (!counters.length) return;
 
     const animateCounter = (el) => {
 
-        const target = Number(el.dataset.counter);
+        const target = Number(el.dataset.target || 0);
 
         const duration = 1800;
-
-        let start = 0;
 
         const startTime = performance.now();
 
@@ -1202,7 +1201,7 @@ console.log(
 
     };
 
-    const observer = new IntersectionObserver(entries => {
+    const observer = new IntersectionObserver((entries) => {
 
         entries.forEach(entry => {
 
@@ -1216,7 +1215,7 @@ console.log(
 
     }, {
 
-        threshold: .35
+        threshold: 0.35
 
     });
 
@@ -1226,12 +1225,12 @@ console.log(
 
 
 /* =====================================================
-   STATISTICS CARDS HOVER
+   STATS HOVER EFFECT
 ===================================================== */
 
 (() => {
 
-    const cards = document.querySelectorAll(".stats-card");
+    const cards = document.querySelectorAll(".stat");
 
     if (!cards.length) return;
 
@@ -1268,7 +1267,7 @@ window.KidsorraNumber = {
 
     percent(value) {
 
-        return value + "%";
+        return `${value}%`;
 
     }
 
@@ -1276,60 +1275,44 @@ window.KidsorraNumber = {
 
 
 /* =====================================================
-   HERO BADGES ANIMATION
+   HERO BADGE FLOAT
 ===================================================== */
 
 (() => {
 
-    const badges = document.querySelectorAll(".hero-badge");
+    const badge = document.querySelector(".badge");
 
-    if (!badges.length) return;
+    if (!badge) return;
 
-    badges.forEach((badge, index) => {
+    badge.animate(
 
-        badge.animate(
+        [
 
-            [
+            { transform: "translateY(0px)" },
 
-                {
+            { transform: "translateY(-6px)" },
 
-                    transform: "translateY(0px)"
+            { transform: "translateY(0px)" }
 
-                },
+        ],
 
-                {
+        {
 
-                    transform: "translateY(-8px)"
+            duration: 2600,
 
-                },
+            easing: "ease-in-out",
 
-                {
+            iterations: Infinity
 
-                    transform: "translateY(0px)"
+        }
 
-                }
-
-            ],
-
-            {
-
-                duration: 2600 + (index * 300),
-
-                iterations: Infinity,
-
-                easing: "ease-in-out"
-
-            }
-
-        );
-
-    });
+    );
 
 })();
 
 
 /* =====================================================
-   SECTION TITLE ANIMATION
+   SECTION TITLE REVEAL
 ===================================================== */
 
 (() => {
@@ -1338,7 +1321,7 @@ window.KidsorraNumber = {
 
     if (!titles.length) return;
 
-    const observer = new IntersectionObserver(entries => {
+    const observer = new IntersectionObserver((entries) => {
 
         entries.forEach(entry => {
 
@@ -1384,7 +1367,7 @@ window.KidsorraNumber = {
 
     }, {
 
-        threshold: .25
+        threshold: 0.2
 
     });
 
@@ -1394,8 +1377,11 @@ window.KidsorraNumber = {
 
 
 console.log(
+
     "%cKidsorra Engine Part 7 Ready",
-    "color:#FFD166;font-weight:bold;"
+
+    "color:#FFD166;font-weight:bold;font-size:14px;"
+
 );
 /* ==========================================
    KIDSORRA
