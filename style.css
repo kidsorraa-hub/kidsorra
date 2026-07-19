@@ -1988,11 +1988,11 @@ height:40px;
 }
 
 /* =========================================
-   FAQ SECTION
+   /* =========================================
+FAQ ACCORDION FINAL
 ========================================= */
 
-
-.faq-section{
+.faq-premium{
 
     background:#fffaf3;
 
@@ -2006,7 +2006,6 @@ height:40px;
     margin:auto;
 
 }
-
 
 
 .faq-item{
@@ -2024,7 +2023,6 @@ height:40px;
 }
 
 
-
 .faq-question{
 
     width:100%;
@@ -2032,6 +2030,10 @@ height:40px;
     padding:25px 30px;
 
     background:white;
+
+    border:none;
+
+    cursor:pointer;
 
     display:flex;
 
@@ -2048,22 +2050,34 @@ height:40px;
 }
 
 
-
 .faq-question span{
 
     font-size:1.8rem;
 
     color:var(--primary);
 
-}
+    transition:.3s ease;
 
+}
 
 
 .faq-answer{
 
-    padding:0 30px 25px;
+    max-height:0;
 
-    display:none;
+    overflow:hidden;
+
+    padding:0 30px;
+
+    opacity:0;
+
+    transition:
+
+        max-height .45s ease,
+
+        opacity .35s ease,
+
+        padding .35s ease;
 
 }
 
@@ -2071,10 +2085,29 @@ height:40px;
 
 .faq-answer p{
 
-    margin-top:15px;
+    margin:15px 0 25px;
 
 }
 
+
+
+/* OPEN STATE */
+
+.faq-item.active .faq-answer{
+
+    opacity:1;
+
+    padding:0 30px 25px;
+
+}
+
+
+
+.faq-item.active .faq-question span{
+
+    transform:rotate(180deg);
+
+}
 
 
 /* =========================================
@@ -5325,35 +5358,4 @@ background:white;
 /* ==========================================================
    END OF KIDSORRA PREMIUM CSS
 ========================================================== */
-
-
-.faq-answer{
-
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .35s ease;
-
-}
-
-
-.faq-item.active .faq-answer{
-
-    padding-top:15px;
-
-}
-
-
-.faq-question{
-
-    cursor:pointer;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-}
-
-
 
