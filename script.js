@@ -1150,6 +1150,114 @@ console.log(
 
 );
 
+
+PART 11
+   ...
+console.log(
+"%cKidsorra Engine Part 11 Ready"
+);
+
+
+/* =====================================================
+   FAQ ACCORDION
+===================================================== */
+
+(() => {
+
+    const questions = document.querySelectorAll(".faq-question");
+
+    if (!questions.length) return;
+
+
+    questions.forEach(question => {
+
+
+        question.addEventListener("click", () => {
+
+
+            const item = question.closest(".faq-item");
+
+            const answer = item.querySelector(".faq-answer");
+
+            const icon = question.querySelector("span");
+
+
+            document.querySelectorAll(".faq-item")
+            .forEach(other => {
+
+                if(other !== item){
+
+                    other.classList.remove("active");
+
+                    const otherAnswer =
+                    other.querySelector(".faq-answer");
+
+                    if(otherAnswer){
+
+                        otherAnswer.style.maxHeight = null;
+
+                    }
+
+
+                    const otherIcon =
+                    other.querySelector(".faq-question span");
+
+                    if(otherIcon){
+
+                        otherIcon.textContent = "+";
+
+                    }
+
+                }
+
+            });
+
+
+
+            item.classList.toggle("active");
+
+
+            if(item.classList.contains("active")){
+
+
+                answer.style.maxHeight =
+                answer.scrollHeight + "px";
+
+
+                if(icon){
+
+                    icon.textContent = "−";
+
+                }
+
+
+            }
+
+            else{
+
+
+                answer.style.maxHeight = null;
+
+
+                if(icon){
+
+                    icon.textContent = "+";
+
+                }
+
+            }
+
+
+        });
+
+
+    });
+
+
+})();
+
+
+
 /* ==========================================
    /* ==========================================
    KIDSORRA
