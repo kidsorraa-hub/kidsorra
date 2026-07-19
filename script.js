@@ -1384,6 +1384,7 @@ console.log(
 
 );
 /* ==========================================
+ /* ==========================================
    KIDSORRA
    SCRIPT.JS
    PART 8 / 15
@@ -1392,129 +1393,38 @@ console.log(
 "use strict";
 
 /* =====================================================
-   TESTIMONIAL SLIDER
+   BUTTON CLICK EFFECT
 ===================================================== */
 
 (() => {
 
-    const slider = document.querySelector(".testimonial-slider");
-    const items = document.querySelectorAll(".testimonial");
+    const buttons = document.querySelectorAll(
 
-    if (!slider || items.length <= 1) return;
+        ".btn-primary, .btn-secondary, .demo-btn"
 
-    let current = 0;
+    );
 
-    function showSlide(index) {
+    if (!buttons.length) return;
 
-        items.forEach((item, i) => {
+    buttons.forEach(button => {
 
-            item.classList.toggle("active", i === index);
-
-        });
-
-    }
-
-    function nextSlide() {
-
-        current++;
-
-        if (current >= items.length) {
-
-            current = 0;
-
-        }
-
-        showSlide(current);
-
-    }
-
-    showSlide(current);
-
-    setInterval(nextSlide, 6000);
-
-})();
-
-
-/* =====================================================
-   TESTIMONIAL DOTS
-===================================================== */
-
-(() => {
-
-    const slider = document.querySelector(".testimonial-slider");
-    const items = document.querySelectorAll(".testimonial");
-
-    if (!slider || items.length <= 1) return;
-
-    const dots = document.createElement("div");
-    dots.className = "testimonial-dots";
-
-    items.forEach((_, index) => {
-
-        const dot = document.createElement("button");
-
-        dot.className = "testimonial-dot";
-
-        if (index === 0) {
-
-            dot.classList.add("active");
-
-        }
-
-        dot.addEventListener("click", () => {
-
-            document.querySelectorAll(".testimonial").forEach((item, i) => {
-
-                item.classList.toggle("active", i === index);
-
-            });
-
-            document.querySelectorAll(".testimonial-dot").forEach((d, i) => {
-
-                d.classList.toggle("active", i === index);
-
-            });
-
-        });
-
-        dots.appendChild(dot);
-
-    });
-
-    slider.appendChild(dots);
-
-})();
-
-
-/* =====================================================
-   BUTTON CLICK SCALE
-===================================================== */
-
-(() => {
-
-    document.querySelectorAll(
-
-        ".btn,.btn-primary,.btn-secondary"
-
-    ).forEach(button => {
-
-        button.addEventListener("mousedown", () => {
+        button.addEventListener("pointerdown", () => {
 
             button.style.transform = "scale(.96)";
 
         });
 
-        button.addEventListener("mouseup", () => {
+        const reset = () => {
 
             button.style.transform = "";
 
-        });
+        };
 
-        button.addEventListener("mouseleave", () => {
+        button.addEventListener("pointerup", reset);
 
-            button.style.transform = "";
+        button.addEventListener("pointerleave", reset);
 
-        });
+        button.addEventListener("pointercancel", reset);
 
     });
 
@@ -1522,26 +1432,52 @@ console.log(
 
 
 /* =====================================================
-   HERO SCROLL INDICATOR
+   HERO FLOATING TAGS
 ===================================================== */
 
 (() => {
 
-    const indicator = document.querySelector(".scroll-indicator");
+    const tags = document.querySelectorAll(".floating-tag");
 
-    if (!indicator) return;
+    if (!tags.length) return;
 
-    indicator.addEventListener("click", () => {
+    tags.forEach((tag, index) => {
 
-        const nextSection = document.querySelector("section");
+        tag.animate(
 
-        if (!nextSection) return;
+            [
 
-        nextSection.scrollIntoView({
+                {
 
-            behavior: "smooth"
+                    transform: "translateY(0px)"
 
-        });
+                },
+
+                {
+
+                    transform: "translateY(-8px)"
+
+                },
+
+                {
+
+                    transform: "translateY(0px)"
+
+                }
+
+            ],
+
+            {
+
+                duration: 2500 + (index * 250),
+
+                easing: "ease-in-out",
+
+                iterations: Infinity
+
+            }
+
+        );
 
     });
 
@@ -1549,35 +1485,161 @@ console.log(
 
 
 /* =====================================================
-   SECTION BACKGROUND PARALLAX
+   FEATURE ITEMS ANIMATION
 ===================================================== */
 
 (() => {
 
-    const sections = document.querySelectorAll(".parallax-section");
+    const items = document.querySelectorAll(".feature-item");
 
-    if (!sections.length) return;
+    if (!items.length) return;
+
+    items.forEach((item, index) => {
+
+        item.animate(
+
+            [
+
+                {
+
+                    opacity: .7,
+
+                    transform: "translateY(0)"
+
+                },
+
+                {
+
+                    opacity: 1,
+
+                    transform: "translateY(-4px)"
+
+                },
+
+                {
+
+                    opacity: .7,
+
+                    transform: "translateY(0)"
+
+                }
+
+            ],
+
+            {
+
+                duration: 2200 + (index * 180),
+
+                iterations: Infinity,
+
+                easing: "ease-in-out"
+
+            }
+
+        );
+
+    });
+
+})();
+
+
+/* =====================================================
+   MAGIC STAR PARALLAX
+===================================================== */
+
+(() => {
+
+    const stars = document.querySelectorAll(".star");
+
+    if (!stars.length) return;
 
     window.addEventListener("scroll", () => {
 
         const scroll = window.pageYOffset;
 
-        sections.forEach(section => {
+        stars.forEach((star, index) => {
 
-            section.style.backgroundPositionY =
-                (scroll * 0.25) + "px";
+            const speed = (index + 1) * 0.03;
+
+            star.style.transform =
+
+                `translateY(${scroll * speed}px)`;
 
         });
+
+    }, {
+
+        passive: true
 
     });
 
 })();
 
 
+/* =====================================================
+   MAGIC CIRCLE PULSE
+===================================================== */
+
+(() => {
+
+    const circle = document.querySelector(".magic-circle");
+
+    if (!circle) return;
+
+    circle.animate(
+
+        [
+
+            {
+
+                transform: "scale(1)",
+
+                opacity: .9
+
+            },
+
+            {
+
+                transform: "scale(1.08)",
+
+                opacity: 1
+
+            },
+
+            {
+
+                transform: "scale(1)",
+
+                opacity: .9
+
+            }
+
+        ],
+
+        {
+
+            duration: 3000,
+
+            iterations: Infinity,
+
+            easing: "ease-in-out"
+
+        }
+
+    );
+
+})();
+
+
 console.log(
+
     "%cKidsorra Engine Part 8 Ready",
-    "color:#35C759;font-weight:bold;"
+
+    "color:#35C759;font-weight:bold;font-size:15px;"
+
 );
+
+
 
 /* ==========================================
    KIDSORRA
@@ -1585,244 +1647,10 @@ console.log(
    PART 9 / 15
 ==========================================*/
 
-"use strict";
 
-/* =====================================================
-   CONTACT FORM VALIDATION
-===================================================== */
-
-(() => {
-
-    const form = document.querySelector(".contact-form");
-
-    if (!form) return;
-
-    const emailPattern =
-        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    form.addEventListener("submit", e => {
-
-        e.preventDefault();
-
-        let valid = true;
-
-        form.querySelectorAll("input,textarea,select")
-        .forEach(field => {
-
-            field.classList.remove("error");
-
-            if (field.hasAttribute("required")) {
-
-                if (field.value.trim() === "") {
-
-                    valid = false;
-                    field.classList.add("error");
-
-                }
-
-            }
-
-            if (field.type === "email") {
-
-                if (!emailPattern.test(field.value.trim())) {
-
-                    valid = false;
-                    field.classList.add("error");
-
-                }
-
-            }
-
-        });
-
-        if (!valid) {
-
-            if (window.Toast) {
-
-                Toast.show(
-                    "Please complete all required fields.",
-                    "#ff4d4f"
-                );
-
-            }
-
-            return;
-
-        }
-
-        const button = form.querySelector("button");
-
-        if (button) {
-
-            const original = button.innerHTML;
-
-            button.disabled = true;
-            button.innerHTML = "Sending...";
-
-            setTimeout(() => {
-
-                button.innerHTML = "✓ Message Sent";
-
-                if (window.Toast) {
-
-                    Toast.show(
-                        "Thank you! We will contact you soon.",
-                        "#35C759"
-                    );
-
-                }
-
-                form.reset();
-
-                setTimeout(() => {
-
-                    button.disabled = false;
-                    button.innerHTML = original;
-
-                }, 2500);
-
-            }, 1200);
-
-        }
-
-    });
-
-})();
-
-
-/* =====================================================
-   INPUT ANIMATION
-===================================================== */
-
-(() => {
-
-    document.querySelectorAll(
-
-        ".contact-form input,.contact-form textarea,.contact-form select"
-
-    ).forEach(field => {
-
-        field.addEventListener("focus", () => {
-
-            field.classList.add("focused");
-
-        });
-
-        field.addEventListener("blur", () => {
-
-            if (field.value.trim() === "") {
-
-                field.classList.remove("focused");
-
-            }
-
-        });
-
-    });
-
-})();
-
-
-/* =====================================================
-   COPY PHONE NUMBER
-===================================================== */
-
-(() => {
-
-    const phone = document.querySelector("[data-copy-phone]");
-
-    if (!phone) return;
-
-    phone.addEventListener("click", () => {
-
-        navigator.clipboard.writeText(phone.dataset.copyPhone);
-
-        if (window.Toast) {
-
-            Toast.show(
-
-                "Phone number copied.",
-
-                "#6C63FF"
-
-            );
-
-        }
-
-    });
-
-})();
-
-
-/* =====================================================
-   COPY EMAIL
-===================================================== */
-
-(() => {
-
-    const email = document.querySelector("[data-copy-email]");
-
-    if (!email) return;
-
-    email.addEventListener("click", () => {
-
-        navigator.clipboard.writeText(email.dataset.copyEmail);
-
-        if (window.Toast) {
-
-            Toast.show(
-
-                "Email copied.",
-
-                "#6C63FF"
-
-            );
-
-        }
-
-    });
-
-})();
-
-
-/* =====================================================
-   CONTACT CARD HOVER
-===================================================== */
-
-(() => {
-
-    document.querySelectorAll(".contact-card")
-
-    .forEach(card => {
-
-        card.addEventListener("mouseenter", () => {
-
-            card.style.transform =
-
-                "translateY(-8px)";
-
-        });
-
-        card.addEventListener("mouseleave", () => {
-
-            card.style.transform = "";
-
-        });
-
-    });
-
-})();
-
-
-console.log(
-
-    "%cKidsorra Engine Part 9 Ready",
-
-    "color:#6C63FF;font-weight:bold;"
-
-);
 
 /* ==========================================
+   /* ==========================================
    KIDSORRA
    SCRIPT.JS
    PART 10 / 15
@@ -1847,14 +1675,19 @@ console.log(
         const docHeight =
             document.documentElement.scrollHeight - window.innerHeight;
 
-        const percent = (scrollTop / docHeight) * 100;
+        const percent = Math.max(
+            0,
+            Math.min((scrollTop / docHeight) * 100, 100)
+        );
 
         progress.style.width = percent + "%";
 
     }
 
     window.addEventListener("scroll", updateProgress, {
+
         passive: true
+
     });
 
     updateProgress();
@@ -1882,11 +1715,13 @@ console.log(
 
             const top = section.offsetTop - 120;
 
-            const height = section.offsetHeight;
+            const bottom = top + section.offsetHeight;
 
             if (
+
                 window.pageYOffset >= top &&
-                window.pageYOffset < top + height
+                window.pageYOffset < bottom
+
             ) {
 
                 current = section.id;
@@ -1899,9 +1734,7 @@ console.log(
 
             link.classList.remove("active");
 
-            if (
-                link.getAttribute("href") === "#" + current
-            ) {
+            if (link.getAttribute("href") === "#" + current) {
 
                 link.classList.add("active");
 
@@ -1912,7 +1745,9 @@ console.log(
     }
 
     window.addEventListener("scroll", updateNavigation, {
+
         passive: true
+
     });
 
     updateNavigation();
@@ -1921,14 +1756,25 @@ console.log(
 
 
 /* =====================================================
-   CARD STAGGER REVEAL
+   PREMIUM STAGGER REVEAL
 ===================================================== */
 
 (() => {
 
     const groups = document.querySelectorAll(
 
-        ".program-grid,.school-grid,.trust-grid,.testimonial-grid"
+        ".skills-grid," +
+        ".future-grid," +
+        ".difference-grid," +
+        ".benefits-grid," +
+        ".growth-wrapper," +
+        ".values-grid," +
+        ".meet-grid," +
+        ".journey-grid," +
+        ".dashboard-grid," +
+        ".community-grid," +
+        ".school-grid," +
+        ".stay-grid"
 
     );
 
@@ -1968,7 +1814,7 @@ console.log(
 
                         duration: 650,
 
-                        delay: index * 120,
+                        delay: index * 100,
 
                         easing: "ease-out",
 
@@ -1986,7 +1832,7 @@ console.log(
 
     }, {
 
-        threshold: .15
+        threshold: 0.15
 
     });
 
@@ -1996,24 +1842,87 @@ console.log(
 
 
 /* =====================================================
-   HERO SCROLL INDICATOR
+   PREMIUM CTA BUTTON EFFECT
 ===================================================== */
 
 (() => {
 
-    const indicator = document.querySelector(".scroll-indicator");
+    const ctaButtons = document.querySelectorAll(
 
-    if (!indicator) return;
+        ".premium-cta .btn-primary," +
+        ".final-cta .btn-primary"
 
-    indicator.addEventListener("click", () => {
+    );
 
-        const next = document.querySelector("main section");
+    if (!ctaButtons.length) return;
 
-        if (!next) return;
+    ctaButtons.forEach(button => {
 
-        next.scrollIntoView({
+        button.addEventListener("mouseenter", () => {
 
-            behavior: "smooth"
+            button.animate(
+
+                [
+
+                    {
+
+                        transform: "translateY(0)"
+
+                    },
+
+                    {
+
+                        transform: "translateY(-6px)"
+
+                    }
+
+                ],
+
+                {
+
+                    duration: 180,
+
+                    easing: "ease-out",
+
+                    fill: "forwards"
+
+                }
+
+            );
+
+        });
+
+        button.addEventListener("mouseleave", () => {
+
+            button.animate(
+
+                [
+
+                    {
+
+                        transform: "translateY(-6px)"
+
+                    },
+
+                    {
+
+                        transform: "translateY(0)"
+
+                    }
+
+                ],
+
+                {
+
+                    duration: 180,
+
+                    easing: "ease-out",
+
+                    fill: "forwards"
+
+                }
+
+            );
 
         });
 
@@ -2023,37 +1932,7 @@ console.log(
 
 
 /* =====================================================
-   SECTION PARALLAX BACKGROUND
-===================================================== */
-
-(() => {
-
-    const parallax = document.querySelectorAll(".parallax-section");
-
-    if (!parallax.length) return;
-
-    window.addEventListener("scroll", () => {
-
-        const offset = window.pageYOffset;
-
-        parallax.forEach(section => {
-
-            section.style.backgroundPositionY =
-                `${offset * 0.18}px`;
-
-        });
-
-    }, {
-
-        passive: true
-
-    });
-
-})();
-
-
-/* =====================================================
-   SAFE INITIALIZER
+   ENGINE STATUS
 ===================================================== */
 
 window.Kidsorra = window.Kidsorra || {};
@@ -2061,11 +1940,15 @@ window.Kidsorra = window.Kidsorra || {};
 Kidsorra.version = "1.0.0";
 
 console.log(
+
     "%cKidsorra Engine Part 10 Ready",
+
     "color:#35C759;font-size:15px;font-weight:bold;"
+
 );
 
 /* ==========================================
+   /* ==========================================
    KIDSORRA
    SCRIPT.JS
    PART 11 / 15
@@ -2073,300 +1956,118 @@ console.log(
 
 "use strict";
 
-
-/* =====================================================
-   PREMIUM LIGHTBOX
-===================================================== */
-
-(() => {
-
-    const images = document.querySelectorAll(
-
-        ".gallery img,\
-.program-card img,\
-.school-card img,\
-.image-card img"
-
-    );
-
-
-    if (!images.length) return;
-
-
-    const overlay = document.createElement("div");
-
-    overlay.className = "kidsorra-lightbox";
-
-
-    Object.assign(overlay.style, {
-
-        position: "fixed",
-
-        inset: "0",
-
-        background: "rgba(0,0,0,.88)",
-
-        display: "flex",
-
-        alignItems: "center",
-
-        justifyContent: "center",
-
-        opacity: "0",
-
-        visibility: "hidden",
-
-        transition: ".35s ease",
-
-        zIndex: "999999"
-
-    });
-
-
-
-    const preview = document.createElement("img");
-
-
-    Object.assign(preview.style, {
-
-        maxWidth: "90%",
-
-        maxHeight: "85vh",
-
-        borderRadius: "24px",
-
-        objectFit: "contain",
-
-        transform: "scale(.85)",
-
-        transition: ".35s ease",
-
-        boxShadow:
-        "0 25px 80px rgba(0,0,0,.35)"
-
-    });
-
-
-
-    overlay.appendChild(preview);
-
-    document.body.appendChild(overlay);
-
-
-
-    images.forEach(img => {
-
-
-        img.style.cursor = "zoom-in";
-
-
-        img.addEventListener("click", () => {
-
-
-            preview.src = img.currentSrc || img.src;
-
-
-            overlay.style.opacity = "1";
-
-            overlay.style.visibility = "visible";
-
-
-            preview.style.transform = "scale(1)";
-
-
-            document.body.style.overflow = "hidden";
-
-
-        });
-
-
-    });
-
-
-
-    function closeLightbox(){
-
-        overlay.style.opacity = "0";
-
-        overlay.style.visibility = "hidden";
-
-        preview.style.transform = "scale(.85)";
-
-        document.body.style.overflow = "";
-
-    }
-
-
-
-    overlay.addEventListener(
-
-        "click",
-
-        closeLightbox
-
-    );
-
-
-
-    document.addEventListener(
-
-        "keydown",
-
-        e => {
-
-            if(e.key === "Escape"){
-
-                closeLightbox();
-
-            }
-
-        }
-
-    );
-
-
-})();
-
-
-
-/* =====================================================
-   IMAGE HOVER MICRO ANIMATION
-===================================================== */
-
-(() => {
-
-
-    const images = document.querySelectorAll(
-
-        ".gallery img,\
-.program-card img,\
-.school-card img"
-
-    );
-
-
-    images.forEach(img => {
-
-
-        img.addEventListener(
-
-            "mouseenter",
-
-            () => {
-
-                img.style.transform =
-                "scale(1.04)";
-
-            }
-
-        );
-
-
-
-        img.addEventListener(
-
-            "mouseleave",
-
-            () => {
-
-                img.style.transform =
-                "";
-
-            }
-
-        );
-
-
-    });
-
-
-})();
-
-
-
 /* =====================================================
    IMAGE LOADING FADE
 ===================================================== */
 
 (() => {
 
-
     const images = document.querySelectorAll("img");
 
+    if (!images.length) return;
 
     images.forEach(img => {
 
+        if (img.complete) {
 
-        img.addEventListener(
+            img.classList.add("image-loaded");
 
-            "load",
+        } else {
 
-            () => {
+            img.addEventListener("load", () => {
 
-                img.classList.add(
+                img.classList.add("image-loaded");
 
-                    "image-loaded"
+            });
 
-                );
-
-            }
-
-        );
-
+        }
 
     });
-
 
 })();
 
 
-
 /* =====================================================
-   GALLERY COUNTER
+   IMAGE ERROR FALLBACK
 ===================================================== */
 
 (() => {
 
+    const images = document.querySelectorAll("img");
 
-    const galleries = document.querySelectorAll(
+    if (!images.length) return;
 
-        "[data-gallery-count]"
+    images.forEach(img => {
 
-    );
+        img.addEventListener("error", () => {
 
+            img.classList.add("image-error");
 
-    galleries.forEach(item => {
+            img.alt = "Image unavailable";
 
-
-        const count =
-
-            item.querySelector(".gallery-count");
-
-
-        const images =
-
-            item.querySelectorAll("img").length;
-
-
-
-        if(count){
-
-            count.textContent = images;
-
-        }
-
+        });
 
     });
 
+})();
+
+
+/* =====================================================
+   IMAGE MICRO HOVER EFFECT
+===================================================== */
+
+(() => {
+
+    const images = document.querySelectorAll("img");
+
+    if (!images.length) return;
+
+    images.forEach(img => {
+
+        img.style.transition =
+            "transform .35s ease, filter .35s ease";
+
+        img.addEventListener("mouseenter", () => {
+
+            img.style.transform = "scale(1.03)";
+
+        });
+
+        img.addEventListener("mouseleave", () => {
+
+            img.style.transform = "";
+
+        });
+
+    });
 
 })();
 
+
+/* =====================================================
+   IMAGE PERFORMANCE
+===================================================== */
+
+(() => {
+
+    const images = document.querySelectorAll("img");
+
+    if (!images.length) return;
+
+    images.forEach(img => {
+
+        img.loading = "lazy";
+
+        img.decoding = "async";
+
+    });
+
+})();
 
 
 /* =====================================================
    ENGINE STATUS
 ===================================================== */
-
 
 console.log(
 
