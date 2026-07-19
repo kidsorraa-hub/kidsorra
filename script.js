@@ -2078,420 +2078,292 @@ console.log(
 );
 
 /* ==========================================
+   /* ==========================================
    KIDSORRA
    SCRIPT.JS
    PART 12 / 15
+   HTML OPTIMIZED
 ==========================================*/
 
 "use strict";
 
-
 /* =====================================================
-   CONFETTI ENGINE
-===================================================== */
-
-const KidsorraConfetti = (() => {
-
-
-    const colors = [
-
-        "#ff7a18",
-
-        "#FFD166",
-
-        "#6C63FF",
-
-        "#35C759",
-
-        "#FF4D6D"
-
-    ];
-
-
-
-    function createPiece(){
-
-
-        const piece = document.createElement("span");
-
-
-        const size =
-
-            Math.random() * 10 + 6;
-
-
-
-        Object.assign(piece.style, {
-
-            position:"fixed",
-
-            top:"-20px",
-
-            left:
-            Math.random() * 100 + "vw",
-
-            width:size + "px",
-
-            height:size * 1.4 + "px",
-
-            background:
-
-            colors[
-                Math.floor(
-                    Math.random()*colors.length
-                )
-            ],
-
-            borderRadius:"4px",
-
-            pointerEvents:"none",
-
-            zIndex:"999999"
-
-        });
-
-
-
-        document.body.appendChild(piece);
-
-
-
-        const duration =
-
-            Math.random()*2000 + 2500;
-
-
-
-        piece.animate(
-
-            [
-
-                {
-
-                    transform:
-                    "translateY(0) rotate(0)",
-
-                    opacity:1
-
-                },
-
-                {
-
-                    transform:
-                    `translateY(110vh)
-                    rotate(${720}deg)`,
-
-                    opacity:0
-
-                }
-
-            ],
-
-            {
-
-                duration,
-
-                easing:"linear"
-
-            }
-
-        );
-
-
-
-        setTimeout(()=>{
-
-            piece.remove();
-
-        }, duration);
-
-
-
-    }
-
-
-
-    function burst(amount = 80){
-
-
-        for(let i=0;i<amount;i++){
-
-
-            setTimeout(()=>{
-
-                createPiece();
-
-            }, i * 15);
-
-
-        }
-
-
-    }
-
-
-
-    return {
-
-        burst
-
-    };
-
-
-})();
-
-
-
-
-/* =====================================================
-   GLOBAL CELEBRATION FUNCTION
-===================================================== */
-
-window.kidsorraCelebrate = function(){
-
-    KidsorraConfetti.burst(120);
-
-};
-
-
-
-
-/* =====================================================
-   SUCCESS BUTTON ACTION
+   PREMIUM CTA BUTTONS
 ===================================================== */
 
 (() => {
 
-
     const buttons = document.querySelectorAll(
 
-        ".celebrate-button,\
-.success-button,\
-.demo-success"
+        ".btn-primary, .demo-btn"
 
     );
 
+    if (!buttons.length) return;
 
+    buttons.forEach(button => {
 
-    buttons.forEach(button=>{
+        button.addEventListener("click", () => {
 
+            button.animate(
 
-        button.addEventListener(
-
-            "click",
-
-            ()=>{
-
-
-                KidsorraConfetti.burst(90);
-
-
-                button.animate(
-
-                    [
-
-                        {
-
-                            transform:"scale(1)"
-
-                        },
-
-                        {
-
-                            transform:"scale(1.08)"
-
-                        },
-
-                        {
-
-                            transform:"scale(1)"
-
-                        }
-
-                    ],
+                [
 
                     {
+                        transform: "scale(1)"
+                    },
 
-                        duration:450,
+                    {
+                        transform: "scale(1.05)"
+                    },
 
-                        easing:"ease"
-
+                    {
+                        transform: "scale(1)"
                     }
 
-                );
+                ],
 
+                {
 
-            }
+                    duration: 300,
 
-        );
+                    easing: "ease-out"
 
+                }
+
+            );
+
+        });
 
     });
-
 
 })();
 
 
-
-
 /* =====================================================
-   FLOATING EMOJI EFFECT
+   HERO BADGE PULSE
 ===================================================== */
 
-window.showKidsorraEmoji = function(){
+(() => {
 
+    const badge = document.querySelector(".hero .badge");
 
-    const emojis = [
+    if (!badge) return;
 
-        "🌈",
-
-        "⭐",
-
-        "✨",
-
-        "🎈",
-
-        "🚀",
-
-        "🦄"
-
-    ];
-
-
-
-    const emoji = document.createElement("div");
-
-
-
-    emoji.textContent =
-
-        emojis[
-            Math.floor(
-                Math.random()*emojis.length
-            )
-        ];
-
-
-
-    Object.assign(emoji.style, {
-
-        position:"fixed",
-
-        left:
-        Math.random()*90+"vw",
-
-        bottom:"20px",
-
-        fontSize:"32px",
-
-        zIndex:"99999",
-
-        pointerEvents:"none"
-
-    });
-
-
-
-    document.body.appendChild(emoji);
-
-
-
-    emoji.animate(
+    badge.animate(
 
         [
 
             {
-
-                transform:"translateY(0)",
-
-                opacity:1
-
+                transform: "scale(1)"
             },
 
             {
+                transform: "scale(1.04)"
+            },
 
-                transform:
-                "translateY(-280px)",
-
-                opacity:0
-
+            {
+                transform: "scale(1)"
             }
 
         ],
 
         {
 
-            duration:2500,
+            duration: 2600,
 
-            easing:"ease-out"
+            iterations: Infinity,
+
+            easing: "ease-in-out"
 
         }
 
     );
 
-
-
-    setTimeout(()=>{
-
-        emoji.remove();
-
-    },2500);
-
-
-};
-
-
+})();
 
 
 /* =====================================================
-   MAGIC MESSAGE
+   SECTION TITLE DECORATION
 ===================================================== */
 
-window.showKidsorraMessage = function(){
+(() => {
 
+    const titles = document.querySelectorAll(".section-title span");
 
-    const messages = [
+    if (!titles.length) return;
 
-        "Dream Big ✨",
+    titles.forEach((title, index) => {
 
-        "Keep Learning 🌈",
+        title.animate(
 
-        "You Can Do It 🚀",
+            [
 
-        "Future Starts Here ⭐",
+                {
+                    opacity: .7
+                },
 
-        "Learning Is Fun 🎨"
+                {
+                    opacity: 1
+                },
 
-    ];
+                {
+                    opacity: .7
+                }
 
+            ],
 
+            {
 
-    const message =
+                duration: 2400 + (index * 120),
 
-        messages[
-            Math.floor(
-                Math.random()*messages.length
-            )
-        ];
+                iterations: Infinity,
 
+                easing: "ease-in-out"
 
-
-    if(window.Toast){
-
-        Toast.show(
-
-            message,
-
-            "#6C63FF"
+            }
 
         );
 
-    }
+    });
+
+})();
 
 
-};
+/* =====================================================
+   HERO FEATURES STAGGER
+===================================================== */
+
+(() => {
+
+    const items = document.querySelectorAll(".feature-item");
+
+    if (!items.length) return;
+
+    items.forEach((item, index) => {
+
+        item.style.animationDelay = `${index * .15}s`;
+
+        item.classList.add("feature-ready");
+
+    });
+
+})();
 
 
+/* =====================================================
+   SMOOTH INTERNAL LINKS
+===================================================== */
+
+(() => {
+
+    const links = document.querySelectorAll(
+
+        'a[href^="#"]'
+
+    );
+
+    if (!links.length) return;
+
+    links.forEach(link => {
+
+        link.addEventListener("click", e => {
+
+            const target = document.querySelector(
+
+                link.getAttribute("href")
+
+            );
+
+            if (!target) return;
+
+            e.preventDefault();
+
+            target.scrollIntoView({
+
+                behavior: "smooth",
+
+                block: "start"
+
+            });
+
+        });
+
+    });
+
+})();
+
+
+/* =====================================================
+   HERO VISUAL TILT
+===================================================== */
+
+(() => {
+
+    const visual = document.querySelector(".hero-visual");
+
+    if (!visual) return;
+
+    visual.addEventListener("mousemove", e => {
+
+        const rect = visual.getBoundingClientRect();
+
+        const x = (e.clientX - rect.left) / rect.width - .5;
+
+        const y = (e.clientY - rect.top) / rect.height - .5;
+
+        visual.style.transform =
+
+            `rotateY(${x * 8}deg) rotateX(${-y * 8}deg)`;
+
+    });
+
+    visual.addEventListener("mouseleave", () => {
+
+        visual.style.transform = "";
+
+    });
+
+})();
+
+
+/* =====================================================
+   PREMIUM SCROLL HINT
+===================================================== */
+
+(() => {
+
+    const hero = document.querySelector(".hero");
+
+    if (!hero) return;
+
+    window.addEventListener(
+
+        "scroll",
+
+        () => {
+
+            if (window.scrollY > 120) {
+
+                hero.classList.add("hero-scrolled");
+
+            } else {
+
+                hero.classList.remove("hero-scrolled");
+
+            }
+
+        },
+
+        {
+
+            passive: true
+
+        }
+
+    );
+
+})();
 
 
 /* =====================================================
@@ -2507,372 +2379,199 @@ console.log(
 );
 
 /* ==========================================
+   /* ==========================================
    KIDSORRA
    SCRIPT.JS
    PART 13 / 15
+   HTML OPTIMIZED
 ==========================================*/
 
 "use strict";
 
-
 /* =====================================================
-   PREMIUM CURSOR EFFECT
+   PREMIUM CURSOR
 ===================================================== */
 
 (() => {
 
-
-    if (window.innerWidth < 768) return;
-
+    if (window.innerWidth < 992) return;
 
     const cursor = document.createElement("div");
 
-
     cursor.className = "kidsorra-cursor";
-
 
     Object.assign(cursor.style, {
 
-        position:"fixed",
+        position: "fixed",
 
-        width:"18px",
+        width: "16px",
 
-        height:"18px",
+        height: "16px",
 
-        borderRadius:"50%",
+        borderRadius: "50%",
 
-        background:"#ff7a18",
+        background: "#FF7A18",
 
-        pointerEvents:"none",
+        pointerEvents: "none",
 
-        zIndex:"999999",
+        zIndex: "999999",
 
-        transform:"translate(-50%,-50%)",
+        left: "0",
+
+        top: "0",
+
+        transform: "translate(-50%,-50%)",
 
         transition:
-        "width .25s ease,height .25s ease,opacity .25s ease",
+            "width .25s ease,height .25s ease,opacity .25s ease",
 
-        opacity:"0.8"
+        opacity: ".75"
 
     });
-
-
 
     document.body.appendChild(cursor);
 
+    window.addEventListener("mousemove", e => {
 
+        cursor.style.left = e.clientX + "px";
 
-    window.addEventListener(
+        cursor.style.top = e.clientY + "px";
 
-        "mousemove",
-
-        e=>{
-
-            cursor.style.left =
-                e.clientX+"px";
-
-            cursor.style.top =
-                e.clientY+"px";
-
-        }
-
-    );
-
-
+    });
 
     document.querySelectorAll(
 
-        "a,button,.card,.program-card,.school-card"
+        "a,button,.skill-card,.future-card,.difference-item,.benefit-card,.growth-box,.value-card,.meet-card"
 
-    )
+    ).forEach(el => {
 
-    .forEach(element=>{
+        el.addEventListener("mouseenter", () => {
 
+            cursor.style.width = "42px";
 
-        element.addEventListener(
+            cursor.style.height = "42px";
 
-            "mouseenter",
-
-            ()=>{
-
-                cursor.style.width="45px";
-
-                cursor.style.height="45px";
-
-                cursor.style.opacity=".35";
-
-            }
-
-        );
-
-
-
-        element.addEventListener(
-
-            "mouseleave",
-
-            ()=>{
-
-                cursor.style.width="18px";
-
-                cursor.style.height="18px";
-
-                cursor.style.opacity=".8";
-
-            }
-
-        );
-
-
-    });
-
-
-})();
-
-
-
-
-/* =====================================================
-   CARD SHINE EFFECT
-===================================================== */
-
-(() => {
-
-
-    const cards = document.querySelectorAll(
-
-        ".program-card,\
-.school-card,\
-.trust-card,\
-.lifeskill-card"
-
-    );
-
-
-
-    if(!cards.length) return;
-
-
-
-    cards.forEach(card=>{
-
-
-        card.addEventListener(
-
-            "mousemove",
-
-            e=>{
-
-
-                const rect =
-                    card.getBoundingClientRect();
-
-
-
-                const x =
-                    e.clientX - rect.left;
-
-
-
-                const y =
-                    e.clientY - rect.top;
-
-
-
-                card.style.background =
-
-                `radial-gradient(
-                    circle at ${x}px ${y}px,
-                    rgba(255,255,255,.9),
-                    #ffffff 45%
-                )`;
-
-
-
-            }
-
-        );
-
-
-
-        card.addEventListener(
-
-            "mouseleave",
-
-            ()=>{
-
-
-                card.style.background="";
-
-
-            }
-
-        );
-
-
-    });
-
-
-})();
-
-
-
-
-/* =====================================================
-   CARD HOVER LIFT
-===================================================== */
-
-(() => {
-
-
-    const elements = document.querySelectorAll(
-
-        ".card,\
-.program-card,\
-.school-card,\
-.testimonial"
-
-    );
-
-
-
-    elements.forEach(item=>{
-
-
-        item.addEventListener(
-
-            "mouseenter",
-
-            ()=>{
-
-                item.style.transform =
-                "translateY(-10px)";
-
-            }
-
-        );
-
-
-
-        item.addEventListener(
-
-            "mouseleave",
-
-            ()=>{
-
-                item.style.transform="";
-
-            }
-
-        );
-
-
-    });
-
-
-})();
-
-
-
-
-/* =====================================================
-   LINK UNDERLINE ANIMATION
-===================================================== */
-
-(() => {
-
-
-    document.querySelectorAll(
-
-        ".nav-links a"
-
-    )
-
-    .forEach(link=>{
-
-
-        link.addEventListener(
-
-            "mouseenter",
-
-            ()=>{
-
-                link.style.transition=".3s";
-
-                link.style.transform =
-                "translateY(-2px)";
-
-            }
-
-        );
-
-
-
-        link.addEventListener(
-
-            "mouseleave",
-
-            ()=>{
-
-                link.style.transform="";
-
-            }
-
-        );
-
-
-    });
-
-
-})();
-
-
-
-
-/* =====================================================
-   RANDOM MAGIC SPARK
-===================================================== */
-
-(() => {
-
-
-    function createSpark(){
-
-
-        const spark =
-            document.createElement("span");
-
-
-
-        Object.assign(spark.style,{
-
-            position:"fixed",
-
-            width:"6px",
-
-            height:"6px",
-
-            borderRadius:"50%",
-
-            background:"#FFD166",
-
-            left:
-            Math.random()*100+"vw",
-
-            top:
-            Math.random()*100+"vh",
-
-            pointerEvents:"none",
-
-            zIndex:"99999"
+            cursor.style.opacity = ".30";
 
         });
 
+        el.addEventListener("mouseleave", () => {
 
+            cursor.style.width = "16px";
+
+            cursor.style.height = "16px";
+
+            cursor.style.opacity = ".75";
+
+        });
+
+    });
+
+})();
+
+
+/* =====================================================
+   CARD MICRO LIFT
+===================================================== */
+
+(() => {
+
+    const cards = document.querySelectorAll(
+
+        ".skill-card,.future-card,.difference-item,.benefit-card,.growth-box,.value-card,.meet-card"
+
+    );
+
+    if (!cards.length) return;
+
+    cards.forEach(card => {
+
+        card.style.transition =
+            "transform .28s ease, box-shadow .28s ease";
+
+        card.addEventListener("mouseenter", () => {
+
+            card.style.transform = "translateY(-8px)";
+
+        });
+
+        card.addEventListener("mouseleave", () => {
+
+            card.style.transform = "";
+
+        });
+
+    });
+
+})();
+
+
+/* =====================================================
+   NAV LINK HOVER
+===================================================== */
+
+(() => {
+
+    const links = document.querySelectorAll(".nav-links a");
+
+    if (!links.length) return;
+
+    links.forEach(link => {
+
+        link.addEventListener("mouseenter", () => {
+
+            link.style.transform = "translateY(-2px)";
+
+            link.style.transition = ".25s ease";
+
+        });
+
+        link.addEventListener("mouseleave", () => {
+
+            link.style.transform = "";
+
+        });
+
+    });
+
+})();
+
+
+/* =====================================================
+   FLOATING MAGIC SPARK
+===================================================== */
+
+(() => {
+
+    function createSpark() {
+
+        const spark = document.createElement("span");
+
+        Object.assign(spark.style, {
+
+            position: "fixed",
+
+            width: "6px",
+
+            height: "6px",
+
+            borderRadius: "50%",
+
+            background: "#FFD166",
+
+            left: Math.random() * 100 + "vw",
+
+            top: Math.random() * 100 + "vh",
+
+            opacity: ".9",
+
+            pointerEvents: "none",
+
+            zIndex: "99999"
+
+        });
 
         document.body.appendChild(spark);
-
-
 
         spark.animate(
 
@@ -2880,17 +2579,17 @@ console.log(
 
                 {
 
-                    transform:"scale(1)",
+                    transform: "scale(1)",
 
-                    opacity:1
+                    opacity: 1
 
                 },
 
                 {
 
-                    transform:"scale(0)",
+                    transform: "scale(0)",
 
-                    opacity:0
+                    opacity: 0
 
                 }
 
@@ -2898,45 +2597,57 @@ console.log(
 
             {
 
-                duration:1200,
+                duration: 1400,
 
-                easing:"ease-out"
+                easing: "ease-out"
 
             }
 
         );
 
-
-
-        setTimeout(()=>{
-
-            spark.remove();
-
-        },1200);
-
+        setTimeout(() => spark.remove(), 1400);
 
     }
 
-
-
-    setInterval(
-
-        createSpark,
-
-        4000
-
-    );
-
+    setInterval(createSpark, 5000);
 
 })();
 
 
+/* =====================================================
+   HERO FEATURE HOVER
+===================================================== */
+
+(() => {
+
+    const features = document.querySelectorAll(".feature-item");
+
+    if (!features.length) return;
+
+    features.forEach(item => {
+
+        item.style.transition = "transform .25s ease";
+
+        item.addEventListener("mouseenter", () => {
+
+            item.style.transform = "translateY(-4px)";
+
+        });
+
+        item.addEventListener("mouseleave", () => {
+
+            item.style.transform = "";
+
+        });
+
+    });
+
+})();
 
 
 /* =====================================================
    ENGINE STATUS
 ===================================================== */
-
 
 console.log(
 
@@ -2946,27 +2657,26 @@ console.log(
 
 );
 
+
 /* ==========================================
+   /* ==========================================
    KIDSORRA
    SCRIPT.JS
    PART 14 / 15
+   HTML OPTIMIZED
 ==========================================*/
 
 "use strict";
 
-
 /* =====================================================
-   CENTRAL ANIMATION CONTROLLER
+   GLOBAL REVEAL ENGINE
 ===================================================== */
 
-const KidsorraAnimation = {
+window.KidsorraAnimation = {
 
+    reveal(element, options = {}) {
 
-    reveal(element, options = {}){
-
-
-        if(!element) return;
-
+        if (!element) return;
 
         const {
 
@@ -2978,27 +2688,23 @@ const KidsorraAnimation = {
 
         } = options;
 
-
-
         element.animate(
 
             [
 
                 {
 
-                    opacity:0,
+                    opacity: 0,
 
-                    transform:
-                    `translateY(${distance}px)`
+                    transform: `translateY(${distance}px)`
 
                 },
 
                 {
 
-                    opacity:1,
+                    opacity: 1,
 
-                    transform:
-                    "translateY(0)"
+                    transform: "translateY(0)"
 
                 }
 
@@ -3010,108 +2716,54 @@ const KidsorraAnimation = {
 
                 delay,
 
-                easing:"ease-out",
+                easing: "ease-out",
 
-                fill:"forwards"
-
-            }
-
-        );
-
-
-    },
-
-
-
-    pulse(element){
-
-
-        if(!element) return;
-
-
-        element.animate(
-
-            [
-
-                {
-
-                    transform:"scale(1)"
-
-                },
-
-                {
-
-                    transform:"scale(1.05)"
-
-                },
-
-                {
-
-                    transform:"scale(1)"
-
-                }
-
-            ],
-
-            {
-
-                duration:500,
-
-                easing:"ease"
+                fill: "forwards"
 
             }
 
         );
-
 
     }
-
 
 };
 
 
-
-window.KidsorraAnimation = KidsorraAnimation;
-
-
-
-
 /* =====================================================
-   SMART REVEAL OBSERVER
+   SMART SECTION REVEAL
 ===================================================== */
 
 (() => {
 
+    const elements = document.querySelectorAll(
 
-    const items = document.querySelectorAll(
-
-        ".fade-element,\
-.program-card,\
-.school-card,\
-.trust-card,\
-.testimonial,\
-.journey-step,\
-.lifeskill-card"
+        ".skill-card,\
+.future-card,\
+.difference-item,\
+.benefit-card,\
+.growth-box,\
+.value-card,\
+.meet-card,\
+.stay-card,\
+.timeline-item,\
+.community-grid > div,\
+.school-grid > div,\
+.dashboard-grid > div,\
+.philosophy-grid > div,\
+.stat,\
+.faq-item"
 
     );
 
-
-
-    if(!items.length) return;
-
-
+    if (!elements.length) return;
 
     const observer = new IntersectionObserver(
 
-        entries=>{
+        entries => {
 
+            entries.forEach(entry => {
 
-            entries.forEach(entry=>{
-
-
-                if(!entry.isIntersecting) return;
-
-
+                if (!entry.isIntersecting) return;
 
                 KidsorraAnimation.reveal(
 
@@ -3119,66 +2771,145 @@ window.KidsorraAnimation = KidsorraAnimation;
 
                     {
 
-                        duration:750
+                        duration: 700
 
                     }
 
                 );
 
-
-
-                observer.unobserve(
-
-                    entry.target
-
-                );
-
+                observer.unobserve(entry.target);
 
             });
-
 
         },
 
         {
 
-            threshold:.15
+            threshold: 0.15
 
         }
 
     );
 
-
-
-    items.forEach(item=>{
-
+    elements.forEach(item => {
 
         observer.observe(item);
 
-
     });
-
-
 
 })();
 
 
-
-
 /* =====================================================
-   HERO AUTO MOTION
+   STAGGER GRID ANIMATION
 ===================================================== */
 
 (() => {
 
+    const grids = document.querySelectorAll(
 
-    const heroVisual =
-        document.querySelector(".hero-visual");
+        ".skills-grid,\
+.future-grid,\
+.difference-grid,\
+.benefits-grid,\
+.growth-wrapper,\
+.values-grid,\
+.meet-grid,\
+.stay-grid,\
+.timeline,\
+.community-grid,\
+.school-grid,\
+.dashboard-grid,\
+.philosophy-grid"
+
+    );
+
+    if (!grids.length) return;
+
+    const observer = new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (!entry.isIntersecting) return;
+
+                [...entry.target.children].forEach(
+
+                    (item, index) => {
+
+                        item.animate(
+
+                            [
+
+                                {
+
+                                    opacity: 0,
+
+                                    transform:
+
+                                    "translateY(30px)"
+
+                                },
+
+                                {
+
+                                    opacity: 1,
+
+                                    transform:
+
+                                    "translateY(0)"
+
+                                }
+
+                            ],
+
+                            {
+
+                                duration: 650,
+
+                                delay: index * 90,
+
+                                easing: "ease-out",
+
+                                fill: "forwards"
+
+                            }
+
+                        );
+
+                    }
+
+                );
+
+                observer.unobserve(entry.target);
+
+            });
+
+        },
+
+        {
+
+            threshold: .15
+
+        }
+
+    );
+
+    grids.forEach(grid => observer.observe(grid));
+
+})();
 
 
+/* =====================================================
+   HERO FLOAT ANIMATION
+===================================================== */
 
-    if(!heroVisual) return;
+(() => {
 
+    const heroVisual = document.querySelector(".hero-visual");
 
+    if (!heroVisual) return;
 
     heroVisual.animate(
 
@@ -3186,22 +2917,19 @@ window.KidsorraAnimation = KidsorraAnimation;
 
             {
 
-                transform:
-                "translateY(0)"
+                transform: "translateY(0)"
 
             },
 
             {
 
-                transform:
-                "translateY(-12px)"
+                transform: "translateY(-10px)"
 
             },
 
             {
 
-                transform:
-                "translateY(0)"
+                transform: "translateY(0)"
 
             }
 
@@ -3209,20 +2937,52 @@ window.KidsorraAnimation = KidsorraAnimation;
 
         {
 
-            duration:4500,
+            duration: 4200,
 
-            iterations:Infinity,
+            iterations: Infinity,
 
-            easing:"ease-in-out"
+            easing: "ease-in-out"
 
         }
 
     );
 
-
 })();
 
 
+/* =====================================================
+   FAQ AUTO ANIMATION
+===================================================== */
+
+(() => {
+
+    const faq = document.querySelectorAll(".faq-item");
+
+    if (!faq.length) return;
+
+    faq.forEach(item => {
+
+        item.style.transition =
+
+            "transform .25s ease";
+
+        item.addEventListener("mouseenter", () => {
+
+            item.style.transform =
+
+                "translateY(-4px)";
+
+        });
+
+        item.addEventListener("mouseleave", () => {
+
+            item.style.transform = "";
+
+        });
+
+    });
+
+})();
 
 
 /* =====================================================
@@ -3231,13 +2991,9 @@ window.KidsorraAnimation = KidsorraAnimation;
 
 (() => {
 
-
     let timer;
 
-
-
-    function optimize(){
-
+    function optimize() {
 
         document.body.classList.add(
 
@@ -3245,14 +3001,9 @@ window.KidsorraAnimation = KidsorraAnimation;
 
         );
 
-
-
         clearTimeout(timer);
 
-
-
-        timer=setTimeout(()=>{
-
+        timer = setTimeout(() => {
 
             document.body.classList.remove(
 
@@ -3260,13 +3011,9 @@ window.KidsorraAnimation = KidsorraAnimation;
 
             );
 
-
-        },500);
-
+        }, 400);
 
     }
-
-
 
     window.addEventListener(
 
@@ -3276,17 +3023,13 @@ window.KidsorraAnimation = KidsorraAnimation;
 
         {
 
-            passive:true
+            passive: true
 
         }
 
     );
 
-
-
 })();
-
-
 
 
 /* =====================================================
@@ -3295,66 +3038,46 @@ window.KidsorraAnimation = KidsorraAnimation;
 
 (() => {
 
+    const media = window.matchMedia(
 
-    const reduceMotion =
-
-        window.matchMedia(
-
-            "(prefers-reduced-motion: reduce)"
-
-        );
-
-
-
-    function apply(){
-
-
-        if(reduceMotion.matches){
-
-
-            document.body.classList.add(
-
-                "reduce-motion"
-
-            );
-
-
-        }
-
-
-    }
-
-
-
-    apply();
-
-
-
-    reduceMotion.addEventListener(
-
-        "change",
-
-        apply
+        "(prefers-reduced-motion: reduce)"
 
     );
 
+    function update() {
 
+        document.body.classList.toggle(
+
+            "reduce-motion",
+
+            media.matches
+
+        );
+
+    }
+
+    update();
+
+    media.addEventListener(
+
+        "change",
+
+        update
+
+    );
 
 })();
 
 
-
-
 /* =====================================================
-   WINDOW LOAD FINAL CHECK
+   PAGE READY
 ===================================================== */
 
 window.addEventListener(
 
     "load",
 
-    ()=>{
-
+    () => {
 
         document.body.classList.add(
 
@@ -3362,24 +3085,30 @@ window.addEventListener(
 
         );
 
-
-
         console.log(
 
-            "%cKidsorra UI Fully Initialized",
+            "%cKidsorra UI Ready",
 
             "color:#35C759;font-size:16px;font-weight:bold;"
 
         );
-
 
     }
 
 );
 
 
+/* =====================================================
+   ENGINE STATUS
+===================================================== */
 
+console.log(
 
+    "%cKidsorra Engine Part 14 Ready",
+
+    "color:#35C759;font-size:15px;font-weight:bold;"
+
+);
 /* =====================================================
    END PART 14
 =====================================================*/
