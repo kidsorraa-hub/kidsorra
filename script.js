@@ -607,203 +607,127 @@ const HeroEngine = {
 HeroEngine.init();
 /*==================================================
  KIDSORRA
- PART 4 / 15
- Scroll Reveal + Card Engine
-==================================================*/
+ /* ==========================================
+PART 4 — SECTION ANIMATIONS (Kidsorra HTML)
+========================================== */
 
-const CardEngine = {
+(() => {
 
-    init() {
+const selectors = [
 
-        this.scrollReveal();
+".skill-card",
+".future-card",
+".difference-item",
+".benefit-card",
+".growth-box",
+".value-card",
+".meet-card",
+".future-icon",
+".growth-wrapper > *",
+".philosophy-grid > *",
+".skills-timeline .timeline-item",
+".stay-card",
+".community-grid > *",
+".school-grid > *",
+".dashboard-grid > *",
+".journey-grid > *"
 
-        this.cardTilt();
+];
 
-        this.cardHover();
+const elements = document.querySelectorAll(selectors.join(","));
 
-    },
+if (!elements.length) return;
 
-    /*==========================================
-      SCROLL REVEAL
-    ==========================================*/
+const observer = new IntersectionObserver((entries) => {
 
-    scrollReveal() {
+entries.forEach((entry) => {
 
-        const elements = document.querySelectorAll(
+if (!entry.isIntersecting) return;
 
-            ".card,\
-.program-card,\
-.school-card,\
-.trust-card,\
-.testimonial,\
-.method-card,\
-.lifeskill-card,\
-.experience-card,\
-.journey-step,\
-.contact-card"
+const el = entry.target;
 
-        );
+el.classList.add("show");
 
-        if (!elements.length) return;
+observer.unobserve(el);
 
-        const observer = new IntersectionObserver(
+});
 
-            (entries) => {
+}, {
 
-                entries.forEach(entry => {
+threshold: 0.15,
 
-                    if (!entry.isIntersecting) return;
+rootMargin: "0px 0px -60px 0px"
 
-                    entry.target.animate(
+});
 
-                        [
+elements.forEach((el, index) => {
 
-                            {
+el.style.opacity = "0";
 
-                                opacity: 0,
+el.style.transform = "translateY(40px)";
 
-                                transform:
-                                "translateY(45px)"
+el.style.transition =
+`opacity .7s ease ${index * 0.05}s,
+ transform .7s ease ${index * 0.05}s`;
 
-                            },
+observer.observe(el);
 
-                            {
+});
 
-                                opacity: 1,
+document.addEventListener("DOMContentLoaded", () => {
 
-                                transform:
-                                "translateY(0)"
+document.querySelectorAll(".show").forEach((el)=>{
 
-                            }
+el.style.opacity="1";
 
-                        ],
+el.style.transform="translateY(0)";
 
-                        {
+});
 
-                            duration: 700,
+});
 
-                            easing: "ease-out",
+const style = document.createElement("style");
 
-                            fill: "forwards"
+style.textContent = `
 
-                        }
+.show{
+opacity:1!important;
+transform:translateY(0)!important;
+}
 
-                    );
+.skill-card:hover,
+.future-card:hover,
+.difference-item:hover,
+.benefit-card:hover,
+.value-card:hover,
+.meet-card:hover,
+.stay-card:hover{
 
-                    observer.unobserve(entry.target);
+transform:translateY(-10px) scale(1.03)!important;
 
-                });
+transition:.35s ease;
 
-            },
+}
 
-            {
+.growth-box:hover,
+.timeline-item:hover,
+.school-grid > div:hover,
+.dashboard-grid > div:hover,
+.community-grid > div:hover,
+.philosophy-grid > div:hover,
+.journey-grid > div:hover{
 
-                threshold: .15
+transform:translateY(-6px) scale(1.02)!important;
 
-            }
+transition:.3s ease;
 
-        );
+}
 
-        elements.forEach(el => observer.observe(el));
+`;
 
-    },
+document.head.appendChild(style);
 
-    /*==========================================
-      PREMIUM CARD TILT
-    ==========================================*/
-
-    cardTilt() {
-
-        const cards = document.querySelectorAll(
-
-            ".program-card,\
-.school-card,\
-.trust-card,\
-.method-card"
-
-        );
-
-        cards.forEach(card => {
-
-            card.addEventListener("mousemove", e => {
-
-                const rect =
-
-                    card.getBoundingClientRect();
-
-                const x =
-
-                    e.clientX - rect.left;
-
-                const y =
-
-                    e.clientY - rect.top;
-
-                const rotateY =
-
-                    ((x / rect.width) - .5) * 10;
-
-                const rotateX =
-
-                    ((y / rect.height) - .5) * -10;
-
-                card.style.transform =
-
-                    `perspective(900px)
-                     rotateX(${rotateX}deg)
-                     rotateY(${rotateY}deg)
-                     translateY(-8px)`;
-
-            });
-
-            card.addEventListener("mouseleave", () => {
-
-                card.style.transform = "";
-
-            });
-
-        });
-
-    },
-
-    /*==========================================
-      HOVER SHADOW
-    ==========================================*/
-
-    cardHover() {
-
-        const cards = document.querySelectorAll(
-
-            ".card,\
-.program-card,\
-.school-card,\
-.trust-card"
-
-        );
-
-        cards.forEach(card => {
-
-            card.addEventListener("mouseenter", () => {
-
-                card.style.boxShadow =
-
-                    "0 24px 55px rgba(0,0,0,.15)";
-
-            });
-
-            card.addEventListener("mouseleave", () => {
-
-                card.style.boxShadow = "";
-
-            });
-
-        });
-
-    }
-
-};
-
-CardEngine.init();
+})();
 
 /* ==========================================
    KIDSORRA
@@ -814,71 +738,68 @@ CardEngine.init();
 "use strict";
 
 /* =====================================================
-   FAQ ACCORDION
-===================================================== */
+   /* ==========================================
+PART 5 — FAQ (Kidsorra HTML)
+========================================== */
 
 (() => {
 
-    const faqItems = document.querySelectorAll(".faq-item");
+const faqItems = document.querySelectorAll(".faq-item");
 
-    if (!faqItems.length) return;
+if (!faqItems.length) return;
 
-    faqItems.forEach(item => {
+faqItems.forEach((item) => {
 
-        const question = item.querySelector(".faq-question");
-        const answer   = item.querySelector(".faq-answer");
-        const icon     = item.querySelector(".faq-icon");
+const question = item.querySelector(".faq-question");
+const answer = item.querySelector(".faq-answer");
+const icon = question.querySelector("span");
 
-        if (!question || !answer) return;
+answer.style.maxHeight = "0";
+answer.style.overflow = "hidden";
+answer.style.transition = "max-height .4s ease";
 
-        answer.style.maxHeight = "0px";
-        answer.style.overflow = "hidden";
-        answer.style.transition = "max-height .35s ease";
+question.addEventListener("click", () => {
 
-        question.addEventListener("click", () => {
+const isOpen = item.classList.contains("active");
 
-            faqItems.forEach(other => {
+faqItems.forEach((faq) => {
 
-                if (other === item) return;
+faq.classList.remove("active");
 
-                other.classList.remove("active");
+faq.querySelector(".faq-answer").style.maxHeight = "0";
 
-                const otherAnswer = other.querySelector(".faq-answer");
-                const otherIcon   = other.querySelector(".faq-icon");
+const span = faq.querySelector(".faq-question span");
 
-                if (otherAnswer)
-                    otherAnswer.style.maxHeight = "0px";
+if (span) {
 
-                if (otherIcon)
-                    otherIcon.classList.remove("rotate");
+span.textContent = "+";
+span.style.transform = "rotate(0deg)";
 
-            });
+}
 
-            item.classList.toggle("active");
+});
 
-            if (item.classList.contains("active")) {
+if (!isOpen) {
 
-                answer.style.maxHeight =
-                    answer.scrollHeight + "px";
+item.classList.add("active");
 
-                if (icon)
-                    icon.classList.add("rotate");
+answer.style.maxHeight = answer.scrollHeight + "px";
 
-            } else {
+if (icon) {
 
-                answer.style.maxHeight = "0px";
+icon.textContent = "−";
+icon.style.transform = "rotate(180deg)";
+icon.style.transition = "transform .3s ease";
 
-                if (icon)
-                    icon.classList.remove("rotate");
+}
 
-            }
+}
 
-        });
+});
 
-    });
+});
 
 })();
-
 
 /* =====================================================
    BUTTON RIPPLE EFFECT
