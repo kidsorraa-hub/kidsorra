@@ -2674,4 +2674,2660 @@ flex-direction:column;
 
 }
 
+/* ==========================================================
+   KIDSORRA PREMIUM DESIGN SYSTEM
+   Part 1 / 50
+========================================================== */
+
+:root{
+
+    /* Primary Palette */
+
+    --orange-100:#fff4ea;
+    --orange-200:#ffe5c8;
+    --orange-300:#ffd29e;
+    --orange-400:#ffbb70;
+    --orange-500:#ff9b38;
+    --orange-600:#ff7a18;
+
+    /* Secondary */
+
+    --yellow:#ffd166;
+    --gold:#ffcb45;
+
+    /* Accent */
+
+    --purple:#6c63ff;
+    --purple-light:#8f89ff;
+
+    /* Success */
+
+    --green:#35c759;
+
+    /* Error */
+
+    --red:#ff5a5f;
+
+    /* Neutral */
+
+    --dark-900:#1f2937;
+    --dark-800:#2c3645;
+    --dark-700:#3b4556;
+
+    --gray-100:#fafafa;
+    --gray-200:#f3f4f6;
+    --gray-300:#ececec;
+    --gray-400:#d7d7d7;
+    --gray-500:#9ca3af;
+    --gray-600:#6b7280;
+
+    --white:#ffffff;
+
+    /* Radius */
+
+    --radius-xs:8px;
+    --radius-sm:14px;
+    --radius-md:20px;
+    --radius-lg:28px;
+    --radius-xl:40px;
+    --radius-round:999px;
+
+    /* Shadow */
+
+    --shadow-xs:0 4px 12px rgba(0,0,0,.05);
+
+    --shadow-sm:0 10px 25px rgba(0,0,0,.08);
+
+    --shadow-md:0 20px 40px rgba(0,0,0,.10);
+
+    --shadow-lg:0 30px 60px rgba(0,0,0,.12);
+
+    /* Transition */
+
+    --fast:.25s ease;
+    --normal:.35s ease;
+    --slow:.55s ease;
+
+}
+/* ==========================================================
+   GLOBAL CONTAINER
+========================================================== */
+
+.container{
+
+    width:min(1320px,92%);
+    margin:auto;
+
+}
+
+.narrow-container{
+
+    width:min(980px,92%);
+    margin:auto;
+
+}
+
+.full-container{
+
+    width:100%;
+
+}
+
+/* ==========================================================
+   SECTION SPACING
+========================================================== */
+
+section{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+section + section{
+
+    margin-top:0;
+
+}
+
+.section-padding-small{
+
+    padding:70px 8%;
+
+}
+
+.section-padding-large{
+
+    padding:120px 8%;
+
+}
+
+/* ==========================================================
+   BADGES
+========================================================== */
+
+.badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:12px 24px;
+
+    border-radius:999px;
+
+    background:white;
+
+    box-shadow:var(--shadow-xs);
+
+    font-weight:600;
+
+    color:var(--primary);
+
+}
+
+.badge svg{
+
+    width:18px;
+
+    height:18px;
+
+}
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
+.btn-primary{
+
+    position:relative;
+
+    overflow:hidden;
+
+    min-width:180px;
+
+}
+
+.btn-primary::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.35),
+        transparent
+    );
+
+    transform:translateX(-100%);
+
+    transition:.7s;
+
+}
+
+.btn-primary:hover::before{
+
+    transform:translateX(150%);
+
+}
+
+.btn-primary:hover{
+
+    box-shadow:
+
+    0 15px 35px rgba(255,122,24,.35);
+
+}
+
+.btn-secondary{
+
+    backdrop-filter:blur(12px);
+
+}
+
+/* ==========================================================
+   PREMIUM CARDS
+========================================================== */
+
+.card-base{
+
+    background:white;
+
+    border-radius:30px;
+
+    box-shadow:var(--shadow-sm);
+
+    transition:.4s;
+
+}
+
+.card-base:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+/* ==========================================================
+   DECORATIONS
+========================================================== */
+
+.bg-blob{
+
+    position:absolute;
+
+    width:380px;
+
+    height:380px;
+
+    border-radius:50%;
+
+    filter:blur(90px);
+
+    opacity:.18;
+
+    pointer-events:none;
+
+}
+
+.bg-orange{
+
+    background:var(--primary);
+
+}
+
+.bg-purple{
+
+    background:var(--purple);
+
+}
+
+.bg-yellow{
+
+    background:var(--yellow);
+
+}
+
+/* ==========================================================
+   PART 2
+   HEADER PREMIUM EXTENSION
+========================================================== */
+
+header{
+
+    transition:.45s ease;
+
+}
+
+header.scrolled{
+
+    background:rgba(255,255,255,.96);
+
+    backdrop-filter:blur(22px);
+
+    box-shadow:
+    0 12px 35px rgba(0,0,0,.08);
+
+}
+
+.navbar{
+
+    transition:.35s ease;
+
+}
+
+.logo{
+
+    transition:.35s ease;
+
+    user-select:none;
+
+}
+
+.logo:hover{
+
+    transform:translateY(-2px) scale(1.04);
+
+    color:var(--orange-600);
+
+}
+
+.nav-links{
+
+    gap:42px;
+
+}
+
+.nav-links li{
+
+    font-size:15px;
+
+    letter-spacing:.2px;
+
+    transition:.35s ease;
+
+}
+
+.nav-links li:hover{
+
+    color:var(--primary);
+
+}
+
+.nav-links li::after{
+
+    height:4px;
+
+    border-radius:20px;
+
+}
+
+.demo-btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.demo-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+
+    90deg,
+
+    transparent,
+
+    rgba(255,255,255,.35),
+
+    transparent
+
+    );
+
+    transform:translateX(-120%);
+
+    transition:.7s;
+
+}
+
+.demo-btn:hover::before{
+
+    transform:translateX(130%);
+
+}
+
+.demo-btn:hover{
+
+    box-shadow:
+
+    0 15px 35px rgba(255,122,24,.35);
+
+}
+
+.menu-toggle{
+
+    transition:.35s ease;
+
+}
+
+.menu-toggle:hover{
+
+    transform:rotate(90deg);
+
+    color:var(--primary);
+
+}
+
+/* ---------- Mobile Menu ---------- */
+
+.nav-links.active{
+
+    animation:slideMenu .45s ease;
+
+}
+
+@keyframes slideMenu{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(60px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateX(0);
+
+    }
+
+}
+
+.mobile-menu-overlay{
+
+    backdrop-filter:blur(4px);
+
+}
+
+/* ==========================================================
+   PART 3
+   HERO PREMIUM
+========================================================== */
+
+.hero{
+
+    isolation:isolate;
+
+}
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    radial-gradient(
+
+    circle at 20% 30%,
+
+    rgba(255,209,102,.15),
+
+    transparent 40%
+
+    ),
+
+    radial-gradient(
+
+    circle at 80% 70%,
+
+    rgba(108,99,255,.08),
+
+    transparent 35%
+
+    );
+
+    z-index:-1;
+
+}
+
+.hero-container{
+
+    align-items:center;
+
+}
+
+.hero-content{
+
+    animation:heroFade .9s ease;
+
+}
+
+@keyframes heroFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(50px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.hero-content h1{
+
+    letter-spacing:-1px;
+
+}
+
+.hero-content p{
+
+    font-size:1.12rem;
+
+    line-height:1.9;
+
+}
+
+.hero-buttons{
+
+    margin-top:35px;
+
+}
+
+.hero-visual{
+
+    animation:heroFloat 6s ease-in-out infinite;
+
+}
+
+@keyframes heroFloat{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
+
+}
+
+.character-card{
+
+    overflow:hidden;
+
+    transition:.45s ease;
+
+}
+
+.character-card:hover{
+
+    transform:
+
+    rotate(-1deg)
+
+    translateY(-8px);
+
+}
+
+.character-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+
+    145deg,
+
+    rgba(255,255,255,.4),
+
+    transparent
+
+    );
+
+    pointer-events:none;
+
+}
+
+.magic-circle{
+
+    animation:circlePulse 8s infinite ease;
+
+}
+
+@keyframes circlePulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.08);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+.floating-tag{
+
+    transition:.35s ease;
+
+}
+
+.floating-tag:hover{
+
+    transform:scale(1.08);
+
+}
+
+.star{
+
+    filter:drop-shadow(
+
+    0 0 8px rgba(255,209,102,.5)
+
+    );
+
+}
+
+/* ==========================================================
+   PART 4
+   STATS PREMIUM
+========================================================== */
+
+.stats{
+
+    position:relative;
+
+    background:
+    linear-gradient(
+        180deg,
+        #ffffff,
+        #fffdf8
+    );
+
+    gap:35px;
+
+}
+
+.stats::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:1px;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,122,24,.25),
+        transparent
+    );
+
+}
+
+.stat{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,122,24,.05);
+
+}
+
+.stat::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-60px;
+    right:-60px;
+
+    width:120px;
+    height:120px;
+
+    border-radius:50%;
+
+    background:rgba(255,209,102,.18);
+
+}
+
+.stat:hover{
+
+    transform:translateY(-12px);
+
+}
+
+.stat h2{
+
+    font-weight:800;
+
+    letter-spacing:-1px;
+
+}
+
+.stat p{
+
+    letter-spacing:.3px;
+
+    color:var(--dark);
+
+}
+
+/* ==========================================================
+   PART 5
+   TESTIMONIALS
+========================================================== */
+
+.testimonials{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.testimonials::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    radial-gradient(
+        circle at 20% 20%,
+        rgba(108,99,255,.05),
+        transparent 40%
+    );
+
+}
+
+.testimonial{
+
+    position:relative;
+
+    border:1px solid rgba(0,0,0,.04);
+
+}
+
+.testimonial::after{
+
+    content:"★★★★★";
+
+    display:block;
+
+    margin-top:18px;
+
+    color:#FFD166;
+
+    letter-spacing:4px;
+
+    font-size:18px;
+
+}
+
+.testimonial:hover{
+
+    transform:
+    translateY(-10px)
+    rotate(-.5deg);
+
+}
+
+.testimonial p{
+
+    font-style:italic;
+
+    line-height:1.9;
+
+}
+
+.testimonial h4{
+
+    font-size:16px;
+
+    font-weight:700;
+
+}
+
+/* ==========================================================
+   PART 6
+   MEET KIDSORRA
+========================================================== */
+
+.meet-kidsorra{
+
+    position:relative;
+
+}
+
+.meet-container{
+
+    align-items:center;
+
+}
+
+.kidsorra-avatar{
+
+    position:relative;
+
+    box-shadow:
+
+    0 35px 60px rgba(255,122,24,.25);
+
+    animation:kidsorraFloat 6s ease-in-out infinite;
+
+}
+
+@keyframes kidsorraFloat{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-15px);
+
+    }
+
+}
+
+.kidsorra-avatar::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-12px;
+
+    border-radius:50%;
+
+    border:2px dashed rgba(255,255,255,.4);
+
+}
+
+.meet-content h2{
+
+    max-width:560px;
+
+}
+
+.meet-content p{
+
+    line-height:2;
+
+}
+
+.meet-content .primary{
+
+    margin-top:20px;
+
+}
+
+.meet-content .primary:hover{
+
+    transform:translateY(-4px);
+
+}
+
+
+/* ==========================================================
+   PART 7
+   KIDSORRA METHOD PREMIUM
+========================================================== */
+
+.method-section{
+    position:relative;
+    overflow:hidden;
+}
+
+.method-section::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(circle at 15% 25%,rgba(255,122,24,.08),transparent 35%),
+        radial-gradient(circle at 85% 75%,rgba(108,99,255,.06),transparent 30%);
+    pointer-events:none;
+}
+
+.method-card{
+    transition:.45s ease;
+    border:1px solid rgba(255,122,24,.08);
+}
+
+.method-card:hover{
+    transform:translateY(-12px);
+    box-shadow:0 25px 60px rgba(0,0,0,.12);
+}
+
+.method-circle{
+    transition:.35s ease;
+}
+
+.method-card:hover .method-circle{
+    transform:rotate(10deg) scale(1.08);
+}
+
+.method-card li{
+    position:relative;
+    padding-left:10px;
+}
+
+.method-card li::before{
+    content:"✓";
+    color:var(--green);
+    margin-right:8px;
+    font-weight:700;
+}
+
+/* ==========================================================
+   PART 8
+   PARENTS PREMIUM
+========================================================== */
+
+.parents-section{
+    background:
+        linear-gradient(180deg,#ffffff,#fffdf8);
+}
+
+.parent-point{
+    padding:18px;
+    border-radius:18px;
+    transition:.35s;
+}
+
+.parent-point:hover{
+    background:#fff8ef;
+    transform:translateX(8px);
+}
+
+.parent-point span{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#fff3e8;
+}
+
+.parent-card{
+    transition:.4s ease;
+}
+
+.parent-card:hover{
+    transform:translateY(-10px);
+}
+
+.parent-circle{
+    box-shadow:0 30px 60px rgba(255,122,24,.18);
+}
+
+/* ==========================================================
+   PART 9
+   PROGRAMS PREMIUM
+========================================================== */
+
+.program-card{
+    position:relative;
+    overflow:hidden;
+}
+
+.program-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:5px;
+    background:
+        linear-gradient(90deg,
+        var(--primary),
+        var(--secondary));
+}
+
+.program-card:hover{
+    transform:translateY(-14px);
+}
+
+.program-card .icon{
+    transition:.35s;
+}
+
+.program-card:hover .icon{
+    transform:scale(1.15) rotate(-8deg);
+}
+
+.program-card button{
+    transition:.35s;
+}
+
+.program-card button:hover{
+    transform:scale(1.05);
+}
+
+/* ==========================================================
+   PART 10
+   LIFE SKILLS PREMIUM
+========================================================== */
+
+.lifeskill-card{
+    position:relative;
+    overflow:hidden;
+}
+
+.lifeskill-card::after{
+    content:"";
+    position:absolute;
+    right:-30px;
+    bottom:-30px;
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    background:rgba(255,209,102,.15);
+}
+
+.lifeskill-card:hover{
+    transform:translateY(-12px);
+}
+
+.lifeskill-icon{
+    transition:.35s;
+}
+
+.lifeskill-card:hover .lifeskill-icon{
+    transform:rotate(-8deg) scale(1.12);
+}
+
+.global-card{
+    transition:.4s;
+}
+
+.global-card:hover{
+    transform:translateY(-10px);
+}
+
+.global-icon{
+    transition:.35s;
+}
+
+.global-card:hover .global-icon{
+    transform:scale(1.12);
+}
+/* ==========================================================
+   PART 11
+   LEARNING JOURNEY PREMIUM
+========================================================== */
+
+.journey-section{
+    position:relative;
+    background:linear-gradient(180deg,#ffffff,#fffaf5);
+}
+
+.journey-step{
+    position:relative;
+    transition:.4s ease;
+    border:1px solid rgba(255,122,24,.08);
+}
+
+.journey-step:hover{
+    transform:translateY(-12px);
+    box-shadow:0 25px 60px rgba(0,0,0,.12);
+}
+
+.journey-number{
+    box-shadow:0 12px 30px rgba(255,122,24,.35);
+}
+
+.journey-icon{
+    transition:.35s;
+}
+
+.journey-step:hover .journey-icon{
+    transform:scale(1.15) rotate(-8deg);
+}
+
+.journey-line{
+    border-radius:10px;
+}
+
+/* ==========================================================
+   PART 12
+   SCHOOLS PREMIUM
+========================================================== */
+
+.school-card,
+.school-premium-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.school-card::before,
+.school-premium-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:
+    linear-gradient(90deg,
+    var(--primary),
+    var(--secondary));
+
+}
+
+.school-card:hover,
+.school-premium-card:hover{
+
+    transform:translateY(-12px);
+
+}
+
+.school-icon{
+
+    transition:.35s;
+
+}
+
+.school-card:hover .school-icon{
+
+    transform:scale(1.12);
+
+}
+
+.school-feature{
+
+    padding:8px 0;
+
+}
+
+/* ==========================================================
+   PART 13
+   FAQ PREMIUM
+========================================================== */
+
+.faq-item{
+
+    transition:.35s;
+
+}
+
+.faq-item:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.faq-question{
+
+    transition:.35s;
+
+}
+
+.faq-question:hover{
+
+    background:#fff8ef;
+
+}
+
+.faq-question span{
+
+    transition:.35s;
+
+}
+
+.faq-item.active .faq-question span{
+
+    transform:rotate(45deg);
+
+}
+
+.faq-answer{
+
+    animation:fadeFaq .35s ease;
+
+}
+
+@keyframes fadeFaq{
+
+from{
+
+opacity:0;
+
+transform:translateY(-10px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ==========================================================
+   PART 14
+   BOOKING PREMIUM
+========================================================== */
+
+.booking-card{
+
+    transition:.4s;
+
+}
+
+.booking-card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea{
+
+    transition:.3s;
+
+}
+
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:
+    0 0 0 4px rgba(255,122,24,.12);
+
+}
+
+.booking-form button{
+
+    transition:.35s;
+
+}
+
+.booking-form button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+
+/* ==========================================================
+   PART 15
+   CONTACT PREMIUM
+========================================================== */
+
+.contact-card,
+.contact-info{
+
+    transition:.4s;
+
+}
+
+.contact-card:hover,
+.contact-info:hover{
+
+    transform:translateY(-10px);
+
+}
+
+.contact-icon{
+
+    transition:.35s;
+
+}
+
+.contact-card:hover .contact-icon{
+
+    transform:scale(1.15);
+
+}
+
+.contact-form input,
+.contact-form textarea{
+
+    transition:.3s;
+
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:
+    0 0 0 4px rgba(255,122,24,.12);
+
+}
+
+/* ==========================================================
+   PART 16
+   CTA PREMIUM
+========================================================== */
+
+.cta-section{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.cta-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    radial-gradient(circle at 20% 30%,rgba(255,255,255,.12),transparent 40%),
+
+    radial-gradient(circle at 80% 70%,rgba(255,255,255,.10),transparent 35%);
+
+}
+
+.cta-container{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.cta-buttons{
+
+    margin-top:45px;
+
+}
+
+.cta-buttons a{
+
+    min-width:210px;
+
+}
+
+.cta-buttons a:hover{
+
+    transform:translateY(-5px);
+
+}
+
+/* ==========================================================
+   PART 17
+   TRUST PREMIUM
+========================================================== */
+
+.trust-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.trust-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:4px;
+
+    background:linear-gradient(
+
+    90deg,
+
+    var(--primary),
+
+    var(--secondary)
+
+    );
+
+}
+
+.trust-card:hover{
+
+    transform:translateY(-12px);
+
+}
+
+.trust-icon{
+
+    transition:.35s;
+
+}
+
+.trust-card:hover .trust-icon{
+
+    transform:rotate(-8deg) scale(1.12);
+
+}
+
+/* ==========================================================
+   PART 18
+   FOOTER PREMIUM
+========================================================== */
+
+.footer{
+
+    position:relative;
+
+}
+
+.footer::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:2px;
+
+    background:
+
+    linear-gradient(
+
+    90deg,
+
+    transparent,
+
+    var(--primary),
+
+    transparent
+
+    );
+
+}
+
+.footer a{
+
+    transition:.3s;
+
+}
+
+.footer a:hover{
+
+    color:white;
+
+    padding-left:8px;
+
+}
+
+.footer-social a{
+
+    transition:.35s;
+
+}
+
+.footer-social a:hover{
+
+    transform:translateY(-6px);
+
+}
+
+/* ==========================================================
+   PART 19
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#f5f5f5;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:linear-gradient(
+
+    180deg,
+
+    var(--primary),
+
+    var(--secondary)
+
+    );
+
+    border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:var(--primary);
+
+}
+
+/* ==========================================================
+   PART 20
+   UTILITIES
+========================================================== */
+
+.text-center{
+
+    text-align:center;
+
+}
+
+.text-left{
+
+    text-align:left;
+
+}
+
+.text-right{
+
+    text-align:right;
+
+}
+
+.mt-1{margin-top:10px;}
+.mt-2{margin-top:20px;}
+.mt-3{margin-top:30px;}
+.mt-4{margin-top:40px;}
+.mt-5{margin-top:50px;}
+
+.mb-1{margin-bottom:10px;}
+.mb-2{margin-bottom:20px;}
+.mb-3{margin-bottom:30px;}
+.mb-4{margin-bottom:40px;}
+.mb-5{margin-bottom:50px;}
+
+.hidden{
+
+    display:none!important;
+
+}
+
+.visible{
+
+    display:block!important;
+
+}
+
+/* ==========================================================
+   PART 21
+   ADVANCED ANIMATIONS
+========================================================== */
+
+/* ---------- Floating Animation ---------- */
+
+.float-slow{
+    animation:floatSlow 8s ease-in-out infinite;
+}
+
+.float-medium{
+    animation:floatMedium 6s ease-in-out infinite;
+}
+
+.float-fast{
+    animation:floatFast 4s ease-in-out infinite;
+}
+
+@keyframes floatSlow{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-18px);
+    }
+
+}
+
+@keyframes floatMedium{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-12px);
+    }
+
+}
+
+@keyframes floatFast{
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+}
+
+/* ---------- Pulse ---------- */
+
+.pulse{
+
+    animation:pulseGlow 3s infinite;
+
+}
+
+@keyframes pulseGlow{
+
+    0%{
+
+        transform:scale(1);
+
+        box-shadow:0 0 0 rgba(255,122,24,0);
+
+    }
+
+    50%{
+
+        transform:scale(1.03);
+
+        box-shadow:0 0 30px rgba(255,122,24,.25);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+        box-shadow:0 0 0 rgba(255,122,24,0);
+
+    }
+
+}
+
+/* ---------- Smooth Hover ---------- */
+
+.hover-lift{
+
+    transition:.35s ease;
+
+}
+
+.hover-lift:hover{
+
+    transform:translateY(-10px);
+
+}
+
+/* ---------- Fade ---------- */
+
+.fade{
+
+    opacity:0;
+
+    transform:translateY(30px);
+
+    transition:.8s ease;
+
+}
+
+.fade.visible{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+/* ---------- Scale ---------- */
+
+.scale-hover{
+
+    transition:.35s ease;
+
+}
+
+.scale-hover:hover{
+
+    transform:scale(1.04);
+
+}
+
+/* ---------- Rotate ---------- */
+
+.rotate-hover{
+
+    transition:.35s ease;
+
+}
+
+.rotate-hover:hover{
+
+    transform:rotate(-4deg);
+
+}
+
+/* ---------- Soft Glow ---------- */
+
+.soft-glow{
+
+    transition:.35s ease;
+
+}
+
+.soft-glow:hover{
+
+    box-shadow:
+
+    0 20px 60px rgba(255,122,24,.18);
+
+}
+
+/* ---------- Image Hover ---------- */
+
+img{
+
+    transition:.45s ease;
+
+}
+
+img:hover{
+
+    transform:scale(1.02);
+
+}
+
+/* ---------- Icon Hover ---------- */
+
+.icon-hover{
+
+    transition:.35s ease;
+
+}
+
+.icon-hover:hover{
+
+    transform:
+
+    rotate(-8deg)
+
+    scale(1.15);
+
+}
+
+/* ---------- Decorative Circles ---------- */
+
+.decor-circle{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    pointer-events:none;
+
+    opacity:.08;
+
+    filter:blur(30px);
+
+}
+
+.decor-orange{
+
+    background:var(--primary);
+
+}
+
+.decor-purple{
+
+    background:var(--accent);
+
+}
+
+.decor-yellow{
+
+    background:#FFD166;
+
+}
+
+/* ---------- Gradient Border ---------- */
+
+.gradient-border{
+
+    position:relative;
+
+}
+
+.gradient-border::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    padding:1px;
+
+    border-radius:inherit;
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        var(--primary),
+
+        var(--secondary)
+
+    );
+
+    -webkit-mask:
+
+        linear-gradient(#fff 0 0) content-box,
+
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+
+            mask-composite:exclude;
+
+    pointer-events:none;
+
+}
+
+/* ---------- Glass Effect ---------- */
+
+.glass{
+
+    background:rgba(255,255,255,.75);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.3);
+
+}
+
+/* ==========================================================
+   PART 22
+   HERO DECORATIVE EFFECTS
+========================================================== */
+
+.hero::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(135deg,
+        rgba(255,255,255,.15),
+        transparent 60%);
+    pointer-events:none;
+    z-index:0;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.hero-visual{
+    position:relative;
+    z-index:2;
+}
+
+.magic-background{
+    overflow:hidden;
+}
+
+.magic-background::before{
+    content:"";
+    position:absolute;
+    width:550px;
+    height:550px;
+    top:-220px;
+    right:-150px;
+    border-radius:50%;
+    background:rgba(255,122,24,.06);
+    filter:blur(60px);
+}
+
+.magic-background::after{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    bottom:-160px;
+    left:-120px;
+    border-radius:50%;
+    background:rgba(108,99,255,.05);
+    filter:blur(60px);
+}
+
+.hero h1{
+    text-wrap:balance;
+}
+
+.hero p{
+    max-width:560px;
+}
+
+/* ==========================================================
+   PART 23
+   SCROLL EFFECTS
+========================================================== */
+
+.reveal{
+    opacity:0;
+    transform:translateY(60px);
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+.reveal.show{
+    opacity:1;
+    transform:translateY(0);
+}
+
+.reveal-left{
+    opacity:0;
+    transform:translateX(-60px);
+    transition:.8s ease;
+}
+
+.reveal-left.show{
+    opacity:1;
+    transform:translateX(0);
+}
+
+.reveal-right{
+    opacity:0;
+    transform:translateX(60px);
+    transition:.8s ease;
+}
+
+.reveal-right.show{
+    opacity:1;
+    transform:translateX(0);
+}
+
+.reveal-scale{
+    opacity:0;
+    transform:scale(.9);
+    transition:.7s ease;
+}
+
+.reveal-scale.show{
+    opacity:1;
+    transform:scale(1);
+}
+
+/* ==========================================================
+   PART 24
+   MICRO INTERACTIONS
+========================================================== */
+
+button,
+.btn-primary,
+.btn-secondary,
+.demo-btn{
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        background .3s ease;
+
+}
+
+button:active,
+.btn-primary:active,
+.btn-secondary:active{
+
+    transform:scale(.97);
+
+}
+
+.card-base,
+.program-card,
+.school-card,
+.trust-card,
+.testimonial{
+
+    will-change:transform;
+
+}
+
+.card-base:hover,
+.program-card:hover,
+.school-card:hover,
+.trust-card:hover,
+.testimonial:hover{
+
+    box-shadow:
+        0 25px 55px rgba(0,0,0,.15);
+
+}
+
+.icon,
+.school-icon,
+.trust-icon,
+.lifeskill-icon{
+
+    transition:
+        transform .35s ease,
+        filter .35s ease;
+
+}
+
+.icon:hover,
+.school-icon:hover,
+.trust-icon:hover,
+.lifeskill-icon:hover{
+
+    filter:drop-shadow(0 8px 16px rgba(255,122,24,.25));
+
+}
+
+/* ==========================================================
+   PART 25
+   ACCESSIBILITY
+========================================================== */
+
+:focus-visible{
+
+    outline:3px solid rgba(255,122,24,.45);
+
+    outline-offset:4px;
+
+    border-radius:8px;
+
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible{
+
+    box-shadow:
+    0 0 0 5px rgba(255,122,24,.18);
+
+}
+
+::selection{
+
+    background:rgba(255,122,24,.22);
+
+    color:#222;
+
+}
+
+html{
+
+    -webkit-text-size-adjust:100%;
+
+}
+
+img{
+
+    image-rendering:auto;
+
+}
+
+input::placeholder,
+textarea::placeholder{
+
+    color:#999;
+
+}
+
+/* ==========================================================
+   PART 26
+   DECORATIVE SHAPES
+========================================================== */
+
+.bg-wave{
+
+    position:absolute;
+
+    width:700px;
+
+    height:700px;
+
+    border-radius:50%;
+
+    filter:blur(90px);
+
+    opacity:.07;
+
+    pointer-events:none;
+
+}
+
+.bg-wave.orange{
+
+    background:var(--primary);
+
+}
+
+.bg-wave.purple{
+
+    background:var(--accent);
+
+}
+
+.bg-wave.yellow{
+
+    background:#FFD166;
+
+}
+
+.pattern-dots{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:.05;
+
+    background-image:
+
+    radial-gradient(circle,#333 1px,transparent 1px);
+
+    background-size:28px 28px;
+
+    pointer-events:none;
+
+}
+
+/* ==========================================================
+   PART 27
+   RESPONSIVE IMPROVEMENTS
+========================================================== */
+
+@media (max-width:1200px){
+
+.container{
+
+    width:min(1100px,94%);
+
+}
+
+}
+
+@media (max-width:992px){
+
+.hero-container,
+.meet-container,
+.parents-container,
+.method-container,
+.global-container{
+
+    gap:40px;
+
+}
+
+section{
+
+    padding:80px 6%;
+
+}
+
+}
+
+@media (max-width:768px){
+
+.section-title{
+
+    margin-bottom:50px;
+
+}
+
+.hero-buttons{
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+.btn-primary,
+.btn-secondary{
+
+    width:100%;
+
+    max-width:320px;
+
+}
+
+}
+
+@media (max-width:480px){
+
+h1{
+
+    line-height:1.2;
+
+}
+
+section{
+
+    padding:65px 5%;
+
+}
+
+}
+
+
+/* ==========================================================
+   PART 28
+   PERFORMANCE
+========================================================== */
+
+.card,
+.program-card,
+.school-card,
+.testimonial,
+.trust-card,
+.lifeskill-card{
+
+    contain:layout paint;
+
+}
+
+.hero-visual,
+.magic-circle,
+.character-card{
+
+    will-change:transform;
+
+}
+
+img{
+
+    backface-visibility:hidden;
+
+    transform:translateZ(0);
+
+}
+
+button,
+a{
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+*{
+
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
+}
+
+.lazy-hidden{
+
+    opacity:0;
+
+}
+
+.lazy-loaded{
+
+    opacity:1;
+
+    transition:opacity .5s ease;
+
+}
+
+/* ==========================================================
+   PART 29
+   FINAL UI POLISH
+========================================================== */
+
+/* ---------- Smooth Section Transition ---------- */
+
+section{
+
+    transition:
+        background .4s ease,
+        color .4s ease;
+
+}
+
+/* ---------- Soft Gradient Overlay ---------- */
+
+.gradient-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+
+    linear-gradient(
+
+        180deg,
+
+        rgba(255,255,255,.02),
+
+        rgba(255,255,255,.08)
+
+    );
+
+}
+
+/* ---------- Premium Divider ---------- */
+
+.section-divider{
+
+    width:140px;
+
+    height:5px;
+
+    margin:30px auto;
+
+    border-radius:999px;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        var(--primary),
+
+        var(--secondary)
+
+    );
+
+}
+
+/* ---------- Card Border Animation ---------- */
+
+.card-border{
+
+    position:relative;
+
+}
+
+.card-border::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:inherit;
+
+    border:2px solid transparent;
+
+    transition:.35s;
+
+}
+
+.card-border:hover::after{
+
+    border-color:
+
+    rgba(255,122,24,.18);
+
+}
+
+/* ---------- Hover Glow ---------- */
+
+.glow-hover{
+
+    transition:.35s;
+
+}
+
+.glow-hover:hover{
+
+    box-shadow:
+
+    0 0 35px rgba(255,122,24,.18);
+
+}
+
+/* ---------- Premium Shadow ---------- */
+
+.shadow-premium{
+
+    box-shadow:
+
+    0 20px 60px rgba(0,0,0,.12);
+
+}
+
+/* ---------- Text Gradient ---------- */
+
+.gradient-text{
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        var(--primary),
+
+        var(--secondary)
+
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+/* ---------- Rounded Image ---------- */
+
+.image-soft{
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+}
+
+/* ==========================================================
+   PART 30
+   PRODUCTION READY
+========================================================== */
+
+/* ---------- Prevent Layout Shift ---------- */
+
+img{
+
+    height:auto;
+
+}
+
+/* ---------- Better Rendering ---------- */
+
+body{
+
+    text-rendering:optimizeLegibility;
+
+}
+
+/* ---------- Disable Animation for Accessibility ---------- */
+
+@media (prefers-reduced-motion:reduce){
+
+*{
+
+animation:none!important;
+
+transition:none!important;
+
+scroll-behavior:auto!important;
+
+}
+
+}
+
+/* ---------- Dark Browser Theme ---------- */
+
+:root{
+
+color-scheme:light;
+
+}
+
+/* ---------- Print ---------- */
+
+@media print{
+
+header,
+footer,
+.back-to-top,
+.demo-btn,
+.hero-buttons{
+
+display:none!important;
+
+}
+
+section{
+
+padding:20px 0;
+
+page-break-inside:avoid;
+
+}
+
+body{
+
+background:white;
+
+color:black;
+
+}
+
+}
+
+/* ---------- Final Helpers ---------- */
+
+.round-xl{
+
+border-radius:32px;
+
+}
+
+.round-full{
+
+border-radius:999px;
+
+}
+
+.flex-center{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+.grid-center{
+
+display:grid;
+
+place-items:center;
+
+}
+
+.text-primary{
+
+color:var(--primary);
+
+}
+
+.text-dark{
+
+color:var(--dark);
+
+}
+
+.bg-light{
+
+background:var(--light);
+
+}
+
+.bg-white{
+
+background:white;
+
+}
+
+/* ==========================================================
+   END OF KIDSORRA PREMIUM CSS
+========================================================== */
+
+
+
+
+
 
