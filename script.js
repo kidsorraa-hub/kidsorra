@@ -896,6 +896,7 @@ icon.style.transition = "transform .3s ease";
 
 })();
 /* ==========================================
+  /* ==========================================
    KIDSORRA
    SCRIPT.JS
    PART 6 / 15
@@ -904,64 +905,29 @@ icon.style.transition = "transform .3s ease";
 "use strict";
 
 /* =====================================================
-   LAZY IMAGE LOADER
+   SECTION REVEAL ANIMATION
 ===================================================== */
 
 (() => {
 
-    const images = document.querySelectorAll("img[data-src]");
+    const elements = document.querySelectorAll(`
 
-    if (!images.length) return;
+        section,
+        .skill-card,
+        .future-card,
+        .difference-item,
+        .benefit-card,
+        .growth-box,
+        .value-card,
+        .meet-card,
+        .stay-card,
+        .future-box
 
-    const imageObserver = new IntersectionObserver((entries, observer) => {
+    `);
 
-        entries.forEach(entry => {
+    if (!elements.length) return;
 
-            if (!entry.isIntersecting) return;
-
-            const img = entry.target;
-
-            img.src = img.dataset.src;
-
-            img.onload = () => {
-
-                img.classList.add("loaded");
-
-            };
-
-            observer.unobserve(img);
-
-        });
-
-    }, {
-        rootMargin: "100px",
-        threshold: 0.1
-    });
-
-    images.forEach(img => {
-
-        imageObserver.observe(img);
-
-    });
-
-})();
-
-
-/* =====================================================
-   SECTION REVEAL
-===================================================== */
-
-(() => {
-
-    const sections = document.querySelectorAll(
-
-        ".section,.program-card,.lifeskill-card,.school-card,.trust-card,.testimonial"
-
-    );
-
-    if (!sections.length) return;
-
-    const observer = new IntersectionObserver(entries => {
+    const observer = new IntersectionObserver((entries) => {
 
         entries.forEach(entry => {
 
@@ -979,11 +945,7 @@ icon.style.transition = "transform .3s ease";
 
     });
 
-    sections.forEach(section => {
-
-        observer.observe(section);
-
-    });
+    elements.forEach(el => observer.observe(el));
 
 })();
 
@@ -998,7 +960,7 @@ icon.style.transition = "transform .3s ease";
 
     if (!header) return;
 
-    window.addEventListener("scroll", () => {
+    function updateHeader() {
 
         if (window.scrollY > 40) {
 
@@ -1010,7 +972,15 @@ icon.style.transition = "transform .3s ease";
 
         }
 
+    }
+
+    window.addEventListener("scroll", updateHeader, {
+
+        passive: true
+
     });
+
+    updateHeader();
 
 })();
 
@@ -1021,15 +991,15 @@ icon.style.transition = "transform .3s ease";
 
 (() => {
 
-    const navLinks = document.querySelectorAll(".nav-links a");
-
     const nav = document.querySelector(".nav-links");
 
     const overlay = document.querySelector(".mobile-menu-overlay");
 
-    if (!navLinks.length) return;
+    const links = document.querySelectorAll(".nav-links a");
 
-    navLinks.forEach(link => {
+    if (!links.length) return;
+
+    links.forEach(link => {
 
         link.addEventListener("click", () => {
 
@@ -1045,62 +1015,86 @@ icon.style.transition = "transform .3s ease";
 
 
 /* =====================================================
-   HERO BUTTON ANIMATION
+   HERO BUTTON MICRO ANIMATION
 ===================================================== */
 
 (() => {
 
-    document.querySelectorAll(".hero .btn").forEach(btn => {
+    const buttons = document.querySelectorAll(
 
-        btn.addEventListener("mouseenter", () => {
+        ".hero .btn-primary, .hero .btn-secondary"
 
-            btn.animate([
+    );
+
+    if (!buttons.length) return;
+
+    buttons.forEach(button => {
+
+        button.addEventListener("mouseenter", () => {
+
+            button.animate(
+
+                [
+
+                    {
+
+                        transform: "translateY(0)"
+
+                    },
+
+                    {
+
+                        transform: "translateY(-6px)"
+
+                    }
+
+                ],
 
                 {
 
-                    transform: "translateY(0)"
+                    duration: 180,
 
-                },
+                    fill: "forwards",
 
-                {
-
-                    transform: "translateY(-6px)"
+                    easing: "ease-out"
 
                 }
 
-            ], {
-
-                duration: 180,
-
-                fill: "forwards"
-
-            });
+            );
 
         });
 
-        btn.addEventListener("mouseleave", () => {
+        button.addEventListener("mouseleave", () => {
 
-            btn.animate([
+            button.animate(
+
+                [
+
+                    {
+
+                        transform: "translateY(-6px)"
+
+                    },
+
+                    {
+
+                        transform: "translateY(0)"
+
+                    }
+
+                ],
 
                 {
 
-                    transform: "translateY(-6px)"
+                    duration: 180,
 
-                },
+                    fill: "forwards",
 
-                {
-
-                    transform: "translateY(0)"
+                    easing: "ease-out"
 
                 }
 
-            ], {
-
-                duration: 180,
-
-                fill: "forwards"
-
-            });
+            );
 
         });
 
@@ -1113,7 +1107,7 @@ icon.style.transition = "transform .3s ease";
    SAFE SCROLL FUNCTION
 ===================================================== */
 
-window.scrollToSection = function (selector) {
+window.scrollToSection = function(selector) {
 
     const target = document.querySelector(selector);
 
@@ -1121,7 +1115,9 @@ window.scrollToSection = function (selector) {
 
     const offset = 90;
 
-    const top = target.getBoundingClientRect().top +
+    const top =
+
+        target.getBoundingClientRect().top +
 
         window.pageYOffset -
 
@@ -1139,14 +1135,18 @@ window.scrollToSection = function (selector) {
 
 
 /* =====================================================
-   ENGINE LOG
+   ENGINE STATUS
 ===================================================== */
+
+window.Kidsorra = window.Kidsorra || {};
+
+Kidsorra.version = "1.0.0";
 
 console.log(
 
     "%cKidsorra Engine Part 6 Ready",
 
-    "color:#35c759;font-size:15px;font-weight:bold;"
+    "color:#35C759;font-size:15px;font-weight:bold;"
 
 );
 
