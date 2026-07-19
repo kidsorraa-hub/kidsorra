@@ -5327,7 +5327,33 @@ background:white;
 ========================================================== */
 
 
+.faq-answer{
 
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .35s ease;
+
+}
+
+
+.faq-item.active .faq-answer{
+
+    padding-top:15px;
+
+}
+
+
+.faq-question{
+
+    cursor:pointer;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
 
 
 
