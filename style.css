@@ -5508,3 +5508,28 @@ padding:25px;
 }
 
 }
+
+
+.footer-column a{
+color:#ffffff;
+text-decoration:none;
+transition:.3s;
+}
+
+.footer-column a:hover{
+color:#FFD54F;
+}
+
+.social-links{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:18px;
+}
+
+.social-links a{
+display:inline-flex;
+align-items:center;
+gap:8px;
+font-weight:500;
+}
