@@ -3464,4 +3464,71 @@ window.addEventListener(
 /* =====================================================
    END OF KIDSORRA SCRIPT ENGINE
 =====================================================*/
+/* ==========================================
+BOOK DEMO FORM
+========================================== */
+
+const bookingForm = document.querySelector(".booking-form");
+
+if (bookingForm) {
+
+bookingForm.addEventListener("submit", async function (e) {
+
+e.preventDefault();
+
+const formData = new FormData(bookingForm);
+
+const response = await fetch(bookingForm.action, {
+
+method: "POST",
+
+body: formData,
+
+headers: {
+
+'Accept': 'application/json'
+
+}
+
+});
+
+if (response.ok) {
+
+bookingForm.reset();
+
+bookingForm.innerHTML = `
+
+<div style="text-align:center;padding:60px 20px;">
+
+<h2 style="color:#6B4EFF;font-size:34px;margin-bottom:20px;">
+
+🎉 Thank You!
+
+</h2>
+
+<p style="font-size:20px;color:#555;line-height:1.8;">
+
+Your Free Demo request has been successfully received.
+
+<br><br>
+
+Our Kidsorra team will contact you shortly.
+
+</p>
+
+</div>
+
+`;
+
+}
+
+else{
+
+alert("Something went wrong. Please try again.");
+
+}
+
+});
+
+}
 
