@@ -6012,3 +6012,227 @@ font-size:16px;
 }
 
 }
+
+
+/* =========================================
+SCHOOLS
+========================================= */
+
+.schools-section{
+padding:100px 8%;
+background:#fafbff;
+}
+
+.schools-grid{
+
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:35px;
+margin-top:60px;
+
+}
+
+.school-card{
+
+background:#fff;
+border-radius:28px;
+padding:40px 30px;
+text-align:center;
+transition:.35s;
+box-shadow:0 15px 35px rgba(0,0,0,.06);
+
+}
+
+.school-card:hover{
+
+transform:translateY(-10px);
+box-shadow:0 25px 50px rgba(0,0,0,.12);
+
+}
+
+.school-icon{
+
+width:90px;
+height:90px;
+margin:auto;
+margin-bottom:25px;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+border-radius:50%;
+font-size:38px;
+color:#fff;
+
+}
+
+.curriculum{
+
+background:#8B5CF6;
+
+}
+
+.teachers{
+
+background:#3B82F6;
+
+}
+
+.sel{
+
+background:#EC4899;
+
+}
+
+.progress{
+
+background:#10B981;
+
+}
+
+.workshop{
+
+background:#F59E0B;
+
+}
+
+.future{
+
+background:#06B6D4;
+
+}
+
+.school-card h3{
+
+font-size:25px;
+margin-bottom:15px;
+font-weight:700;
+color:#222;
+
+}
+
+.school-card p{
+
+font-size:17px;
+line-height:1.8;
+color:#666;
+
+}
+
+.schools-cta{
+
+margin-top:80px;
+padding:60px;
+text-align:center;
+
+background:linear-gradient(135deg,#6B4EFF,#8B5CF6);
+
+border-radius:35px;
+
+color:#fff;
+
+}
+
+.schools-cta h2{
+
+font-size:42px;
+margin-bottom:20px;
+
+}
+
+.schools-cta p{
+
+font-size:20px;
+line-height:1.8;
+margin-bottom:35px;
+
+}
+
+.schools-cta .btn-primary{
+
+display:inline-block;
+
+padding:18px 45px;
+
+background:#fff;
+color:#6B4EFF;
+
+border-radius:50px;
+
+font-weight:700;
+font-size:18px;
+
+text-decoration:none;
+
+transition:.3s;
+
+}
+
+.schools-cta .btn-primary:hover{
+
+transform:translateY(-5px);
+
+}
+
+@media(max-width:992px){
+
+.schools-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.schools-section{
+
+padding:70px 6%;
+
+}
+
+.schools-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.school-card{
+
+padding:35px 25px;
+
+}
+
+.school-card h3{
+
+font-size:22px;
+
+}
+
+.school-card p{
+
+font-size:16px;
+
+}
+
+.schools-cta{
+
+padding:40px 25px;
+
+}
+
+.schools-cta h2{
+
+font-size:30px;
+
+}
+
+.schools-cta p{
+
+font-size:17px;
+
+}
+
+}
