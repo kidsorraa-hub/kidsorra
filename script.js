@@ -3532,3 +3532,140 @@ alert("Something went wrong. Please try again.");
 
 }
 
+
+/* ==========================================
+   PROGRAMS SECTION ANIMATION
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+const animatedItems = document.querySelectorAll(
+".feature-box, .gallery-item, .path-card, .program-text, .program-image, .program-cta"
+);
+
+const observer = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show-program");
+
+}
+
+});
+
+},{
+threshold:0.2
+});
+
+animatedItems.forEach(item=>{
+
+item.classList.add("program-hidden");
+
+observer.observe(item);
+
+});
+
+});
+
+
+/* ==========================================
+   HOVER EFFECT
+========================================== */
+
+document.querySelectorAll(".feature-box").forEach(card=>{
+
+card.addEventListener("mouseenter",()=>{
+
+card.style.transform="translateY(-12px) scale(1.03)";
+
+});
+
+card.addEventListener("mouseleave",()=>{
+
+card.style.transform="translateY(0px) scale(1)";
+
+});
+
+});
+
+
+/* ==========================================
+   GALLERY PARALLAX
+========================================== */
+
+document.querySelectorAll(".gallery-item img").forEach(img=>{
+
+img.addEventListener("mousemove",(e)=>{
+
+const x=e.offsetX/img.clientWidth-0.5;
+const y=e.offsetY/img.clientHeight-0.5;
+
+img.style.transform=
+`scale(1.08) rotateY(${x*10}deg) rotateX(${y*-10}deg)`;
+
+});
+
+img.addEventListener("mouseleave",()=>{
+
+img.style.transform="scale(1) rotateY(0) rotateX(0)";
+
+});
+
+});
+
+
+/* ==========================================
+   PATH CARD CLICK
+========================================== */
+
+document.querySelectorAll(".path-card").forEach(card=>{
+
+card.addEventListener("click",()=>{
+
+card.classList.add("active-path");
+
+setTimeout(()=>{
+
+card.classList.remove("active-path");
+
+},500);
+
+});
+
+});
+
+
+/* ==========================================
+   BUTTON RIPPLE
+========================================== */
+
+document.querySelectorAll(".program-cta .btn-primary").forEach(btn=>{
+
+btn.addEventListener("click",function(e){
+
+const circle=document.createElement("span");
+
+const size=Math.max(this.clientWidth,this.clientHeight);
+
+circle.style.width=size+"px";
+circle.style.height=size+"px";
+
+circle.style.left=(e.offsetX-size/2)+"px";
+circle.style.top=(e.offsetY-size/2)+"px";
+
+circle.classList.add("ripple");
+
+this.appendChild(circle);
+
+setTimeout(()=>{
+
+circle.remove();
+
+},700);
+
+});
+
+});
+
