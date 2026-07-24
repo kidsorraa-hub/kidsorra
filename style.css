@@ -5789,3 +5789,226 @@ font-size:1.8rem;
 
 }
 
+/* =========================================
+PARENTS
+========================================= */
+
+.parents-section{
+
+padding:100px 8%;
+background:#fff;
+
+}
+
+.parents-wrapper{
+
+display:grid;
+grid-template-columns:1.1fr 1fr;
+gap:60px;
+align-items:center;
+margin-top:60px;
+
+}
+
+.parents-text h3{
+
+font-size:30px;
+color:#6B4EFF;
+margin-bottom:20px;
+margin-top:35px;
+font-weight:700;
+
+}
+
+.parents-text p{
+
+font-size:18px;
+line-height:1.9;
+color:#555;
+margin-bottom:20px;
+
+}
+
+.parents-list{
+
+list-style:none;
+padding:0;
+margin:30px 0;
+
+}
+
+.parents-list li{
+
+background:#F8F7FF;
+padding:14px 18px;
+margin-bottom:15px;
+border-radius:14px;
+font-size:17px;
+font-weight:500;
+color:#444;
+box-shadow:0 6px 18px rgba(0,0,0,.05);
+
+}
+
+.research-grid{
+
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:15px;
+margin-top:25px;
+
+}
+
+.research-item{
+
+background:#6B4EFF;
+color:#fff;
+padding:16px;
+text-align:center;
+border-radius:15px;
+font-weight:600;
+transition:.35s;
+
+}
+
+.research-item:hover{
+
+transform:translateY(-6px);
+
+}
+
+.parents-images{
+
+display:grid;
+grid-template-columns:1fr;
+gap:22px;
+
+}
+
+.parent-image{
+
+overflow:hidden;
+border-radius:24px;
+box-shadow:0 20px 40px rgba(0,0,0,.12);
+
+}
+
+.parent-image img{
+
+width:100%;
+display:block;
+transition:.45s;
+
+}
+
+.parent-image:hover img{
+
+transform:scale(1.05);
+
+}
+
+.parent-quote{
+
+margin-top:80px;
+padding:50px;
+background:linear-gradient(135deg,#6B4EFF,#9E82FF);
+border-radius:30px;
+text-align:center;
+color:#fff;
+
+}
+
+.parent-quote h3{
+
+font-size:34px;
+font-weight:700;
+margin-bottom:20px;
+
+}
+
+.parent-quote p{
+
+font-size:20px;
+line-height:1.8;
+max-width:850px;
+margin:auto;
+
+}
+
+/* ===========================
+Responsive
+=========================== */
+
+@media(max-width:992px){
+
+.parents-wrapper{
+
+grid-template-columns:1fr;
+
+}
+
+.parents-images{
+
+grid-template-columns:1fr;
+
+}
+
+.research-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.parent-quote{
+
+padding:35px 25px;
+
+}
+
+.parent-quote h3{
+
+font-size:28px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.parents-section{
+
+padding:70px 6%;
+
+}
+
+.parents-text h3{
+
+font-size:24px;
+
+}
+
+.parents-text p{
+
+font-size:16px;
+
+}
+
+.parents-list li{
+
+font-size:15px;
+
+}
+
+.parent-quote h3{
+
+font-size:24px;
+
+}
+
+.parent-quote p{
+
+font-size:16px;
+
+}
+
+}
