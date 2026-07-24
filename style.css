@@ -6015,19 +6015,27 @@ font-size:16px;
 
 
 /* =========================================
+
 SCHOOLS
+
 ========================================= */
 
 .schools-section{
+
 padding:100px 8%;
+
 background:#fafbff;
+
 }
 
 .schools-grid{
 
 display:grid;
+
 grid-template-columns:repeat(3,1fr);
+
 gap:35px;
+
 margin-top:60px;
 
 }
@@ -6035,10 +6043,15 @@ margin-top:60px;
 .school-card{
 
 background:#fff;
+
 border-radius:28px;
+
 padding:40px 30px;
+
 text-align:center;
+
 transition:.35s;
+
 box-shadow:0 15px 35px rgba(0,0,0,.06);
 
 }
@@ -6046,24 +6059,50 @@ box-shadow:0 15px 35px rgba(0,0,0,.06);
 .school-card:hover{
 
 transform:translateY(-10px);
+
 box-shadow:0 25px 50px rgba(0,0,0,.12);
 
 }
 
+/* ===== School Icons ===== */
+
 .school-icon{
 
 width:90px;
+
 height:90px;
+
 margin:auto;
+
 margin-bottom:25px;
 
 display:flex;
+
 justify-content:center;
+
 align-items:center;
 
 border-radius:50%;
-font-size:38px;
+
+}
+
+.school-icon .material-symbols-rounded{
+
+font-size:42px;
+
 color:#fff;
+
+line-height:1;
+
+font-variation-settings:
+
+'FILL' 1,
+
+'wght' 400,
+
+'GRAD' 0,
+
+'opsz' 24;
 
 }
 
@@ -6106,8 +6145,11 @@ background:#06B6D4;
 .school-card h3{
 
 font-size:25px;
+
 margin-bottom:15px;
+
 font-weight:700;
+
 color:#222;
 
 }
@@ -6115,7 +6157,9 @@ color:#222;
 .school-card p{
 
 font-size:17px;
+
 line-height:1.8;
+
 color:#666;
 
 }
@@ -6123,7 +6167,9 @@ color:#666;
 .schools-cta{
 
 margin-top:80px;
+
 padding:60px;
+
 text-align:center;
 
 background:linear-gradient(135deg,#6B4EFF,#8B5CF6);
@@ -6137,6 +6183,7 @@ color:#fff;
 .schools-cta h2{
 
 font-size:42px;
+
 margin-bottom:20px;
 
 }
@@ -6144,7 +6191,9 @@ margin-bottom:20px;
 .schools-cta p{
 
 font-size:20px;
+
 line-height:1.8;
+
 margin-bottom:35px;
 
 }
@@ -6156,11 +6205,13 @@ display:inline-block;
 padding:18px 45px;
 
 background:#fff;
+
 color:#6B4EFF;
 
 border-radius:50px;
 
 font-weight:700;
+
 font-size:18px;
 
 text-decoration:none;
@@ -6229,10 +6280,4 @@ font-size:30px;
 
 }
 
-.schools-cta p{
-
-font-size:17px;
-
-}
-
-}
+.schools-
