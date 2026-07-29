@@ -6440,3 +6440,62 @@ font-size:30px;
 }
 
 }
+
+/* ===========================
+RESOURCES
+=========================== */
+
+.resources-section{
+padding:90px 8%;
+background:#fff;
+}
+
+.resource-card{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:50px;
+align-items:center;
+max-width:1200px;
+margin:auto;
+}
+
+.resource-image img{
+width:100%;
+border-radius:18px;
+display:block;
+}
+
+.resource-category{
+display:inline-block;
+padding:6px 14px;
+background:#eef4ff;
+color:#294c8b;
+border-radius:30px;
+font-size:14px;
+font-weight:600;
+margin-bottom:20px;
+}
+
+.resource-content h3{
+font-size:34px;
+margin-bottom:20px;
+color:#222;
+}
+
+.resource-content p{
+font-size:18px;
+line-height:1.8;
+color:#666;
+margin-bottom:35px;
+}
+
+@media(max-width:900px){
+
+.resource-card{
+
+grid-template-columns:1fr;
+
+}
+
+}
+   
